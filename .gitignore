@@ -3,3 +3,4 @@ cat .gitignore
 .DS_Store
 cmake-build-debug
 /vishniavetski/introduction/build/
+/vishniavetski/workshop/CarRental/build/
