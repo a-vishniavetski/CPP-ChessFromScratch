@@ -3,7 +3,6 @@ project(MathLibrary)
 
 set(SOURCE_FILES
         src/math_helpers.cpp
-        src/model/client.cpp
         )
 #Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł
 add_library(MathLibrary ${SOURCE_FILES})

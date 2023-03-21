@@ -8,12 +8,8 @@ using namespace std;
 
 int main()
 {
-
     cout << "Hello world!" << endl;
 
     cout << factorial(5) << endl;
-
-    Client client1 = Client();
-
     return 0;
 }
