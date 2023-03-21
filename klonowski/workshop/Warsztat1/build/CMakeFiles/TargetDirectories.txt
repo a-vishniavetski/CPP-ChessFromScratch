@@ -1,0 +1,11 @@
+/Users/hubert/Library/CloudStorage/OneDrive-Osobisty/Studia - OneDrive/Semestr 2/Programowanie obiektowe/introduction/build/CMakeFiles/test.dir
+/Users/hubert/Library/CloudStorage/OneDrive-Osobisty/Studia - OneDrive/Semestr 2/Programowanie obiektowe/introduction/build/CMakeFiles/edit_cache.dir
+/Users/hubert/Library/CloudStorage/OneDrive-Osobisty/Studia - OneDrive/Semestr 2/Programowanie obiektowe/introduction/build/CMakeFiles/rebuild_cache.dir
+/Users/hubert/Library/CloudStorage/OneDrive-Osobisty/Studia - OneDrive/Semestr 2/Programowanie obiektowe/introduction/build/program/CMakeFiles/Program.dir
+/Users/hubert/Library/CloudStorage/OneDrive-Osobisty/Studia - OneDrive/Semestr 2/Programowanie obiektowe/introduction/build/program/CMakeFiles/test.dir
+/Users/hubert/Library/CloudStorage/OneDrive-Osobisty/Studia - OneDrive/Semestr 2/Programowanie obiektowe/introduction/build/program/CMakeFiles/edit_cache.dir
+/Users/hubert/Library/CloudStorage/OneDrive-Osobisty/Studia - OneDrive/Semestr 2/Programowanie obiektowe/introduction/build/program/CMakeFiles/rebuild_cache.dir
+/Users/hubert/Library/CloudStorage/OneDrive-Osobisty/Studia - OneDrive/Semestr 2/Programowanie obiektowe/introduction/build/library/CMakeFiles/MathLibrary.dir
+/Users/hubert/Library/CloudStorage/OneDrive-Osobisty/Studia - OneDrive/Semestr 2/Programowanie obiektowe/introduction/build/library/CMakeFiles/test.dir
+/Users/hubert/Library/CloudStorage/OneDrive-Osobisty/Studia - OneDrive/Semestr 2/Programowanie obiektowe/introduction/build/library/CMakeFiles/edit_cache.dir
+/Users/hubert/Library/CloudStorage/OneDrive-Osobisty/Studia - OneDrive/Semestr 2/Programowanie obiektowe/introduction/build/library/CMakeFiles/rebuild_cache.dir

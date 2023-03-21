@@ -1,0 +1,1 @@
+/usr/bin/g++ -g3 -gdwarf-4 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/Program.dir/src/main.cpp.o CMakeFiles/Program.dir/__/library/src/math_helpers.cpp.o -o Program  ../library/libMathLibrary.a 

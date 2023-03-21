@@ -1,0 +1,17 @@
+[
+{
+  "directory": "/Users/hubert/Library/CloudStorage/OneDrive-Osobisty/Studia - OneDrive/Semestr 2/Programowanie obiektowe/introduction/build/program",
+  "command": "/usr/bin/g++  -I\"/Users/hubert/Library/CloudStorage/OneDrive-Osobisty/Studia - OneDrive/Semestr 2/Programowanie obiektowe/introduction/program/include\" -I\"/Users/hubert/Library/CloudStorage/OneDrive-Osobisty/Studia - OneDrive/Semestr 2/Programowanie obiektowe/introduction/library/include\" -g3 -gdwarf-4 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -std=gnu++11 -o CMakeFiles/Program.dir/src/main.cpp.o -c \"/Users/hubert/Library/CloudStorage/OneDrive-Osobisty/Studia - OneDrive/Semestr 2/Programowanie obiektowe/introduction/program/src/main.cpp\"",
+  "file": "/Users/hubert/Library/CloudStorage/OneDrive-Osobisty/Studia - OneDrive/Semestr 2/Programowanie obiektowe/introduction/program/src/main.cpp"
+},
+{
+  "directory": "/Users/hubert/Library/CloudStorage/OneDrive-Osobisty/Studia - OneDrive/Semestr 2/Programowanie obiektowe/introduction/build/program",
+  "command": "/usr/bin/g++  -I\"/Users/hubert/Library/CloudStorage/OneDrive-Osobisty/Studia - OneDrive/Semestr 2/Programowanie obiektowe/introduction/program/include\" -I\"/Users/hubert/Library/CloudStorage/OneDrive-Osobisty/Studia - OneDrive/Semestr 2/Programowanie obiektowe/introduction/library/include\" -g3 -gdwarf-4 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -std=gnu++11 -o CMakeFiles/Program.dir/__/library/src/math_helpers.cpp.o -c \"/Users/hubert/Library/CloudStorage/OneDrive-Osobisty/Studia - OneDrive/Semestr 2/Programowanie obiektowe/introduction/library/src/math_helpers.cpp\"",
+  "file": "/Users/hubert/Library/CloudStorage/OneDrive-Osobisty/Studia - OneDrive/Semestr 2/Programowanie obiektowe/introduction/library/src/math_helpers.cpp"
+},
+{
+  "directory": "/Users/hubert/Library/CloudStorage/OneDrive-Osobisty/Studia - OneDrive/Semestr 2/Programowanie obiektowe/introduction/build/library",
+  "command": "/usr/bin/g++  -I\"/Users/hubert/Library/CloudStorage/OneDrive-Osobisty/Studia - OneDrive/Semestr 2/Programowanie obiektowe/introduction/library/include\" -g3 -gdwarf-4 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -std=gnu++11 -o CMakeFiles/MathLibrary.dir/src/math_helpers.cpp.o -c \"/Users/hubert/Library/CloudStorage/OneDrive-Osobisty/Studia - OneDrive/Semestr 2/Programowanie obiektowe/introduction/library/src/math_helpers.cpp\"",
+  "file": "/Users/hubert/Library/CloudStorage/OneDrive-Osobisty/Studia - OneDrive/Semestr 2/Programowanie obiektowe/introduction/library/src/math_helpers.cpp"
+}
+]
