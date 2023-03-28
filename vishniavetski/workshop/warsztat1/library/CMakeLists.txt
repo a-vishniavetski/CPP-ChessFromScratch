@@ -10,3 +10,6 @@ add_library(Library ${SOURCE_FILES})
 
 target_include_directories(Library PUBLIC include)
 target_include_directories(Library PUBLIC include/model)
+
+enable_testing()
+
