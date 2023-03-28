@@ -54,7 +54,7 @@ void Client::setLastName(string lastName){
         return;
     }
 
-    this->firstName = lastName;
+    this->lastName = lastName;
 }
 
 void Client::setPersonalID(string personalID) {
