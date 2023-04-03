@@ -3,10 +3,7 @@
 //
 
 #include "model/Client.h"
-#include <iostream>
 #include <string>
-
-using namespace std;
 
 Client::Client() {}
 
@@ -19,7 +16,7 @@ Client::Client(string firstName, string lastName, string personalID):
 Client::~Client() {}
 
 // getters
-string Client::getClientInfo() {
+string Client::getClientInfo() const{
     string _prompt = "firstName: " + this->firstName +
             " | lastName: " + this->lastName +
             " | personalID: " + this->personalID;
@@ -27,15 +24,15 @@ string Client::getClientInfo() {
     return _prompt;
 }
 
-string Client::getFirstName(){
+string Client::getFirstName() const {
     return this->firstName;
 };
 
-string Client::getLastName(){
+string Client::getLastName() const{
     return this->lastName;
 };
 
-string Client::getPersonalID(){
+string Client::getPersonalID() const{
     return this->personalID;
 };
 
@@ -55,12 +52,4 @@ void Client::setLastName(string lastName){
     }
 
     this->lastName = lastName;
-}
-
-void Client::setPersonalID(string personalID) {
-    if (personalID.empty()){
-        return;
-    }
-
-    this->firstName = firstName;
 }

@@ -17,15 +17,15 @@ public:
     ~Client();
 
     // getters
-    string getClientInfo();
-    string getFirstName();
-    string getLastName();
-    string getPersonalID();
+    string getClientInfo() const;
+    string getFirstName() const;
+    string getLastName() const;
+    string getPersonalID() const;
 
     // setters
     void setFirstName(string firstName);
     void setLastName(string lastName);
-    void setPersonalID(string personalID);
+
 
 private:
     Client();
