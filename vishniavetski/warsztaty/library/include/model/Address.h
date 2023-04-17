@@ -16,9 +16,9 @@ public:
     ~Address();
 
     // getters
-    string getCity() const;
-    string getStreet() const;
-    string getNumber() const;
+    const string & getCity() const;
+    const string & getStreet() const;
+    const string & getNumber() const;
     string getAddressInfo() const;
 
 private:

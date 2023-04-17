@@ -8,13 +8,13 @@ Address::Address(string arg_city, string arg_street, string arg_number):
 
 Address::~Address() {}
 // getters
-string Address::getCity() const{
+const string & Address::getCity() const{
     return this->city;
 };
-string Address::getStreet() const{
+const string & Address::getStreet() const{
     return this->street;
 };
-string Address::getNumber() const{
+const string & Address::getNumber() const{
     return this->number;
 };
 string Address::getAddressInfo() const{

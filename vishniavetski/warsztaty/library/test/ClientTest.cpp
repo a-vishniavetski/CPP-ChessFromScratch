@@ -31,7 +31,8 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteClient, TestSuiteClientFixture)
     }
 	
     BOOST_AUTO_TEST_CASE(ConstructorTest) {
-		Client test_client = Client(testFirstName, testLastName, testPersonalID, testaddress1);
+		Client test_client = Client(testFirstName, testLastName,
+                                    testPersonalID, testaddress1);
 
 		BOOST_TEST(testFirstName == test_client.getFirstName());
         BOOST_TEST(testLastName == test_client.getLastName());
@@ -41,7 +42,8 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteClient, TestSuiteClientFixture)
 	BOOST_AUTO_TEST_CASE(FirstNameSetterTest){
 		// pozytywny test
 		
-		Client test_client = Client(testFirstName, testLastName, testPersonalID, testaddress1);
+		Client test_client = Client(testFirstName, testLastName,
+                                    testPersonalID, testaddress1);
 		test_client.setFirstName("Jordan");
 		
 		string getter_name = test_client.getFirstName();
@@ -51,7 +53,8 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteClient, TestSuiteClientFixture)
 		// negatywny test
 		string wrong_name = "";
 
-        Client test_client2 = Client(testFirstName, testLastName, testPersonalID, testaddress1);
+        Client test_client2 = Client(testFirstName, testLastName,
+                                     testPersonalID, testaddress1);
 		test_client.setFirstName(wrong_name);
 		
 		getter_name = test_client2.getFirstName();
@@ -65,7 +68,8 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteClient, TestSuiteClientFixture)
 		string last_name = "Vish";
 		string id = "249518";
 		
-		Client test_client = Client("InitialName", "Initial last_name", "Initial id", testaddress1);
+		Client test_client = Client("InitialName", "Initial last_name",
+                                    "Initial id", testaddress1);
 		test_client.setLastName(last_name);
 		
 		string getter_last_name = test_client.getLastName();
@@ -75,7 +79,8 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteClient, TestSuiteClientFixture)
 		// negatywny test
 		string wrong_last_name = "";
 		
-		Client test_client2 = Client("InitialName", "Initial last_name", "Initial id", testaddress1);
+		Client test_client2 = Client("InitialName", "Initial last_name",
+                                     "Initial id", testaddress1);
 		test_client.setLastName(wrong_last_name);
 		
 		getter_last_name = test_client2.getLastName();
