@@ -21,27 +21,3 @@ string Address::getAddressInfo() const{
     string _prompt = this->city + ", " + this-> street + ", " + this->number;
     return _prompt;
 };
-
-// setters
-void Address::setCity(string city){
-    if (city.empty()){
-        return;
-    }
-
-    this->city = city;
-};
-
-void Address::setStreet(string street){
-    if (street.empty()){
-        return;
-    }
-
-    this->street = street;
-};;
-void Address::setNumber(string number){
-    if (number.empty()){
-        return;
-    }
-
-    this->number = number;
-};;

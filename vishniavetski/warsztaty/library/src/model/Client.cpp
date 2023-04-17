@@ -7,10 +7,12 @@
 
 Client::Client() {}
 
-Client::Client(string firstName, string lastName, string personalID):
+Client::Client(string firstName, string lastName, string personalID,
+               Address* address):
     firstName(firstName),
     lastName(lastName),
-    personalID(personalID)
+    personalID(personalID),
+    address(address)
     {}
 
 Client::~Client() {}
@@ -21,7 +23,9 @@ string Client::getClientInfo() const{
             " | lastName: " + this->lastName +
             " | personalID: " + this->personalID;
 
-    return _prompt;
+    string _prompt_address = this->address->getAddressInfo();
+
+    return _prompt +  " | " + _prompt_address;
 }
 
 string Client::getFirstName() const {
@@ -35,6 +39,10 @@ string Client::getLastName() const{
 string Client::getPersonalID() const{
     return this->personalID;
 };
+
+const Address* Client::getAddress() const{
+    return this->address;
+}
 
 // setters
 
@@ -52,4 +60,12 @@ void Client::setLastName(string lastName){
     }
 
     this->lastName = lastName;
+}
+
+void Client::setAddress(Address *address) {
+    if (address == nullptr){
+        return;
+    }
+
+    this->address = address;
 }

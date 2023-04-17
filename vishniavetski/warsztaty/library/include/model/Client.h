@@ -5,13 +5,15 @@
 #ifndef WARSZTAT1_CLIENT_H
 #define WARSZTAT1_CLIENT_H
 #include <string>
+#include "model/Address.h"
 
 using namespace std;
 
 class Client {
 public:
     // constructor
-    Client(string firstName, string lastName, string personalID);
+    Client(string firstName, string lastName, string personalID,
+           Address* address);
 
     // destructor
     ~Client();
@@ -21,10 +23,12 @@ public:
     string getFirstName() const;
     string getLastName() const;
     string getPersonalID() const;
+    const Address* getAddress() const;
 
     // setters
     void setFirstName(string firstName);
     void setLastName(string lastName);
+    void setAddress(Address* address);
 
 
 private:
@@ -32,7 +36,8 @@ private:
 
     string firstName;
     string lastName;
-    string personalID;
+    const string personalID;
+    Address* address;
 
 };
 

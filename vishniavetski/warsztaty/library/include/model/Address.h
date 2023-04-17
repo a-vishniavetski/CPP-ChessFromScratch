@@ -21,11 +21,6 @@ public:
     string getNumber() const;
     string getAddressInfo() const;
 
-    // setters
-    void setCity(string city);
-    void setStreet(string street);
-    void setNumber(string number);
-
 private:
     string city;
     string street;
