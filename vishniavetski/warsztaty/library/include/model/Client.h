@@ -33,7 +33,7 @@ public:
     void setLastName(const string &lastName);
     void setAddress(Address* address);
 
-    // currentRents
+    // Rents
     vector<Rent*> currentRents;
 
 private:

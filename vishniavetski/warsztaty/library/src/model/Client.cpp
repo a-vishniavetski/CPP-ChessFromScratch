@@ -4,6 +4,7 @@
 
 #include "model/Client.h"
 #include <string>
+#include <vector>
 
 Client::Client() {}
 

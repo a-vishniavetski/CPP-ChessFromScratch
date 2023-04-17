@@ -13,7 +13,8 @@ Rent::Rent(int _id, Client* _client, Vehicle* _vehicle) :
         client(_client),
         vehicle(_vehicle)
 {
-    this->client->currentRents.push_back(this);
+    vector<Rent*>& clientRents = _client->currentRents;
+    clientRents.push_back(this);
 }
 
 // Destructor
@@ -21,7 +22,7 @@ Rent::~Rent() {}
 
 // Getters
 int Rent::getId() const {
-    return id;
+    return this->id;
 }
 
 string Rent::getRentInfo() const {
