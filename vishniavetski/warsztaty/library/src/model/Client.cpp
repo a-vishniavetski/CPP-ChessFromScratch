@@ -70,3 +70,15 @@ void Client::setAddress(Address *address) {
 
     this->address = address;
 }
+
+string Client::getFullClientInfo() const{
+    string _prompt = "firstName: " + this->firstName +
+                     " | lastName: " + this->lastName +
+                     " | personalID: " + this->personalID;
+
+    string _prompt_address = this->address->getAddressInfo();
+    string _prompt_rent = "";
+
+    return _prompt +  " | " + _prompt_address + "\n"
+    + _prompt_rent;
+};

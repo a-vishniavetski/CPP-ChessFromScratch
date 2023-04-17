@@ -1,26 +1,27 @@
 #include <iostream>
 #include <math_helpers.h>
 #include <Client.h>
+#include <Rent.h>
 
 using namespace std;
 
 int main(){
     Address* testaddress = new Address("London", "Accacia Avenue", "22");
+    Vehicle* testvehicle = new Vehicle(10, "999");
 
-    Client c1 = Client("Aliaksei", "Vishniavetski", "249518", testaddress);
-    Client* c2 = new Client("Ktos", "Inny", "000000", testaddress);
+    Client *c1 = new Client("Aliaksei", "Vishniavetski", "249518", testaddress);
 
-    cout << c1.getClientInfo() << "\n";
-    cout << c2->getClientInfo() << "\n";
+    Rent *rent1 = new Rent(1, c1, testvehicle);
 
-    Address* testaddress2 = new Address("Not London", "Not Accacia Avenue", "Not 22");
 
-    c2->setAddress(testaddress2);
+    cout << c1->getClientInfo() << "\n\n";
+    cout << rent1->getRentInfo() << "\n\n";
+    cout << c1->getFullClientInfo() << "\n\n";
 
-    cout << c1.getClientInfo() << "\n";
-    cout << c2->getClientInfo() << "\n";
-
-    delete c2;
+    delete testaddress;
+    delete testvehicle;
+    delete c1;
+    delete rent1;
 
     return 0;
 }

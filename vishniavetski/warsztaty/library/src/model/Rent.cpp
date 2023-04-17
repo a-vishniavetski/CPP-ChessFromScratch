@@ -15,6 +15,13 @@ Rent::Rent(int _id, Client* _client, Vehicle* _vehicle) :
 {
     vector<Rent*>& clientRents = _client->currentRents;
     clientRents.push_back(this);
+
+    if (!_vehicle->isRented()){
+        _vehicle->setRented(true);
+    }
+    else {
+        return;
+    }
 }
 
 // Destructor

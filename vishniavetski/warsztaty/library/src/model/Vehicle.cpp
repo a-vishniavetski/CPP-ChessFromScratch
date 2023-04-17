@@ -24,9 +24,14 @@ const std::string& Vehicle::getPlateNumber() const {
 
 string Vehicle::getVehicleInfo() const {
     string _prompt = "PlateNumber: " + this->getPlateNumber() +
-    " | BasePrice: " + to_string(this->getBasePrice());
+    " | BasePrice: " + to_string(this->getBasePrice()) +
+    " | IsRented: " + to_string(this->isRented());
 
     return _prompt;
+}
+
+bool Vehicle::isRented() const{
+    return this->rented;
 }
 // Setters
 void Vehicle::setBasePrice(int _basePrice) {
@@ -39,4 +44,8 @@ void Vehicle::setPlateNumber(const std::string& _plateNumber) {
     }
 
     this->plateNumber = _plateNumber;
+}
+
+void Vehicle::setRented(bool _val){
+    this->rented = _val;
 }

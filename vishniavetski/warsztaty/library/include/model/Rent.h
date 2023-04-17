@@ -11,8 +11,6 @@
 
 using namespace std;
 
-class Client;
-
 class Rent {
 public:
     Rent(int _id, Client* _client, Vehicle* _vehicle);

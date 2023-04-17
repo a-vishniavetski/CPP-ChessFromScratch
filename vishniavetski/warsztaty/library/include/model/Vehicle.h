@@ -12,6 +12,7 @@ class Vehicle {
 private:
     int basePrice;
     string plateNumber;
+    bool rented = false;
 
 public:
     // Konstruktor parametrowy
@@ -22,10 +23,12 @@ public:
     int getBasePrice() const;
     const string& getPlateNumber() const;
     string getVehicleInfo() const;
+    bool isRented() const;
 
     // Settery
     void setBasePrice(int _basePrice);
     void setPlateNumber(const string& _plateNumber);
+    void setRented(bool _val);
 };
 
 

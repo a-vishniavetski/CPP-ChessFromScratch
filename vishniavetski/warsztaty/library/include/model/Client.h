@@ -27,6 +27,7 @@ public:
     const string & getLastName() const;
     const string & getPersonalID() const;
     const Address* getAddress() const;
+    string getFullClientInfo() const;
 
     // setters
     void setFirstName(const string &firstName);
