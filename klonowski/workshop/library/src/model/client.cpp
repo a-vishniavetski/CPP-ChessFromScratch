@@ -4,18 +4,32 @@
 #include "model/client.h"
 #include <iostream>
 #include <sstream>
+#include <vector>
 using namespace std;
 
-Client::Client(string firstName, string lastName, string personalID):firstName(firstName), lastName(lastName), personalID(personalID)
+Client::Client(string firstName, string lastName, string personalID, Address* address):firstName(firstName), lastName(lastName), personalID(personalID), address(address)
 {}
 
 Client::~Client()
-{}
+{
+    delete address;
+}
 
 string Client::getClientInfo() const
 {
     stringstream ss;
-    ss << "Client: " << firstName << " " << lastName << " " << personalID;
+    ss << "Client: " << firstName << " " << lastName << " " << personalID << " " << address->getAddressInfo();
+    return ss.str();
+}
+
+string Client::getFullClientInfo() const
+{
+    stringstream ss;
+    ss << "Client: " << firstName << " " << lastName << " " << personalID << " " << address->getAddressInfo() << ", currentRents: ";
+    for(int i = 0; i < this->currentRents.size(); i++)
+    {
+        ss << this->currentRents[i]->getRentInfo() << endl;
+    }
     return ss.str();
 }
 
@@ -31,6 +45,14 @@ string Client::getLastName() const {
 
 string Client::getPersonalID() const {
     return personalID;
+}
+
+Address* Client::getAddress() const {
+    return address;
+}
+
+vector<Rent*> Client::getCurrentRents() const {
+    return this->currentRents;
 }
 
 //setters
@@ -49,5 +71,17 @@ void Client::setPersonalID(std::string personalID){
     if(personalID.empty())
         return;
     this->personalID = personalID;
+}
+
+void Client::setAddress(Address *address) {
+    if(address == nullptr)
+        return;
+    this->address = address;
+}
+
+void Client::addToCurrentRents(Rent *rent) {
+    if(rent == nullptr)
+        return;
+    this->currentRents.push_back(rent);
 }
 
