@@ -4,6 +4,7 @@
 
 #include <vector>
 #include "model/Rent.h"
+#include "model/Client.h"
 
 using namespace std;
 
@@ -40,15 +41,3 @@ string Rent::getRentInfo() const {
     return rentInfo;
 }
 
-string Client::getFullClientInfo() const{
-    // Client + Address
-    string _prompt = this->getClientInfo();
-    // Rents
-    string _prompt_rent = "\nCurrents rents:\n";
-    for (int i = 0; i < this->currentRents.size(); i++){
-        _prompt_rent = _prompt_rent + currentRents[i]->getRentInfo() +
-                        "\n";
-    }
-
-    return _prompt + _prompt_rent;
-}

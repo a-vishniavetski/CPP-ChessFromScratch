@@ -7,9 +7,11 @@
 
 #include <string>
 #include "model/Vehicle.h"
-#include "model/Client.h"
+//#include "model/Client.h"
 
 using namespace std;
+
+class Client;
 
 class Rent {
 public:

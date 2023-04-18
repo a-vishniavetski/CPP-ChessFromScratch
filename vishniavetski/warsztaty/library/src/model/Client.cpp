@@ -2,9 +2,9 @@
 // Created by avish on 3/22/2023.
 //
 
-#include "model/Client.h"
 #include <string>
-#include <vector>
+#include "model/Client.h"
+#include "model/Rent.h"
 
 Client::Client() {}
 
@@ -71,4 +71,16 @@ void Client::setAddress(Address *address) {
     this->address = address;
 }
 
+string Client::getFullClientInfo() const{
+    // Client + Address
+    string _prompt = this->getClientInfo();
+    // Rents
+    string _prompt_rent = "\nCurrents rents:\n";
+    for (int i = 0; i < this->currentRents.size(); i++){
+        _prompt_rent = _prompt_rent + currentRents[i]->getRentInfo() +
+                       "\n";
+    }
+
+    return _prompt + _prompt_rent;
+}
 

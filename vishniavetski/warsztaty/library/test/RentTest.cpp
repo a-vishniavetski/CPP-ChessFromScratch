@@ -4,6 +4,8 @@
 
 #include <boost/test/unit_test.hpp>
 #include "model/Rent.h"
+#include "model/Address.h"
+#include "model/Client.h"
 
 using namespace std;
 
