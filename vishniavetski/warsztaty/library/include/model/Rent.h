@@ -33,7 +33,7 @@ public:
 
 private:
     int id;
-    const Client *client;
+    Client *client;
     Vehicle *vehicle;
     pt::ptime beginTime;
     pt::ptime endTime = pt::not_a_date_time;

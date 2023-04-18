@@ -3,6 +3,7 @@
 //
 
 #include <vector>
+#include <algorithm>
 #include "model/Rent.h"
 #include "model/Client.h"
 
@@ -49,18 +50,27 @@ const pt::ptime Rent::getEndTime() const {
 };
 // endRent
 void Rent::endRent(pt::ptime _endTime) {
-    this->vehicle->setRented(false);
+
     if (_endTime == pt::not_a_date_time){
         this->endTime = pt::second_clock::local_time();
-        return;
     }
 
-    if (_endTime < this->beginTime){
+    else if (_endTime < this->beginTime){
         this->endTime = this->beginTime;
     }
     else {
         this->endTime = _endTime;
     }
+
+    // vehicle not rented anymore
+    this->vehicle->setRented(false);
+    // zwolnic pojazd
+    vector<Rent*> *rents = &this->client->currentRents;
+    int id = this->getId;
+
+	rents->erase(remove_if(rents->begin(), rents->end(), [id](Rent *rent) { return (rent->getId() == id);  }), rents->end());
+
+    return;
 };
 int Rent::getRentDays() const {
     // Rent not over yet
