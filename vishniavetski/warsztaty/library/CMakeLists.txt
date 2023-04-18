@@ -3,7 +3,7 @@ project(Library)
 
 set(SOURCE_FILES
     src/math_helpers.cpp
-        src/model/Client.cpp test/master.cpp test/ClientTest.cpp include/model/Address.h src/model/Address.cpp test/AddressTest.cpp include/model/Vehicle.h src/model/Vehicle.cpp test/VehicleTest.cpp src/model/Rent.cpp include/model/Rent.h)
+        src/model/Client.cpp test/master.cpp test/ClientTest.cpp include/model/Address.h src/model/Address.cpp test/AddressTest.cpp include/model/Vehicle.h src/model/Vehicle.cpp test/VehicleTest.cpp src/model/Rent.cpp include/model/Rent.h test/RentTest.cpp)
 
 #Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł
 add_library(Library ${SOURCE_FILES})
@@ -24,7 +24,7 @@ set(SOURCE_TEST_FILES
         test/ClientTest.cpp
             test/master.cpp
                 test/AddressTest.cpp
-        test/VehicleTest.cpp) # tu w przyszłości będą dodawane pliki źródłowe testów
+        test/VehicleTest.cpp test/RentTest.cpp) # tu w przyszłości będą dodawane pliki źródłowe testów
 
 add_executable (LibraryTest ${SOURCE_TEST_FILES})
 

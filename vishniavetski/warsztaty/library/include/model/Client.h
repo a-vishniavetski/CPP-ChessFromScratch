@@ -27,13 +27,14 @@ public:
     const string & getLastName() const;
     const string & getPersonalID() const;
     const Address* getAddress() const;
+    string getFullClientInfo() const; // Definicja w Rent.cpp
 
     // setters
     void setFirstName(const string &firstName);
     void setLastName(const string &lastName);
     void setAddress(Address* address);
 
-    // currentRents
+    // Rents
     vector<Rent*> currentRents;
 
 private:

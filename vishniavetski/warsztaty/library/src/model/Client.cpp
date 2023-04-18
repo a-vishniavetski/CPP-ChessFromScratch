@@ -2,8 +2,9 @@
 // Created by avish on 3/22/2023.
 //
 
-#include "model/Client.h"
 #include <string>
+#include "model/Client.h"
+#include "model/Rent.h"
 
 Client::Client() {}
 
@@ -19,13 +20,13 @@ Client::~Client() {}
 
 // getters
 string Client::getClientInfo() const{
-    string _prompt = "firstName: " + this->firstName +
-            " | lastName: " + this->lastName +
-            " | personalID: " + this->personalID;
+    string _prompt = "FirstName: " + this->firstName +
+            " | LastName: " + this->lastName +
+            " | PersonalID: " + this->personalID;
 
     string _prompt_address = this->address->getAddressInfo();
 
-    return _prompt +  " | " + _prompt_address;
+    return _prompt +  " | Address: " + _prompt_address;
 }
 
 const string & Client::getFirstName() const {
@@ -69,3 +70,17 @@ void Client::setAddress(Address *address) {
 
     this->address = address;
 }
+
+string Client::getFullClientInfo() const{
+    // Client + Address
+    string _prompt = this->getClientInfo();
+    // Rents
+    string _prompt_rent = "\nCurrents rents:\n";
+    for (int i = 0; i < this->currentRents.size(); i++){
+        _prompt_rent = _prompt_rent + currentRents[i]->getRentInfo() +
+                       "\n";
+    }
+
+    return _prompt + _prompt_rent;
+}
+

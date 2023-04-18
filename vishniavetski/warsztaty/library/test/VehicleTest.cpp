@@ -43,5 +43,11 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteVehicle, TestSuiteVehicleFixture)
         BOOST_TEST(v.getPlateNumber() != emptyPlateNumber);
     }
 
+    BOOST_AUTO_TEST_CASE(RentedSetterTest){
+        Vehicle v = Vehicle(0, ".....");
+        v.setRented(true);
+        BOOST_TEST(true == v.isRented());
+    }
+
 
 BOOST_AUTO_TEST_SUITE_END()
