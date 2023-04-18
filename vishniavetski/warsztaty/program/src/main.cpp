@@ -14,8 +14,8 @@ int main(){
     Rent *rent1 = new Rent(1, c1, testvehicle);
 
 
-    cout << c1->getClientInfo() << "\n\n";
-    cout << rent1->getRentInfo() << "\n\n";
+    //cout << c1->getClientInfo() << "\n\n";
+    //cout << rent1->getRentInfo() << "\n\n";
     cout << c1->getFullClientInfo() << "\n\n";
 
     delete testaddress;

@@ -27,7 +27,7 @@ public:
     const string & getLastName() const;
     const string & getPersonalID() const;
     const Address* getAddress() const;
-    string getFullClientInfo() const;
+    string getFullClientInfo() const; // Definicja w Rent.cpp
 
     // setters
     void setFirstName(const string &firstName);
