@@ -4,19 +4,23 @@
 #include <iostream>
 #include <math_helpers.h>
 #include <model/client.h>
+#include <model/vehicle.h>
+#include "model/rent.h"
 
 using namespace std;
 
 int main()
 {
-    Client client1("Marek", "Kowalski", "12312312300");
-    cout << client1.getClientInfo() << endl;
-
-    Client* client2 = new Client("Jan", "Brzechwa", "23423424300");
-    cout << client2->getClientInfo() << endl;
-
-    client2->setLastName("Tuwim");
-//    delete &client1;
-    delete client2;
+//    Address *testaddress2 = new Address("London", "Rue Morgue", "13");
+//    Client* c1 = new Client("Andrzej", "Konieczny", "12312312312", nullptr);
+//    Address* address = new Address("London", "Alley", "2");
+//    Vehicle* vehicle = new Vehicle("ABC1", 2);
+//
+//    c1->setAddress(address);
+//
+//    Rent* rent = new Rent(1000, vehicle, c1);
+//    cout << rent->getRentInfo();
+//
+//    cout << c1->getAddress();
     return 0;
 }

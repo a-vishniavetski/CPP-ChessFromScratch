@@ -3,7 +3,7 @@ project(Library)
 
 set(SOURCE_FILES
         src/math_helpers.cpp
-        src/model/Client.cpp include/model/Client.h test/master.cpp test/ClientTest.cpp)
+        src/model/client.cpp include/model/client.h test/master.cpp test/ClientTest.cpp src/model/address.cpp include/model/address.h test/AddressTest.cpp src/model/vehicle.cpp include/model/vehicle.h test/VehicleTest.cpp include/model/rent.h src/model/rent.cpp test/RentTest.cpp)
 #Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł
 add_library(Library ${SOURCE_FILES})
 
@@ -17,7 +17,7 @@ include_directories(
         ${Boost_INCLUDE_DIRS}
 )
 
-set(SOURCE_TEST_FILES test/master.cpp test/ClientTest.cpp) # tu w przyszłości będą dodawane pliki źródłowe testów
+set(SOURCE_TEST_FILES test/master.cpp test/ClientTest.cpp test/AddressTest.cpp test/VehicleTest.cpp test/RentTest.cpp) # tu w przyszłości będą dodawane pliki źródłowe testów
 
 add_executable (LibraryTest ${SOURCE_TEST_FILES})
 
@@ -37,3 +37,4 @@ add_test(LibraryTest1 LibraryTest
 add_custom_target(check ${CMAKE_COMMAND} -E env CTEST_OUTPUT_ON_FAILURE=1 BOOST_TEST_LOG_LEVEL=all
         ${CMAKE_CTEST_COMMAND} -C $<CONFIGURATION> --verbose
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
+

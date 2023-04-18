@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.4)
 project(Program)
 
 #Ustaw we własnej zmiennej SOURCE_FILES zbiór plików źródłowych projektu
-set(SOURCE_FILES src/main.cpp ../library/include/math_helpers.h ../library/src/math_helpers.cpp ../library/include/model/client.h ../library/src/model/client.cpp)
+set(SOURCE_FILES src/main.cpp ../library/include/math_helpers.h ../library/src/math_helpers.cpp ../library/include/model/client.h ../library/src/model/client.cpp ../library/src/model/address.cpp ../library/include/model/address.h ../library/test/AddressTest.cpp ../library/test/VehicleTest.cpp ../library/include/model/rent.h ../library/src/model/rent.cpp ../library/test/RentTest.cpp)
 
 #Włącz powyższy zbiór plików do zbudowania programu wykonywalnego Program
 add_executable(Program ${SOURCE_FILES})
