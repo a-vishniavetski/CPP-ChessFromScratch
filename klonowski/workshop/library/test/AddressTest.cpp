@@ -22,38 +22,38 @@ BOOST_AUTO_TEST_SUITE(TestSuiteAddress)
         BOOST_TEST(address.getNumber() == number);
 
     }
-
-    BOOST_AUTO_TEST_CASE(SetCity)
-    {
-        Address address("Lodz", "Gladka", "9");
-        std::string city = "Warszawa";
-        address.setCity(city);
-        BOOST_TEST(address.getCity() == city);
-
-        address.setCity("");
-        BOOST_TEST(address.getCity() == city);
-    }
-
-    BOOST_AUTO_TEST_CASE(SetStreet)
-    {
-        Address address("Lodz", "Gladka", "9");
-        std::string street = "Jana Pawla";
-        address.setStreet(street);
-        BOOST_TEST(address.getStreet() == street);
-
-        address.setStreet("");
-        BOOST_TEST(address.getStreet() == street);
-    }
-
-    BOOST_AUTO_TEST_CASE(SetNumber)
-    {
-        Address address("Lodz", "Gladka", "9");
-        std::string number = "1";
-        address.setNumber(number);
-        BOOST_TEST(address.getNumber() == number);
-
-        address.setNumber("");
-        BOOST_TEST(address.getNumber() == number);
-    }
+//
+//    BOOST_AUTO_TEST_CASE(SetCity)
+//    {
+//        Address address("Lodz", "Gladka", "9");
+//        std::string city = "Warszawa";
+//        address.setCity(city);
+//        BOOST_TEST(address.getCity() == city);
+//
+//        address.setCity("");
+//        BOOST_TEST(address.getCity() == city);
+//    }
+//
+//    BOOST_AUTO_TEST_CASE(SetStreet)
+//    {
+//        Address address("Lodz", "Gladka", "9");
+//        std::string street = "Jana Pawla";
+//        address.setStreet(street);
+//        BOOST_TEST(address.getStreet() == street);
+//
+//        address.setStreet("");
+//        BOOST_TEST(address.getStreet() == street);
+//    }
+//
+//    BOOST_AUTO_TEST_CASE(SetNumber)
+//    {
+//        Address address("Lodz", "Gladka", "9");
+//        std::string number = "1";
+//        address.setNumber(number);
+//        BOOST_TEST(address.getNumber() == number);
+//
+//        address.setNumber("");
+//        BOOST_TEST(address.getNumber() == number);
+//    }
 
 BOOST_AUTO_TEST_SUITE_END()

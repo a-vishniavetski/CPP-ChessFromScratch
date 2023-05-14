@@ -2,12 +2,15 @@
 // Created by Hubert Klonowski on 21/03/2023.
 //
 #include "model/client.h"
+#include "model/address.h"
+#include "model/rent.h"
+#include "typedefs.h"
 #include <iostream>
 #include <sstream>
 #include <vector>
 using namespace std;
 
-Client::Client(string firstName, string lastName, string personalID, Address* address):firstName(firstName), lastName(lastName), personalID(personalID), address(address)
+Client::Client(string firstName, string lastName, string personalID, AddressPtr address,std::vector<RentPtr> &currentRents):firstName(firstName ), lastName(lastName), personalID(personalID), address(address), currentRents(currentRents)
 {}
 
 Client::~Client()
@@ -73,13 +76,13 @@ void Client::setPersonalID(std::string personalID){
     this->personalID = personalID;
 }
 
-void Client::setAddress(Address *address) {
+void Client::setAddress(AddressPtr address) {
     if(address == nullptr)
         return;
     this->address = address;
 }
 
-void Client::addToCurrentRents(Rent *rent) {
+void Client::addToCurrentRents(RentPtr rent) {
     if(rent == nullptr)
         return;
     this->currentRents.push_back(rent);

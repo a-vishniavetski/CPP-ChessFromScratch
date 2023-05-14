@@ -1,5 +1,6 @@
 #include <boost/test/unit_test.hpp>
 #include "model/client.h"
+#include "model/address.h"
 
 struct TestSuiteClientFixture {
     const std::string testFirstName = "Jon";
@@ -28,7 +29,9 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteClient, TestSuiteClientFixture)
 
     BOOST_AUTO_TEST_CASE(ConstructorTest)
     {
-        Client client(testFirstName, testLastName, testPersonalID, testaddress1);
+        std::vector<RentPtr> rents;
+
+        Client client(testFirstName, testLastName, testPersonalID, testaddress1, rents);
 
         BOOST_TEST(client.getFirstName() == testFirstName);
         BOOST_TEST(client.getLastName() == testLastName);
@@ -39,7 +42,9 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteClient, TestSuiteClientFixture)
 
     BOOST_AUTO_TEST_CASE(SetFirstNameTest)
     {
-        Client client(testFirstName, testLastName, testPersonalID, testaddress1);
+        std::vector<RentPtr> rents;
+
+        Client client(testFirstName, testLastName, testPersonalID, testaddress1, rents);
         std::string firstName = "Hubert";
         client.setFirstName(firstName);
         BOOST_TEST(client.getFirstName() == firstName);
@@ -51,7 +56,9 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteClient, TestSuiteClientFixture)
 
     BOOST_AUTO_TEST_CASE(SetLastNameTest)
     {
-        Client client(testFirstName, testLastName, testPersonalID, testaddress1);
+        std::vector<RentPtr> rents;
+
+        Client client(testFirstName, testLastName, testPersonalID, testaddress1, rents);
         std::string lastName = "Klonowski";
         client.setLastName(lastName);
         BOOST_TEST(client.getLastName() == lastName);
@@ -63,7 +70,9 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteClient, TestSuiteClientFixture)
 
     BOOST_AUTO_TEST_CASE(SetPersonalIDTest)
     {
-        Client client(testFirstName, testLastName, testPersonalID, testaddress1);
+        std::vector<RentPtr> rents;
+
+        Client client(testFirstName, testLastName, testPersonalID, testaddress1, rents);
         std::string personalID = "00000000000";
         client.setPersonalID(personalID);
         BOOST_TEST(client.getPersonalID() == personalID);
@@ -75,7 +84,9 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteClient, TestSuiteClientFixture)
 
     BOOST_AUTO_TEST_CASE(SetAddressTest)
     {
-        Client client(testFirstName, testLastName, testPersonalID, testaddress1);
+        std::vector<RentPtr> rents;
+
+        Client client(testFirstName, testLastName, testPersonalID, testaddress1, rents);
 
         client.setAddress(testaddress2);
         BOOST_TEST(client.getAddress() == testaddress2);

@@ -1,8 +1,15 @@
 #include <boost/test/unit_test.hpp>
 #include "model/address.h"
 #include "model/rent.h"
+#include "model/vehicle.h"
+#include "model/client.h"
+#include "model/bicycle.h"
+#include "typedefs.h"
+
 
 BOOST_AUTO_TEST_SUITE(TestSuiteRent)
+    std::vector<RentPtr> rents;
+    std::string plateNumber = "ABCD1";
 
     BOOST_AUTO_TEST_CASE(AssertionsTests) {
         BOOST_TEST(1.0/3.0 == 0.333, boost::test_tools::tolerance(.03));
@@ -13,9 +20,10 @@ BOOST_AUTO_TEST_SUITE(TestSuiteRent)
     {
 
         unsigned int id = 1;
-        Address* address = new Address("London", "Alley", "2");
-        Vehicle* vehicle = new Vehicle("ABC1", 2);
-        Client* c1 = new Client("Andrzej", "Konieczny", "12312312312", address);
+        AddressPtr address = new Address("London", "Alley", "2");
+
+        Bicycle* vehicle = new Bicycle(plateNumber, 2);
+        ClientPtr c1 = new Client("Andrzej", "Konieczny", "12312312312", address, rents);
 
         Rent rent(id, vehicle, c1, true, pt::not_a_date_time);
         pt::ptime now = pt::second_clock::local_time(); //hope this takes no longer than 59 secs...
@@ -27,16 +35,19 @@ BOOST_AUTO_TEST_SUITE(TestSuiteRent)
         BOOST_TEST(rent.getClient() == c1);
         BOOST_TEST(rent.getVehicle()->isRented() == true);
 
-        delete address, vehicle, c1;
+        delete address;
+        delete vehicle;
+        delete c1;
 
     }
     BOOST_AUTO_TEST_CASE(EndRentTest)
     {
 
         unsigned int id = 1;
-        Address* address = new Address("London", "Alley", "2");
-        Vehicle* vehicle = new Vehicle("ABC1", 2);
-        Client* c1 = new Client("Andrzej", "Konieczny", "12312312312", address);
+        AddressPtr address = new Address("London", "Alley", "2");
+        Bicycle* vehicle = new Bicycle(plateNumber, 2);
+
+        ClientPtr c1 = new Client("Andrzej", "Konieczny", "12312312312", address, rents);
 
         Rent rent(id, vehicle, c1, true, pt::not_a_date_time);
 
@@ -55,9 +66,9 @@ BOOST_AUTO_TEST_SUITE(TestSuiteRent)
     {
 
         unsigned int id = 1;
-        Address* address = new Address("London", "Alley", "2");
-        Vehicle* vehicle = new Vehicle("ABC1", 2);
-        Client* c1 = new Client("Andrzej", "Konieczny", "12312312312", address);
+        AddressPtr address = new Address("London", "Alley", "2");
+        Bicycle* vehicle = new Bicycle(plateNumber, 2);
+        ClientPtr c1 = new Client("Andrzej", "Konieczny", "12312312312", address, rents);
 
         pt::ptime beg = pt::ptime(gr::date(2023,4,18),pt::hours(0)+pt::minutes(00));
 
@@ -87,9 +98,9 @@ BOOST_AUTO_TEST_SUITE(TestSuiteRent)
     {
 
         unsigned int id = 1;
-        Address* address = new Address("London", "Alley", "2");
-        Vehicle* vehicle = new Vehicle("ABC1", 2);
-        Client* c1 = new Client("Andrzej", "Konieczny", "12312312312", address);
+        AddressPtr address = new Address("London", "Alley", "2");
+        Bicycle* vehicle = new Bicycle(plateNumber, 2);
+        ClientPtr c1 = new Client("Andrzej", "Konieczny", "12312312312", address, rents);
         pt::ptime beg = pt::ptime(gr::date(2023,4,18),pt::hours(0)+pt::minutes(00));
         Rent rent(id, vehicle, c1, true, pt::not_a_date_time, beg);
         Rent rent1(id, vehicle, c1, true, pt::not_a_date_time, beg);
@@ -112,9 +123,9 @@ BOOST_AUTO_TEST_SUITE(TestSuiteRent)
     {
 
         unsigned int id = 1;
-        Address* address = new Address("London", "Alley", "2");
-        Vehicle* vehicle = new Vehicle("ABC1", 2);
-        Client* c1 = new Client("Andrzej", "Konieczny", "12312312312", address);
+        AddressPtr address = new Address("London", "Alley", "2");
+        Bicycle* vehicle = new Bicycle(plateNumber, 2);
+        ClientPtr c1 = new Client("Andrzej", "Konieczny", "12312312312", address, rents);
         pt::ptime beg = pt::ptime(gr::date(2023,4,18),pt::hours(0)+pt::minutes(00));
         Rent rent(id, vehicle, c1, true, pt::not_a_date_time, beg);
         pt::ptime end1 = pt::ptime(gr::date(2023,4,18),pt::hours(23)+pt::minutes(59));

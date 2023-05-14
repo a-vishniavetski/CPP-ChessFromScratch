@@ -8,7 +8,7 @@ Vehicle::Vehicle(std::string plateNumber, unsigned int basePrice):plateNumber(pl
 
 Vehicle::~Vehicle() {}
 
-string Vehicle::getVehicleInfo() const {
+string Vehicle::getVehicleInfo(){
     stringstream ss;
     ss << "Plate Number = " << this->plateNumber << ", base price = " << this->basePrice;
     return ss.str();
@@ -20,12 +20,16 @@ unsigned int Vehicle::getBasePrice() const {
     return this->basePrice;
 }
 
-string Vehicle::getPlateNumber() const {
+const string &Vehicle::getPlateNumber() const {
     return this->plateNumber;
 }
 
 bool Vehicle::isRented() const{
     return this->rented;
+}
+
+double Vehicle::getActualRentalPrice() {
+    return basePrice;
 }
 
 //setters

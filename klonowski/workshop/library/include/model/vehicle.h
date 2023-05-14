@@ -5,18 +5,24 @@
 #ifndef VEHICLE_H
 #define VEHICLE_H
 #include <string>
+#include <ostream>
+#include "typedefs.h"
+
+enum SegmentType{ A = 10, B = 11, C = 12, D = 13, E = 15};
 
 class Vehicle {
 public:
     Vehicle(std::string plateNumber, unsigned int basePrice);
 
-    ~Vehicle();
+    virtual ~Vehicle() = 0;
 
     //getters
-    std::string getVehicleInfo() const;
-    std::string getPlateNumber() const;
+    virtual std::string getVehicleInfo();
+    const std::string &getPlateNumber() const;
     unsigned int getBasePrice() const;
     bool isRented() const;
+
+    virtual double getActualRentalPrice();
 
     //setters
 
@@ -29,8 +35,6 @@ public:
 private:
     std::string plateNumber;
     int basePrice;
-    Vehicle();
-
 };
 
 

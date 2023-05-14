@@ -4,23 +4,28 @@
 
 #ifndef RENT_H
 #define RENT_H
+
 #include <boost/date_time.hpp>
-#include "client.h"
-#include "vehicle.h"
 #include <string>
+#include "typedefs.h"
+
+class Client;
+class Vehicle;
+
 namespace pt = boost::posix_time;
 namespace gr = boost::gregorian;
+
 class Rent{
 public:
-    Rent(unsigned int id, Vehicle *vehicle, Client *client, bool rented = true, pt::ptime endTime =  pt::not_a_date_time, pt::ptime beginTime =  pt::second_clock::local_time());
+    Rent(unsigned int id, VehiclePtr vehicle, ClientPtr client, bool rented = true, pt::ptime endTime =  pt::not_a_date_time, pt::ptime beginTime =  pt::second_clock::local_time());
 
     ~Rent();
 
     //getters
 
     unsigned int getId() const;
-    Vehicle* getVehicle() const;
-    Client* getClient() const;
+    VehiclePtr getVehicle() const;
+    ClientPtr getClient() const;
 
     std::string getRentInfo() const;
     pt::ptime getBeginTime() const;
@@ -31,14 +36,14 @@ public:
 
     //setters
 
-    void assignRentToClient() const;
+    void assignRentToClient();
     void endRent(pt::ptime endTime);
     unsigned int rentCost = 0;
 
 private:
     unsigned int id;
-    Vehicle* vehicle;
-    Client* client;
+    VehiclePtr vehicle;
+    ClientPtr client;
     pt::ptime beginTime;
     pt::ptime endTime;
 };

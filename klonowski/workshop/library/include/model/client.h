@@ -7,13 +7,17 @@
 
 #include <string>
 #include <vector>
-#include "address.h"
+#include "typedefs.h"
 #include "rent.h"
+#include "address.h"
+
+class Address;
+class Rent;
 
 class Client
 {
 public:
-    Client(std::string firstName, std::string lastName, std::string personalID, Address* address);
+    Client(std::string firstName, std::string lastName, std::string personalID, AddressPtr address, std::vector<RentPtr> &currentRents);
 
     ~Client();
     //getters
@@ -22,22 +26,22 @@ public:
     std::string getFirstName() const;
     std::string getLastName() const;
     std::string getPersonalID() const;
-    Address* getAddress() const;
-    std::vector<Rent*> getCurrentRents() const;
+    AddressPtr getAddress() const;
+    std::vector<RentPtr> getCurrentRents() const;
 
     //setters
     void setFirstName(std::string firstName);
     void setLastName(std::string lastName);
     void setPersonalID(std::string personalID);
-    void setAddress(Address* address);
-    void addToCurrentRents(Rent* rent);
+    void setAddress(AddressPtr address);
+    void addToCurrentRents(RentPtr rent);
 
 private:
     std::string firstName;
     std::string lastName;
     std::string personalID;
-    Address* address;
-    std::vector<Rent*> currentRents;
+    AddressPtr address;
+    std::vector<RentPtr> currentRents;
     Client();
 };
 

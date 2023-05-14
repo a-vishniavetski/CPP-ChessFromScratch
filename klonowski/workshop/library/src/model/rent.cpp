@@ -1,13 +1,16 @@
 
 #include <boost/date_time.hpp>
 #include "model/rent.h"
+#include "model/client.h"
+#include "model/vehicle.h"
+#include "typedefs.h"
 #include <iostream>
 #include <sstream>
 namespace pt = boost::posix_time;
 namespace gr = boost::gregorian;
 using namespace std;
 
-Rent::Rent(unsigned int id, Vehicle *vehicle, Client *client, bool rented, pt::ptime endTime, pt::ptime beginTime): id(id), vehicle(vehicle), client(client), beginTime(beginTime), endTime(endTime) {
+Rent::Rent(unsigned int id, VehiclePtr vehicle, ClientPtr client, bool rented, pt::ptime endTime, pt::ptime beginTime): id(id), vehicle(vehicle), client(client), beginTime(beginTime), endTime(endTime) {
     if(this->beginTime == pt::not_a_date_time)
         this->beginTime = pt::second_clock::local_time();
     this->endTime = pt::not_a_date_time;
@@ -26,11 +29,11 @@ unsigned int Rent::getId() const {
     return this->id;
 }
 
-Vehicle* Rent::getVehicle() const {
-    return this->getVehicle();
+VehiclePtr Rent::getVehicle() const {
+    return this->vehicle;
 }
 
-Client* Rent::getClient() const {
+ClientPtr Rent::getClient() const {
     return this->client;
 }
 
@@ -57,7 +60,7 @@ unsigned int Rent::getRentCost() const {
 
 //setters
 
-void Rent::assignRentToClient() const {
+void Rent::assignRentToClient(){
     this->getClient()->addToCurrentRents(this);
 }
 
@@ -80,7 +83,7 @@ void Rent::endRent(pt::ptime endTime) {
     if(it != this->getClient()->getCurrentRents().end())
     {
         int index = std::distance(this->getClient()->getCurrentRents().begin(), it);
-        this->getClient()->getCurrentRents().erase(index);
+        this->getClient()->getCurrentRents().erase(this->getClient()->getCurrentRents().begin()+index);
     }
     this->rentCost = this->getRentDays() * this->getVehicle()->getBasePrice();
 }

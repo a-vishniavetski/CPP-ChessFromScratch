@@ -23,9 +23,9 @@ public:
     std::string getNumber() const;
 
     //setters
-    void setCity(std::string city);
-    void setStreet(std::string street);
-    void setNumber(std::string number);
+//    void setCity(std::string city);
+//    void setStreet(std::string street);
+//    void setNumber(std::string number);
 
 private:
     std::string city;
