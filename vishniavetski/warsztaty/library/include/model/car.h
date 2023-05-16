@@ -1,0 +1,4 @@
+#ifndef WARSZTAT3_CAR_H
+#define WARSZTAT3_CAR_H
+
+#endif //WARSZTAT3_CAR_H
