@@ -1,6 +1,1 @@
-
-
-#ifndef WARSZTAT3_RENTREPOSITORY_CPP
-#define WARSZTAT3_RENTREPOSITORY_CPP
-
-#endif //WARSZTAT3_RENTREPOSITORY_CPP
+#include "repositories//ClientRepository.h"
