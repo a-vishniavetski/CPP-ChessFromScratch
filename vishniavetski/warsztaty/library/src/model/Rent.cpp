@@ -66,7 +66,7 @@ void Rent::endRent(pt::ptime _endTime) {
     this->vehicle->setRented(false);
     // zwolnic pojazd
     vector<Rent*> *rents = &this->client->currentRents;
-    int id = this->getId;
+    int id = this->getId();
 
 	rents->erase(remove_if(rents->begin(), rents->end(), [id](Rent *rent) { return (rent->getId() == id);  }), rents->end());
 
