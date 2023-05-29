@@ -5,34 +5,45 @@
 #ifndef WARSZTAT1_CLIENT_H
 #define WARSZTAT1_CLIENT_H
 #include <string>
+#include <vector>
+#include "model/Address.h"
 
 using namespace std;
+
+class Rent;
 
 class Client {
 public:
     // constructor
-    Client(string firstName, string lastName, string personalID);
+    Client(const string &firstName, const string &lastName, const string &personalID,
+           Address* address);
 
     // destructor
     ~Client();
 
     // getters
-    string getClientInfo();
-    string getFirstName();
-    string getLastName();
-    string getPersonalID();
+    string getClientInfo() const;
+    const string & getFirstName() const;
+    const string & getLastName() const;
+    const string & getPersonalID() const;
+    const Address* getAddress() const;
+    string getFullClientInfo() const; // Definicja w Rent.cpp
 
     // setters
-    void setFirstName(string firstName);
-    void setLastName(string lastName);
-    void setPersonalID(string personalID);
+    void setFirstName(const string &firstName);
+    void setLastName(const string &lastName);
+    void setAddress(Address* address);
+
+    // Rents
+    vector<Rent*> currentRents;
 
 private:
     Client();
 
     string firstName;
     string lastName;
-    string personalID;
+    const string personalID;
+    Address* address;
 
 };
 

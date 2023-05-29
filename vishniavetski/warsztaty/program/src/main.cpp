@@ -1,17 +1,30 @@
 #include <iostream>
 #include <math_helpers.h>
 #include <Client.h>
+#include <Rent.h>
 
 using namespace std;
 
 int main(){
-    Client c1 = Client("Aliaksei", "Vishniavetski", "249518");
-    Client* c2 = new Client("Ktos", "Inny", "000000");
+    pt::ptime empty = pt::not_a_date_time;
+    pt::ptime now = pt::second_clock::local_time();
 
-    cout << c1.getClientInfo() << "\n";
-    cout << c2->getClientInfo() << "\n";
+    Address* testaddress = new Address("London", "Accacia Avenue", "22");
+    Vehicle* testvehicle = new Vehicle(10, "999");
 
-    delete c2;
+    Client *c1 = new Client("Aliaksei", "Vishniavetski", "249518", testaddress);
+
+    Rent *rent1 = new Rent(1, c1, testvehicle, now);
+
+
+    //cout << c1->getClientInfo() << "\n\n";
+    //cout << rent1->getRentInfo() << "\n\n";
+    cout << c1->getFullClientInfo() << "\n\n";
+
+    delete testaddress;
+    delete testvehicle;
+    delete c1;
+    delete rent1;
 
     return 0;
 }

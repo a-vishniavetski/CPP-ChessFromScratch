@@ -2,46 +2,52 @@
 // Created by avish on 3/22/2023.
 //
 
-#include "model/Client.h"
-#include <iostream>
 #include <string>
-
-using namespace std;
+#include "model/Client.h"
+#include "model/Rent.h"
 
 Client::Client() {}
 
-Client::Client(string firstName, string lastName, string personalID):
+Client::Client(const string &firstName, const string &lastName, const string &personalID,
+               Address* address):
     firstName(firstName),
     lastName(lastName),
-    personalID(personalID)
+    personalID(personalID),
+    address(address)
     {}
 
 Client::~Client() {}
 
 // getters
-string Client::getClientInfo() {
-    string _prompt = "firstName: " + this->firstName +
-            " | lastName: " + this->lastName +
-            " | personalID: " + this->personalID;
+string Client::getClientInfo() const{
+    string _prompt = "FirstName: " + this->firstName +
+            " | LastName: " + this->lastName +
+            " | PersonalID: " + this->personalID;
 
-    return _prompt;
+    string _prompt_address = this->address->getAddressInfo();
+
+    return _prompt +  " | Address: " + _prompt_address;
 }
 
-string Client::getFirstName(){
+const string & Client::getFirstName() const {
     return this->firstName;
 };
 
-string Client::getLastName(){
+const string & Client::getLastName() const{
     return this->lastName;
 };
 
-string Client::getPersonalID(){
+const string & Client::getPersonalID() const{
     return this->personalID;
 };
 
+const Address* Client::getAddress() const{
+    return this->address;
+}
+
 // setters
 
-void Client::setFirstName(string firstName){
+void Client::setFirstName(const string &firstName){
     if (firstName.empty()){
         return;
     }
@@ -49,7 +55,7 @@ void Client::setFirstName(string firstName){
     this->firstName = firstName;
 }
 
-void Client::setLastName(string lastName){
+void Client::setLastName(const string &lastName){
     if (lastName.empty()){
         return;
     }
@@ -57,10 +63,24 @@ void Client::setLastName(string lastName){
     this->lastName = lastName;
 }
 
-void Client::setPersonalID(string personalID) {
-    if (personalID.empty()){
+void Client::setAddress(Address *address) {
+    if (address == nullptr){
         return;
     }
 
-    this->firstName = firstName;
+    this->address = address;
 }
+
+string Client::getFullClientInfo() const{
+    // Client + Address
+    string _prompt = this->getClientInfo();
+    // Rents
+    string _prompt_rent = "\nCurrents rents:\n";
+    for (int i = 0; i < this->currentRents.size(); i++){
+        _prompt_rent = _prompt_rent + currentRents[i]->getRentInfo() +
+                       "\n";
+    }
+
+    return _prompt + _prompt_rent;
+}
+
