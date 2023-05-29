@@ -11,11 +11,13 @@ class Board;
 
 
 class Game {
+
+    void gameloop();
+
 private:
     vector<PlayerPtr> players;
     BoardPtr board;
     int total_turns;
-
 };
 
 
