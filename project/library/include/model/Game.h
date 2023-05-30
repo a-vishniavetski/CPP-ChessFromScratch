@@ -11,8 +11,15 @@ class Board;
 
 
 class Game {
+public:
+    // Konstruktor
+    Game(const vector<PlayerPtr> &_players, BoardPtr const _board, int _totalTurns);
+
 
     void gameloop();
+    void new_game();
+
+    virtual ~Game();
 
 private:
     vector<PlayerPtr> players;

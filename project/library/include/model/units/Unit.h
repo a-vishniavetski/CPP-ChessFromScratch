@@ -1,8 +1,11 @@
 #ifndef CHESS_UNIT_H
 #define CHESS_UNIT_H
 
+#include <string>
+#include <vector>
+#include <typedefs.h>
 
-#include "typedefs.h"
+using namespace std;
 
 
 class Board;
@@ -15,6 +18,9 @@ class Field;
 */
 class Unit {
 public:
+
+    Unit(const string &name, int uuid, const FieldPtr &field, bool alive);
+
     virtual vector<FieldPtr> get_moves(BoardPtr board)=0;
 
 private:
@@ -22,6 +28,7 @@ private:
     int UUID; // unique unit id
     FieldPtr field;
     bool alive;
+
 };
 
 

@@ -1,14 +1,22 @@
 #ifndef CHESS_TYPEDEFS_H
 #define CHESS_TYPEDEFS_H
-#include <Game.h>
-#include <Player.h>
-#include <Board.h>
-#include <Field.h>
 
-typedef Game* GamePtr;
-typedef Player* PlayerPtr;
-typedef Board* BoardPtr;
-typedef Field* FieldPtr;
-typedef Unit* UnitPtr;
+#include <memory>
+
+using namespace std;
+
+
+class Game;
+class Player;
+class Board;
+class Field;
+class Unit;
+
+
+typedef shared_ptr<Game> GamePtr;
+typedef shared_ptr<Player> PlayerPtr;
+typedef shared_ptr<Board> BoardPtr;
+typedef shared_ptr<Field> FieldPtr;
+typedef shared_ptr<Unit> UnitPtr;
 
 #endif //CHESS_TYPEDEFS_H

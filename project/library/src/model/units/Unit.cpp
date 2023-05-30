@@ -1,5 +1,6 @@
-//
-// Created by avish on 5/29/2023.
-//
+#include <Unit.h>
 
-#include "model/units/Unit.h"
+
+Unit::Unit(const string &name, int uuid, const FieldPtr &field, bool alive) : name(name), UUID(uuid), field(field),
+                                                                              alive(alive) {}
+

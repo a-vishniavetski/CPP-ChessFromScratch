@@ -7,11 +7,18 @@
 #include <vector>
 #include <typedefs.h>
 
+using namespace std;
+
 
 class Field;
 
 
 class Board {
+public:
+    Board(int _x_dimension, int _y_dimension, const vector<FieldPtr> &_fields);
+
+    virtual ~Board();
+
 private:
     int x_dimension;
     int y_dimension;

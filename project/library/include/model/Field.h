@@ -5,16 +5,52 @@
 #ifndef CHESS_FIELD_H
 #define CHESS_FIELD_H
 #include <string>
-#import <typedefs.h>
+#include <typedefs.h>
 
+using namespace std;
 
 class Unit;
 
 
 class Field {
+public:
+    // Konstruktorzy i destruktorzy
+    Field(int xCoord, int yCoord, const string &color);
+
+    Field(int xCoord, int yCoord, bool isOccupied, const UnitPtr &occupiedByUnit, const vector<UnitPtr> &seenByUnits,
+          const string &color);
+
+    virtual ~Field();
+
+    // x
+    int getXCoord() const;
+    void setXCoord(int xCoord);
+
+    // y
+    int getYCoord() const;
+    void setYCoord(int yCoord);
+
+    // occupation
+    bool isOccupied() const;
+    void setOccupied(bool occupied);
+
+    const UnitPtr &getOccupiedByUnit() const;
+    void setOccupiedByUnit(const UnitPtr &occupiedByUnit);
+
+    // color
+    const string &getColor() const;
+    void setColor(const string &color);
+
+    // seen by units
+    const vector<UnitPtr> &getSeenByUnits() const;
+    void add_seeing_unit(const UnitPtr _unit);
+    void remove_seeing_unit(const int UUID);
+
+
 private:
     int x_coord;
     int y_coord;
+    bool occupied;
     UnitPtr occupied_by_unit;
     vector<UnitPtr> seen_by_units;
     string color;
