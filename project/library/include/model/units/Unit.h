@@ -21,7 +21,11 @@ public:
 
     Unit(const string &name, int uuid, const FieldPtr field, bool alive);
 
-    virtual vector<FieldPtr> get_moves(BoardPtr board)=0;
+    Unit(std::nullptr_t);
+
+    virtual vector<FieldPtr> get_moves(BoardPtr board);
+
+    string get_unit_info() const;
 
     const string &getName() const;
 
@@ -31,7 +35,7 @@ public:
 
     void setUuid(int uuid);
 
-    const FieldPtr &getField() const;
+    const FieldPtr getField() const;
 
     void setField(const FieldPtr &field);
 

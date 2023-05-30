@@ -1,3 +1,4 @@
+#include <iostream>
 #include <Board.h>
 #include <Field.h>
 
@@ -29,15 +30,20 @@ void Board::setYDimension(int yDimension) {
 }
 
 FieldPtr Board::get_field(int x_dimension, int y_dimension) const{
-    FieldPtr retval;
+    //std::cout << "In get_filed";
+    FieldPtr retval = make_shared<Field>(nullptr);
 
     for (int i = 0; i < fields.size(); i++){
         retval = fields[i];
         if (retval->getXCoord() == x_dimension && retval->getYCoord() == y_dimension){
+            //std::cout << "Field found";
             break;
+        }
+        else{
+            //std::cout << "Field not found";
         }
     }
     // todo field_not_found exception czy coś takiego
-
+    //std::cout << "Almost out of get_filed";
     return retval;
 }

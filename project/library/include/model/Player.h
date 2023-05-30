@@ -20,6 +20,19 @@ public:
 
     virtual ~Player();
 
+    string get_all_units_info() const;
+    const string &getName() const;
+
+    void setName(const string &name);
+
+    int getUpid() const;
+
+    void setUpid(int upid);
+
+    const vector<UnitPtr> &getUnits() const;
+
+    void setUnits(const vector<UnitPtr> &units);
+
 private:
     string name;
     int UPID;  // unique player ID

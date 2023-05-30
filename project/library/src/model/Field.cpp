@@ -4,6 +4,8 @@
 
 #include <vector>
 #include "Field.h"
+#include <Unit.h>
+#include <Pawn.h>
 
 using namespace std;
 
@@ -11,7 +13,13 @@ using namespace std;
 // Konstruktorzy i destruktorzy
 Field::~Field() {}
 
-Field::Field(int xCoord, int yCoord, const string &color) : x_coord(xCoord), y_coord(yCoord), color(color) {}
+Field::Field(int xCoord, int yCoord, const string &color) : x_coord(xCoord), y_coord(yCoord), color(color) {
+    /* Potrzebujemy żeby pole "occupied_by" mógło być nullptr(niczym) żeby jego zwalniać
+     * dlatego trzeba było dać Unitu konstruktor z nullptr-em.
+    */
+    UnitPtr null_unit = make_shared<Unit>(nullptr);
+    occupied_by_unit = null_unit;
+}
 
 Field::Field(int xCoord, int yCoord, bool isOccupied, const UnitPtr &occupiedByUnit, const vector<UnitPtr> &seenByUnits,
              const string &color) : x_coord(xCoord), y_coord(yCoord), occupied(isOccupied),
@@ -37,8 +45,8 @@ bool Field::isOccupied() const {
     return occupied;
 }
 
-void Field::setOccupied(bool occupied) {
-    Field::occupied = occupied;
+void Field::setOccupied(bool _occupied) {
+    occupied = _occupied;
 }
 
 const UnitPtr &Field::getOccupiedByUnit() const {
@@ -72,6 +80,23 @@ void Field::remove_seeing_unit(const int UUID) {
 
 void Field::add_seeing_unit(const UnitPtr _unit) {
     //todo
+}
+
+Field::Field(nullptr_t) {
+
+}
+
+string Field::get_field_info() const {
+    string occupied_status = "Not_Occupied";
+    if (isOccupied()){
+        occupied_status = "Occupied";
+    }
+    string _prompt = "Field(";
+    _prompt.append(to_string(this->getXCoord())).append(", ");
+    _prompt.append(to_string(this->getYCoord())).append(")");
+    _prompt.append(this->getColor());
+    _prompt.append(":").append(occupied_status);
+    return _prompt;
 }
 
 

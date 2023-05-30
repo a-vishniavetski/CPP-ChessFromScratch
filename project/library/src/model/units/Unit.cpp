@@ -1,8 +1,10 @@
 #include <Unit.h>
-
+#include <Field.h>
 
 Unit::Unit(const string &name, int uuid, const FieldPtr field, bool alive) : name(name), UUID(uuid), field(field),
-                                                                             alive(alive) {}
+                                                                             alive(alive) {
+
+}
 
 const string &Unit::getName() const {
     return name;
@@ -20,7 +22,7 @@ void Unit::setUuid(int uuid) {
     UUID = uuid;
 }
 
-const FieldPtr &Unit::getField() const {
+const FieldPtr Unit::getField() const {
     return field;
 }
 
@@ -35,4 +37,26 @@ bool Unit::isAlive() const {
 void Unit::setAlive(bool alive) {
     Unit::alive = alive;
 }
+
+vector<FieldPtr> Unit::get_moves(BoardPtr board) {
+    return vector<FieldPtr>();
+}
+
+Unit::Unit(std::nullptr_t) {
+    FieldPtr null_field = make_shared<Field>(nullptr);
+    field = null_field;
+}
+
+string Unit::get_unit_info() const {
+    if (this == nullptr){
+        return "NULL";
+    }
+    string _prompt;
+    _prompt.append(this->getName());
+    _prompt.append(", ").append(to_string(this->getUuid()));
+    _prompt.append(", ").append(to_string(this->isAlive()));
+    _prompt.append(", ").append(this->getField()->get_field_info());
+    return _prompt;
+}
+
 

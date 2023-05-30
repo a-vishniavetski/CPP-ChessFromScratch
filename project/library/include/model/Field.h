@@ -15,6 +15,8 @@ class Unit;
 class Field {
 public:
     // Konstruktorzy i destruktorzy
+    Field(nullptr_t);
+
     Field(int xCoord, int yCoord, const string &color);
 
     Field(int xCoord, int yCoord, bool isOccupied, const UnitPtr &occupiedByUnit, const vector<UnitPtr> &seenByUnits,
@@ -36,6 +38,7 @@ public:
     const UnitPtr &getOccupiedByUnit() const;
     void occupy(const UnitPtr unit);
     void deoccupy();
+    void setOccupied(bool _occupied);
 
     // color
     const string &getColor() const;
@@ -46,17 +49,20 @@ public:
     void add_seeing_unit(const UnitPtr _unit);
     void remove_seeing_unit(const int UUID);
 
+    // print
+    string get_field_info() const;
+
 
 private:
-    int x_coord;
-    int y_coord;
-    bool occupied;
+    int x_coord = -1;
+    int y_coord = -1;
+    bool occupied = false;
     UnitPtr occupied_by_unit;
     vector<UnitPtr> seen_by_units;
     string color;
 
     // occupation
-    void setOccupied(bool occupied);
+
 };
 
 
