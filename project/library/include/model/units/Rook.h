@@ -10,7 +10,10 @@
 
 
 class Rook : public Unit {
+public:
+    Rook(const string &name, int uuid, const FieldPtr &field, bool alive);
 
+    vector<FieldPtr> get_moves(BoardPtr board);
 };
 
 

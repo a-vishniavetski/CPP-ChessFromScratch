@@ -19,6 +19,16 @@ public:
 
     virtual ~Board();
 
+    int getXDimension() const;
+
+    void setXDimension(int xDimension);
+
+    int getYDimension() const;
+
+    void setYDimension(int yDimension);
+
+    FieldPtr get_field(int x_dimension, int y_dimension) const;
+
 private:
     int x_dimension;
     int y_dimension;

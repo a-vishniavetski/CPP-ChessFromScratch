@@ -45,8 +45,13 @@ const UnitPtr &Field::getOccupiedByUnit() const {
     return occupied_by_unit;
 }
 
-void Field::setOccupiedByUnit(const UnitPtr &occupiedByUnit) {
-    occupied_by_unit = occupiedByUnit;
+void Field::occupy(const UnitPtr unit) {
+    occupied_by_unit = unit;
+    setOccupied(true);
+}
+
+void Field::deoccupy() {
+    setOccupied(false);
 }
 
 const string &Field::getColor() const {
@@ -68,3 +73,5 @@ void Field::remove_seeing_unit(const int UUID) {
 void Field::add_seeing_unit(const UnitPtr _unit) {
     //todo
 }
+
+

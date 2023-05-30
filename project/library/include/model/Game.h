@@ -18,6 +18,7 @@ public:
 
     void gameloop();
     void new_game();
+    void place_unit_at(int x_coord, int y_coord, UnitPtr unit);
 
     virtual ~Game();
 

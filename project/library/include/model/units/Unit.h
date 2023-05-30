@@ -19,9 +19,25 @@ class Field;
 class Unit {
 public:
 
-    Unit(const string &name, int uuid, const FieldPtr &field, bool alive);
+    Unit(const string &name, int uuid, const FieldPtr field, bool alive);
 
     virtual vector<FieldPtr> get_moves(BoardPtr board)=0;
+
+    const string &getName() const;
+
+    void setName(const string &name);
+
+    int getUuid() const;
+
+    void setUuid(int uuid);
+
+    const FieldPtr &getField() const;
+
+    void setField(const FieldPtr &field);
+
+    bool isAlive() const;
+
+    void setAlive(bool alive);
 
 private:
     string name;

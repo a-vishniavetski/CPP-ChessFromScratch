@@ -1,0 +1,72 @@
+[
+{
+  "directory": "C:/msys64/home/avish/atom_wt_1400_03/project/cmake-build-release",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -IC:/msys64/home/avish/atom_wt_1400_03/project/program/include -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include/model -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include/model/units -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src/model -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src/model/units -g3 -gdwarf-4 -std=gnu++11 -o program\\CMakeFiles\\Program.dir\\src\\main.cpp.obj -c C:\\msys64\\home\\avish\\atom_wt_1400_03\\project\\program\\src\\main.cpp",
+  "file": "C:\\msys64\\home\\avish\\atom_wt_1400_03\\project\\program\\src\\main.cpp"
+},
+{
+  "directory": "C:/msys64/home/avish/atom_wt_1400_03/project/cmake-build-release",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include/model -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include/model/units -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src/model -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src/model/units -g3 -gdwarf-4 -std=gnu++11 -o library\\CMakeFiles\\Library.dir\\test\\master.cpp.obj -c C:\\msys64\\home\\avish\\atom_wt_1400_03\\project\\library\\test\\master.cpp",
+  "file": "C:\\msys64\\home\\avish\\atom_wt_1400_03\\project\\library\\test\\master.cpp"
+},
+{
+  "directory": "C:/msys64/home/avish/atom_wt_1400_03/project/cmake-build-release",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include/model -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include/model/units -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src/model -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src/model/units -g3 -gdwarf-4 -std=gnu++11 -o library\\CMakeFiles\\Library.dir\\src\\model\\Game.cpp.obj -c C:\\msys64\\home\\avish\\atom_wt_1400_03\\project\\library\\src\\model\\Game.cpp",
+  "file": "C:\\msys64\\home\\avish\\atom_wt_1400_03\\project\\library\\src\\model\\Game.cpp"
+},
+{
+  "directory": "C:/msys64/home/avish/atom_wt_1400_03/project/cmake-build-release",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include/model -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include/model/units -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src/model -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src/model/units -g3 -gdwarf-4 -std=gnu++11 -o library\\CMakeFiles\\Library.dir\\src\\model\\Player.cpp.obj -c C:\\msys64\\home\\avish\\atom_wt_1400_03\\project\\library\\src\\model\\Player.cpp",
+  "file": "C:\\msys64\\home\\avish\\atom_wt_1400_03\\project\\library\\src\\model\\Player.cpp"
+},
+{
+  "directory": "C:/msys64/home/avish/atom_wt_1400_03/project/cmake-build-release",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include/model -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include/model/units -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src/model -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src/model/units -g3 -gdwarf-4 -std=gnu++11 -o library\\CMakeFiles\\Library.dir\\src\\model\\Board.cpp.obj -c C:\\msys64\\home\\avish\\atom_wt_1400_03\\project\\library\\src\\model\\Board.cpp",
+  "file": "C:\\msys64\\home\\avish\\atom_wt_1400_03\\project\\library\\src\\model\\Board.cpp"
+},
+{
+  "directory": "C:/msys64/home/avish/atom_wt_1400_03/project/cmake-build-release",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include/model -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include/model/units -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src/model -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src/model/units -g3 -gdwarf-4 -std=gnu++11 -o library\\CMakeFiles\\Library.dir\\src\\model\\Field.cpp.obj -c C:\\msys64\\home\\avish\\atom_wt_1400_03\\project\\library\\src\\model\\Field.cpp",
+  "file": "C:\\msys64\\home\\avish\\atom_wt_1400_03\\project\\library\\src\\model\\Field.cpp"
+},
+{
+  "directory": "C:/msys64/home/avish/atom_wt_1400_03/project/cmake-build-release",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include/model -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include/model/units -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src/model -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src/model/units -g3 -gdwarf-4 -std=gnu++11 -o library\\CMakeFiles\\Library.dir\\src\\model\\units\\Unit.cpp.obj -c C:\\msys64\\home\\avish\\atom_wt_1400_03\\project\\library\\src\\model\\units\\Unit.cpp",
+  "file": "C:\\msys64\\home\\avish\\atom_wt_1400_03\\project\\library\\src\\model\\units\\Unit.cpp"
+},
+{
+  "directory": "C:/msys64/home/avish/atom_wt_1400_03/project/cmake-build-release",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include/model -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include/model/units -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src/model -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src/model/units -g3 -gdwarf-4 -std=gnu++11 -o library\\CMakeFiles\\Library.dir\\src\\model\\units\\Pawn.cpp.obj -c C:\\msys64\\home\\avish\\atom_wt_1400_03\\project\\library\\src\\model\\units\\Pawn.cpp",
+  "file": "C:\\msys64\\home\\avish\\atom_wt_1400_03\\project\\library\\src\\model\\units\\Pawn.cpp"
+},
+{
+  "directory": "C:/msys64/home/avish/atom_wt_1400_03/project/cmake-build-release",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include/model -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include/model/units -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src/model -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src/model/units -g3 -gdwarf-4 -std=gnu++11 -o library\\CMakeFiles\\Library.dir\\src\\model\\units\\King.cpp.obj -c C:\\msys64\\home\\avish\\atom_wt_1400_03\\project\\library\\src\\model\\units\\King.cpp",
+  "file": "C:\\msys64\\home\\avish\\atom_wt_1400_03\\project\\library\\src\\model\\units\\King.cpp"
+},
+{
+  "directory": "C:/msys64/home/avish/atom_wt_1400_03/project/cmake-build-release",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include/model -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include/model/units -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src/model -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src/model/units -g3 -gdwarf-4 -std=gnu++11 -o library\\CMakeFiles\\Library.dir\\src\\model\\units\\Queen.cpp.obj -c C:\\msys64\\home\\avish\\atom_wt_1400_03\\project\\library\\src\\model\\units\\Queen.cpp",
+  "file": "C:\\msys64\\home\\avish\\atom_wt_1400_03\\project\\library\\src\\model\\units\\Queen.cpp"
+},
+{
+  "directory": "C:/msys64/home/avish/atom_wt_1400_03/project/cmake-build-release",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include/model -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include/model/units -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src/model -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src/model/units -g3 -gdwarf-4 -std=gnu++11 -o library\\CMakeFiles\\Library.dir\\src\\model\\units\\Rook.cpp.obj -c C:\\msys64\\home\\avish\\atom_wt_1400_03\\project\\library\\src\\model\\units\\Rook.cpp",
+  "file": "C:\\msys64\\home\\avish\\atom_wt_1400_03\\project\\library\\src\\model\\units\\Rook.cpp"
+},
+{
+  "directory": "C:/msys64/home/avish/atom_wt_1400_03/project/cmake-build-release",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include/model -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include/model/units -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src/model -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src/model/units -g3 -gdwarf-4 -std=gnu++11 -o library\\CMakeFiles\\Library.dir\\src\\model\\units\\Bishop.cpp.obj -c C:\\msys64\\home\\avish\\atom_wt_1400_03\\project\\library\\src\\model\\units\\Bishop.cpp",
+  "file": "C:\\msys64\\home\\avish\\atom_wt_1400_03\\project\\library\\src\\model\\units\\Bishop.cpp"
+},
+{
+  "directory": "C:/msys64/home/avish/atom_wt_1400_03/project/cmake-build-release",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include/model -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include/model/units -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src/model -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src/model/units -g3 -gdwarf-4 -std=gnu++11 -o library\\CMakeFiles\\Library.dir\\src\\model\\units\\Knight.cpp.obj -c C:\\msys64\\home\\avish\\atom_wt_1400_03\\project\\library\\src\\model\\units\\Knight.cpp",
+  "file": "C:\\msys64\\home\\avish\\atom_wt_1400_03\\project\\library\\src\\model\\units\\Knight.cpp"
+},
+{
+  "directory": "C:/msys64/home/avish/atom_wt_1400_03/project/cmake-build-release",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DBOOST_UNIT_TEST_FRAMEWORK_DYN_LINK -DBOOST_UNIT_TEST_FRAMEWORK_NO_LIB -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include/model -IC:/msys64/home/avish/atom_wt_1400_03/project/library/include/model/units -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src/model -IC:/msys64/home/avish/atom_wt_1400_03/project/library/src/model/units -g3 -gdwarf-4 -std=gnu++11 -o library\\CMakeFiles\\LibraryTest.dir\\test\\master.cpp.obj -c C:\\msys64\\home\\avish\\atom_wt_1400_03\\project\\library\\test\\master.cpp",
+  "file": "C:\\msys64\\home\\avish\\atom_wt_1400_03\\project\\library\\test\\master.cpp"
+}
+]

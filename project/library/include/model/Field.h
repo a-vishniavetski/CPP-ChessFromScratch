@@ -32,10 +32,10 @@ public:
 
     // occupation
     bool isOccupied() const;
-    void setOccupied(bool occupied);
 
     const UnitPtr &getOccupiedByUnit() const;
-    void setOccupiedByUnit(const UnitPtr &occupiedByUnit);
+    void occupy(const UnitPtr unit);
+    void deoccupy();
 
     // color
     const string &getColor() const;
@@ -54,6 +54,9 @@ private:
     UnitPtr occupied_by_unit;
     vector<UnitPtr> seen_by_units;
     string color;
+
+    // occupation
+    void setOccupied(bool occupied);
 };
 
 
