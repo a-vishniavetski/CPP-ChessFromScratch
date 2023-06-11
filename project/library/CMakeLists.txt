@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.4)
 project(Library)
 
 set(SOURCE_FILES
-        test/master.cpp src/model/Game.cpp include/model/Game.h include/typedefs.h src/model/Player.cpp include/model/Player.h src/model/Board.cpp include/model/Board.h src/model/Field.cpp include/model/Field.h src/model/units/Unit.cpp include/model/units/Unit.h src/model/units/Pawn.cpp include/model/units/Pawn.h src/model/units/King.cpp include/model/units/King.h src/model/units/Queen.cpp include/model/units/Queen.h src/model/units/Rook.cpp include/model/units/Rook.h src/model/units/Bishop.cpp include/model/units/Bishop.h src/model/units/Knight.cpp include/model/units/Knight.h)
+        test/master.cpp src/model/Game.cpp include/model/Game.h include/typedefs.h src/model/Player.cpp include/model/Player.h src/model/Board.cpp include/model/Board.h src/model/Field.cpp include/model/Field.h src/model/units/Unit.cpp include/model/units/Unit.h src/model/units/Pawn.cpp include/model/units/Pawn.h src/model/units/King.cpp include/model/units/King.h src/model/units/Queen.cpp include/model/units/Queen.h src/model/units/Rook.cpp include/model/units/Rook.h src/model/units/Bishop.cpp include/model/units/Bishop.h src/model/units/Knight.cpp include/model/units/Knight.h include/model/MainFrame.h src/model/MainFrame.cpp include/model/App.h src/model/App.cpp include/model/GameFrame.h include/model/UI.h src/model/UI.cpp src/model/GameFrame.cpp)
 
 #Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł
 add_library(Library ${SOURCE_FILES})
@@ -13,6 +13,11 @@ target_include_directories(Library PUBLIC include/model/units)
 target_include_directories(Library PUBLIC src)
 target_include_directories(Library PUBLIC src/model)
 target_include_directories(Library PUBLIC src/model/units)
+
+find_package(wxWidgets REQUIRED COMPONENTS net core base)
+if(wxWidgets_USE_FILE) # not defined in CONFIG mode
+    include(${wxWidgets_USE_FILE})
+endif()
 
 enable_testing()
 
@@ -27,6 +32,7 @@ set(SOURCE_TEST_FILES
         test/master.cpp) # tu w przyszłości będą dodawane pliki źródłowe testów
 
 add_executable (LibraryTest ${SOURCE_TEST_FILES})
+target_link_libraries(Library ${wxWidgets_LIBRARIES})
 
 #dołącz bibliotekę z testowanymi klasami oraz bibliotekę boost.test do programu testów
 target_link_libraries (LibraryTest

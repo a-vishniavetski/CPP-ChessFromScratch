@@ -11,6 +11,7 @@ class Player;
 class Board;
 class Field;
 class Unit;
+class MainFrame;
 
 
 typedef shared_ptr<Game> GamePtr;
@@ -18,5 +19,6 @@ typedef shared_ptr<Player> PlayerPtr;
 typedef shared_ptr<Board> BoardPtr;
 typedef shared_ptr<Field> FieldPtr;
 typedef shared_ptr<Unit> UnitPtr;
+typedef shared_ptr<MainFrame> MainFramePtr;
 
 #endif //CHESS_TYPEDEFS_H

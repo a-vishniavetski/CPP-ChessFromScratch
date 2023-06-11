@@ -7,6 +7,10 @@
 #include <memory>
 #include <sstream>
 
+#include "App.h"
+
+#include "wx/wx.h"
+
 using namespace std;
 
 
@@ -21,7 +25,17 @@ void _print(BoardPtr board){
         }
     }
 }
-int main(){
+
+wxIMPLEMENT_APP_NO_MAIN(App);
+
+int main(int argc, char *argv[]){
+//    wxApp* app = new App();
+//    wxApp::SetInstance(app);
+    wxEntryStart(argc, argv);
+    wxTheApp->CallOnInit();
+
+
+
     //Player player_one("Player 1", 0, )
     GamePtr g1 = make_shared<Game>(Game());
     g1->new_game();
@@ -32,9 +46,7 @@ int main(){
     cout << temp[0]->get_all_units_info();
     cout << "\n";
     cout << g1->getPlayers()[1]->get_all_units_info();
-
-    cout << "\nReturning 0, out";
-    string buf;
-    getline(cin, buf);
+    wxTheApp->OnRun();
+    wxEntryCleanup();
     return 0;
 }
