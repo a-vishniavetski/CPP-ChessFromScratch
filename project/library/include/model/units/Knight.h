@@ -9,6 +9,10 @@
 #include "Unit.h"
 
 class Knight : public Unit {
+public:
+    string getIcon() override;
+private:
+    string icon = "\n♞\n";
 
 };
 

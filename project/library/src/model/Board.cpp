@@ -13,7 +13,7 @@ Board::~Board() {
 
 }
 
-int Board::getXDimension() const {
+int Board::getXDimension() {
     return x_dimension;
 }
 
@@ -21,7 +21,7 @@ void Board::setXDimension(int xDimension) {
     x_dimension = xDimension;
 }
 
-int Board::getYDimension() const {
+int Board::getYDimension() {
     return y_dimension;
 }
 

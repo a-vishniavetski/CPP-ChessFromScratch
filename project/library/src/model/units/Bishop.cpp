@@ -3,3 +3,7 @@
 //
 
 #include "model/units/Bishop.h"
+
+string Bishop::getIcon() {
+    return icon;
+}

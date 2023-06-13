@@ -9,7 +9,10 @@
 #include "Unit.h"
 
 class Queen : public Unit {
-
+public:
+    string getIcon() override;
+private:
+    string icon = "\n♛\n";
 };
 
 

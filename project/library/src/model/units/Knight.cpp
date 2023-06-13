@@ -3,3 +3,7 @@
 //
 
 #include "model/units/Knight.h"
+
+string Knight::getIcon() {
+    return icon;
+}

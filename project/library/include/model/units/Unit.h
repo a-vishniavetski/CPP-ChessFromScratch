@@ -23,6 +23,8 @@ public:
 
     Unit(std::nullptr_t);
 
+    string getColor();
+
     virtual vector<FieldPtr> get_moves(BoardPtr board);
 
     string get_unit_info() const;
@@ -43,8 +45,12 @@ public:
 
     void setAlive(bool alive);
 
+    virtual string getIcon();
+
 private:
     string name;
+    string icon = "\n\n";
+    string color = "";
     int UUID; // unique unit id
     FieldPtr field;
     bool alive;

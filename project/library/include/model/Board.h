@@ -19,11 +19,11 @@ public:
 
     virtual ~Board();
 
-    int getXDimension() const;
+    int getXDimension();
 
     void setXDimension(int xDimension);
 
-    int getYDimension() const;
+    int getYDimension();
 
     void setYDimension(int yDimension);
 

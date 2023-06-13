@@ -9,7 +9,12 @@
 #include "Unit.h"
 
 class Bishop : public Unit {
+public:
 
+    string getIcon() override;
+
+private:
+    string icon = "\n♝\n";
 };
 
 

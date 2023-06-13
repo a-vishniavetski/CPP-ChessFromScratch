@@ -4,10 +4,14 @@
 
 #include "MainFrame.h"
 #include "UI.h"
+#include "Unit.h"
 #include "wx/wx.h"
+#include "Game.h"
+
+#include "typedefs.h"
 
 enum IDs{
-    NEWGAME_BUTTON = 1,
+    NEWGAME_BUTTON = 100,
 };
 
 wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
@@ -38,11 +42,33 @@ void MainFrame::OnButtonClicked(wxCommandEvent &event) {
     {
         this->Hide();
 
-        UI* ui = new UI("Game", *this);
+        ui = new UI("Game", *this);
 
+        vector<UnitPtr> units;
+        UnitPtr u = make_shared<Unit>(nullptr);
+        units.push_back(u);
+        gameStarted = true;
+
+        GamePtr game = make_shared<Game>(Game());
+        game->new_game();
+        BoardPtr board = game->getBoard();
+
+        int x = board->getXDimension();
+        int y = board->getYDimension();
+
+        ui->create_board(x, y);
+        ui->populate_board(board);
     }
     wxString msg = wxString::Format("Button clicked, ID=%d", event.GetId());
     wxLogStatus(msg);
+}
+
+UI* MainFrame::getUI() {
+    return ui;
+}
+
+bool MainFrame::getGameStarted() {
+    return gameStarted;
 }
 //
 //void MainFrame::OnClose(wxCloseEvent &event) {

@@ -7,10 +7,18 @@
 #include "wx/wx.h"
 #include "typedefs.h"
 
+App::App(){
+//    OnInit();
+};
+
 bool App::OnInit() {
-    MainFrame* mainFrame = new MainFrame("Main Window");
+    mainFrame = new MainFrame("Main Window");
     mainFrame->SetClientSize(800, 600);
     mainFrame->Center();
     mainFrame->Show();
     return true;
+}
+
+MainFrame* App::getMainFrame() {
+    return mainFrame;
 }

@@ -2,6 +2,7 @@
 #define CHESS_GAME_H
 #include <vector>
 #include <typedefs.h>
+#include "Board.h"
 
 using namespace std;
 
@@ -28,7 +29,7 @@ public:
 
     void setPlayers(const vector<PlayerPtr> &players);
 
-    const BoardPtr getBoard() const;
+     BoardPtr getBoard() ;
 
     void setBoard(const BoardPtr &board);
 

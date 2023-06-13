@@ -12,6 +12,11 @@ public:
     Pawn(const string &name, int uuid, const FieldPtr &field, bool alive);
 
     vector<FieldPtr> get_moves(BoardPtr board);
+
+    string getIcon() override;
+
+private:
+    string icon = "\n♟\n";
 };
 
 

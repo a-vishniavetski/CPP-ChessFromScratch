@@ -3,3 +3,7 @@
 //
 
 #include "model/units/Queen.h"
+
+string Queen::getIcon() {
+    return icon;
+}

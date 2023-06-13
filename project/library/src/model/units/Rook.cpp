@@ -9,3 +9,7 @@ Rook::Rook(const string &name, int uuid, const FieldPtr &field, bool alive) : Un
 vector<FieldPtr> Rook::get_moves(BoardPtr board) {
     return vector<FieldPtr>();
 }
+
+string Rook::getIcon() {
+    return icon;
+}

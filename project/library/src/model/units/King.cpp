@@ -3,3 +3,7 @@
 //
 
 #include "model/units/King.h"
+
+string King::getIcon() {
+    return icon;
+}

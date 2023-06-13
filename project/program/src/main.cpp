@@ -3,13 +3,17 @@
 #include <Player.h>
 #include <Board.h>
 #include <Field.h>
+#include "Unit.h"
 #include <typedefs.h>
 #include <memory>
 #include <sstream>
+#include "wx/stdpaths.h"
 
 #include "App.h"
 
+
 #include "wx/wx.h"
+#include "UI.h"
 
 using namespace std;
 
@@ -29,24 +33,36 @@ void _print(BoardPtr board){
 wxIMPLEMENT_APP_NO_MAIN(App);
 
 int main(int argc, char *argv[]){
-//    wxApp* app = new App();
-//    wxApp::SetInstance(app);
+
+    wxString path = wxStandardPaths::Get().GetResourcesDir() + "/images/link.jpg";
+    cout << path << endl;
+
+    App* app = new App();
+    wxApp::SetInstance(app);
     wxEntryStart(argc, argv);
-    wxTheApp->CallOnInit();
+//    wxTheApp->CallOnInit();
 
+    app->CallOnInit();
 
+//    app->getMainFrame()->Hide();
 
     //Player player_one("Player 1", 0, )
-    GamePtr g1 = make_shared<Game>(Game());
-    g1->new_game();
-    _print(g1->getBoard());
+//    GamePtr g1 = make_shared<Game>(Game());
+//
+//    g1->new_game();
+//    _print(g1->getBoard());
+//
+//    cout << "\nUnit stuff";
+//    vector<PlayerPtr> temp = g1->getPlayers();
+//    cout << temp[0]->get_all_units_info();
+//    cout << "\n";
+//    cout << g1->getPlayers()[1]->get_all_units_info();
 
-    cout << "\nUnit stuff";
-    vector<PlayerPtr> temp = g1->getPlayers();
-    cout << temp[0]->get_all_units_info();
-    cout << "\n";
-    cout << g1->getPlayers()[1]->get_all_units_info();
-    wxTheApp->OnRun();
+    app->OnRun();
+
+
+//
+//    wxTheApp->OnRun();
     wxEntryCleanup();
     return 0;
 }

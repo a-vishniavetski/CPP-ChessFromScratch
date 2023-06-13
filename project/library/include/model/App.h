@@ -6,10 +6,18 @@
 #define CHESS_APP_H
 
 #include "wx/wx.h"
+#include "MainFrame.h"
 class App : public wxApp
 {
 public:
+    App();
+    MainFrame* mainFrame;
+
     bool OnInit();
+
+    MainFrame* getMainFrame();
+
+private:
 };
 
 #endif //CHESS_APP_H

@@ -9,3 +9,7 @@ Pawn::Pawn(const string &name, int uuid, const FieldPtr &field, bool alive) : Un
 vector<FieldPtr> Pawn::get_moves(BoardPtr board) {
     return vector<FieldPtr>();
 }
+
+string Pawn::getIcon() {
+    return icon;
+}

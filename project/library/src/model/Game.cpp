@@ -70,13 +70,13 @@ void Game::fill_classic_unit_sets(vector<UnitPtr>& unit_set_one, vector<UnitPtr>
     for (int i = 0; i < 8; i++){
         // białe (drugi rząd na desce)
         temp_unit.reset(new Pawn("Pawn", uuids, temp_field, true));
-        place_unit_at(i, 2, temp_unit);
+        place_unit_at(i, 1, temp_unit);
         unit_set_one.push_back(temp_unit);
         uuids = uuids - 1;
 
         // czarne (siódmy rząd na desce)
         temp_unit.reset(new Pawn("Pawn", uuids, temp_field, true));
-        place_unit_at(i, 7, temp_unit);
+        place_unit_at(i, 6, temp_unit);
         unit_set_two.push_back(temp_unit);
         uuids = uuids - 1;
     }
@@ -105,7 +105,6 @@ void Game::new_game(){
     PlayerPtr player_two = make_shared<Player>(Player("Player 2", 2, unit_set_two));
 
     setPlayers(vector<PlayerPtr> {player_one, player_two});
-    cout << "lol";
 }
 
 void Game::place_unit_at(int x_coord, int y_coord, UnitPtr unit) {
@@ -129,7 +128,7 @@ void Game::setPlayers(const vector<PlayerPtr> &players) {
     Game::players = players;
 }
 
-const BoardPtr Game::getBoard() const {
+BoardPtr Game::getBoard()  {
     return board;
 }
 

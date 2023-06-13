@@ -59,4 +59,8 @@ string Unit::get_unit_info() const {
     return _prompt;
 }
 
+string Unit::getIcon() {
+    return std::string();
+}
+
 
