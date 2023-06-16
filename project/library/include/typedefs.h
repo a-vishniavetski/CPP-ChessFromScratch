@@ -2,6 +2,7 @@
 #define CHESS_TYPEDEFS_H
 
 #include <memory>
+#include "wx/wx.h"
 
 using namespace std;
 
@@ -27,6 +28,9 @@ typedef shared_ptr<Unit> UnitPtr;
 typedef shared_ptr<MainFrame> MainFramePtr;
 typedef shared_ptr<UI> UIPtr;
 typedef shared_ptr<GameFrame> GameFramePtr;
+//
+//wxColour white_tile = wxColour(196, 196, 196);
+//wxColour black_tile = wxColour(59, 59, 59);
 
 
 #endif //CHESS_TYPEDEFS_H

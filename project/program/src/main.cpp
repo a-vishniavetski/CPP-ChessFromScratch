@@ -36,18 +36,18 @@ void _print(BoardPtr board){
     }
 }
 
-//wxIMPLEMENT_APP_NO_MAIN(App);
+wxIMPLEMENT_APP_NO_MAIN(App);
 
 int main(int argc, char *argv[]){
 
 //    wxString path = wxStandardPaths::Get().GetResourcesDir() + "/images/link.jpg";
 //    cout << path << endl;
+//
+//    App* app = new App();
+//    wxApp::SetInstance(app);
+    wxEntryStart(argc, argv);
 
-    //App* app = new App();
-    //wxApp::SetInstance(app);
-    //wxEntryStart(argc, argv);
-
-//    wxTheApp->CallOnInit();
+    wxTheApp->CallOnInit();
 //    app->CallOnInit();
 
 //    app->getMainFrame()->Hide();
@@ -68,8 +68,8 @@ int main(int argc, char *argv[]){
 
 
 //
-//    wxTheApp->OnRun();
-//    wxEntryCleanup();
-    //return wxEntry(argc, argv);
+    wxTheApp->OnRun();
+    wxEntryCleanup();
+//    return wxEntry(argc, argv);
     return 0;
 }

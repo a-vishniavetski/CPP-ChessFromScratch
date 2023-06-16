@@ -41,11 +41,13 @@ if(LINUX)
 
     target_link_libraries(Library wx::net wx::core wx::base)
 endif()
-if(UNIX)
+if(APPLE)
     message("hi")
-    target_link_libraries(Library wx::net wx::core wx::base)
-elseif(APPLE)
     target_link_libraries(Library ${wxWidgets_LIBRARIES})
+
+elseif(UNIX)
+    target_link_libraries(Library wx::net wx::core wx::base)
+
 endif()
 
 #dołącz bibliotekę z testowanymi klasami oraz bibliotekę boost.test do programu testów

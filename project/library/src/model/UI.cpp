@@ -7,8 +7,8 @@
 #include "wx/wx.h"
 #include "typedefs.h"
 
-UI::UI(const wxString& title, wxFrame& parent): wxFrame(&parent, 200, title), parent(parent) {
-    gameFrame = new GameFrame("Game", parent);
+UI::UI(const wxString& title, wxFrame& parent, GamePtr game): wxFrame(&parent, 200, title), parent(parent), game(game) {
+    gameFrame = new GameFrame("Game", parent, game);
     gameFrame->SetClientSize(1280, 720);
     gameFrame->Center();
     gameFrame->Show();

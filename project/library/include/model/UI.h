@@ -9,10 +9,11 @@
 #include "wx/wx.h"
 #include <vector>
 #include "typedefs.h"
+#include "Game.h"
 
 class UI : public wxFrame{
 public:
-    UI(const wxString& title, wxFrame& parent);
+    UI(const wxString& title, wxFrame& parent, GamePtr game);
     ~UI();
 
     void update_units_pos(vector<UnitPtr> units);
@@ -20,6 +21,7 @@ public:
     virtual void populate_board(BoardPtr board);
 private:
     GameFrame* gameFrame;
+    GamePtr game;
     wxFrame& parent;
 };
 

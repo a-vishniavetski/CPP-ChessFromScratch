@@ -10,6 +10,13 @@
 #include "typedefs.h"
 #include "Field.h"
 #include "Unit.h"
+#include <string>
+
+const wxColour BLACK_TILE = wxColour(59, 59, 59);
+const wxColour WHITE_TILE = wxColour(196, 196, 196);
+const wxColour SELECTED_UNIT = wxColour(0, 155, 0);
+const wxColour POSSIBLE_MOVE = wxColour(45, 0, 155);
+
 
 enum Ids{
     A1 = 00,    A2 = 10,    A3 = 20,    A4 = 30,    A5 = 40,    A6 = 50,    A7 = 60,    A8 = 70,
@@ -24,10 +31,10 @@ enum Ids{
 
 wxBEGIN_EVENT_TABLE(GameFrame, wxFrame)
     EVT_CLOSE(GameFrame::OnClose)
-    EVT_BUTTON(200, GameFrame::OnButtonClicked)
+    EVT_BUTTON(wxID_ANY, GameFrame::OnButtonClicked)
 wxEND_EVENT_TABLE()
 
-GameFrame::GameFrame(const wxString &title, wxFrame& parent): wxFrame(&parent, wxID_ANY, title), parent(parent) {
+GameFrame::GameFrame(const wxString &title, wxFrame& parent, GamePtr game): wxFrame(&parent, wxID_ANY, title), parent(parent), game(game) {
     wxPanel *panel = new wxPanel(this);
 
     CreateStatusBar();
@@ -45,6 +52,17 @@ void GameFrame::OnClose(wxCloseEvent &event) {
 
 void GameFrame::update_unit_pos(vector<UnitPtr> units) {
 
+}
+
+
+wxColour getColour(Color color)
+{
+    switch (color) {
+        case BLACK:
+            return *wxBLACK;
+        case WHITE:
+            return *wxWHITE;
+    }
 }
 
 vector<Ids> getVectorOfIds()
@@ -73,22 +91,33 @@ void GameFrame::populate_board(BoardPtr board) {
         {
             FieldPtr field = board->get_field(x, y);
             wxButton* btn = (wxButton*) wxWindow::FindWindowById(ids[i]);
-            UnitPtr unit = field->getOccupiedByUnit();
-            string icon = unit->getIcon();
-            btn->SetLabelText(icon);
+            if(field->isOccupied() == true)
+            {
+                UnitPtr unit = field->getOccupiedByUnit();
+                string icon = unit->getIcon();
+                Color color = unit->getColor();
+                btn->wxControl::SetForegroundColour(wxColor(getColour(color)));
+                btn->SetLabelText(icon);
 
-            cout << icon;
+            }
 
-            btn->Update();
+//            cout << icon;
+            cout << endl << wxToString(btn->GetForegroundColour());
             btn->Refresh();
+            btn->Update();
+
+
             i++;
         }
     }
+    this->Refresh();
+    this->Update();
 
 }
 
+
 void GameFrame::create_board(int xDim, int yDim) {
-    wxFont largeFont = wxFont(wxFontInfo()); largeFont.MakeLarger().MakeLarger().MakeBold().Scale(2);
+    wxFont largeFont = wxFont(wxFontInfo()); largeFont.MakeLarger().MakeLarger().MakeBold().Scale(2.3);
 
     vector<Ids> ids = getVectorOfIds();
 
@@ -100,15 +129,15 @@ void GameFrame::create_board(int xDim, int yDim) {
         vector<wxButton*> xBtns;
         for(int y = 0; y < yDim; y++)
         {
-            wxButton* btn = new wxButton(this, ids[k], "\n_\n", wxPoint(0 + (x * 80), 0 + (y * 80)), wxSize(70, 70));
+            wxButton* btn = new wxButton(this, ids[k], "\n\n\n", wxPoint(0 + (x * 80), 0 + (y * 80)), wxSize(70, 70));
             btn->SetFont(largeFont);
             if(i == 1)
             {
-                btn->SetBackgroundColour(wxColour(196, 196, 196));
+                btn->SetBackgroundColour(WHITE_TILE);
             }
             else
             {
-                btn->SetBackgroundColour(wxColour(59, 59, 59));
+                btn->SetBackgroundColour(BLACK_TILE);
             }
 
             btn->Update();
@@ -125,7 +154,199 @@ void GameFrame::create_board(int xDim, int yDim) {
 
 }
 
+wxButton* GameFrame::getButtonOfId(int id) {
+    return (wxButton*) wxWindow::FindWindowById(id);
+}
+
+void GameFrame::setSelectedField(FieldPtr field) {
+    selected_field = field;
+    string x = to_string(field->getXCoord());
+    string y = to_string(field->getYCoord());
+
+    string XY = x + y;
+
+    int id = stoi(XY);
+
+    wxButton* btn = getButtonOfId(id);
+    btn->SetBackgroundColour(SELECTED_UNIT);
+    btn->Update();
+    btn->Refresh();
+}
+
+int getIdFromCoords(int xCoord, int yCoord)
+{
+    string x = to_string(xCoord);
+    string y = to_string(yCoord);
+
+    string XY = x + y;
+
+    int id = stoi(XY);
+
+    return id;
+}
+
+void GameFrame::highlight_field(FieldPtr field) {
+    if(field == nullptr)
+        return;
+    wxButton* btn = getButtonOfId(getIdFromCoords(field->getXCoord(), field->getYCoord()));
+    btn->SetBackgroundColour(POSSIBLE_MOVE);
+    btn->Update();
+    btn->Refresh();
+}
+
+void GameFrame::revert_fields_colors() {
+    vector<Ids> ids = getVectorOfIds();
+
+    int xDim = game->getBoard()->getXDimension();
+    int yDim = game->getBoard()->getYDimension();
+
+    int i = 1;
+    int k = 0;
+    for(int x = 0; x < xDim; x++)
+    {
+        for(int y = 0; y < yDim; y++)
+        {
+            int id = getIdFromCoords(x, y);
+            wxButton* btn = getButtonOfId(id);
+            if(i == 1)
+            {
+                btn->SetBackgroundColour(WHITE_TILE);
+            }
+            else
+            {
+                btn->SetBackgroundColour(BLACK_TILE);
+            }
+
+            btn->Update();
+            btn->Refresh();
+            i = 1 - i;
+            k++;
+        }
+        i = 1 - i;
+    }
+}
+
+void GameFrame::unsetSelectedField() {
+    string x = to_string(selected_field->getXCoord());
+    string y = to_string(selected_field->getYCoord());
+
+    int xi = stoi(x);
+    int yi = stoi(y);
+
+    string XY = x + y;
+    int id = stoi(XY);
+    wxButton* btn = getButtonOfId(id);
+
+//    if(xi % 2 == 0 && yi % 2 == 0)
+//        btn->SetBackgroundColour(WHITE_TILE);
+//    if(xi % 2 == 0 && yi % 2 == 1)
+//        btn->SetBackgroundColour(BLACK_TILE);
+//    if(xi % 2 == 1 && yi % 2 == 0)
+//        btn->SetBackgroundColour(BLACK_TILE);
+//    if(xi % 2 == 1 && yi % 2 == 1)
+//        btn->SetBackgroundColour(WHITE_TILE);
+
+    revert_fields_colors();
+
+    btn->Update();
+    btn->Refresh();
+    selected_field = nullptr;
+}
+
 void GameFrame::OnButtonClicked(wxCommandEvent &event) {
     int id = event.GetId();
-    cout << endl << id << endl;
+    //obsluga tylko przyciskow planszy
+    if(id < 0 || id > 77)
+        return;
+    vector<int> coords = getCoordsFromId(id);
+    FieldPtr f = game->getBoard()->get_field(coords[0], coords[1]);
+
+    wxButton* btn = getButtonOfId(id);
+    if(selected_field == nullptr && f->isOccupied() == false)
+        return;
+
+    cout << endl << "x: " << coords[0] << ", y: " << coords[1];
+
+    int x = coords[0];
+    int y = coords[1];
+
+    BoardPtr board = game->getBoard();
+    FieldPtr field = board->get_field(x, y);
+    vector<FieldPtr> possible_moves;
+
+    if(selected_field != nullptr)
+        possible_moves = selected_field->getOccupiedByUnit()->get_moves(board);
+
+    if(selected_field == nullptr)
+    {
+        setSelectedField(field);
+        UnitPtr unit = field->getOccupiedByUnit();
+
+         possible_moves = unit->get_moves(board);
+        //pokaz gdzie moge sie ruszyc
+
+        for(int i = 0; i < possible_moves.size(); i++)
+        {
+            highlight_field(possible_moves[i]);
+        }
+
+        return;
+    }
+    FieldPtr clicked_field = board->get_field(x, y);
+    if(clicked_field == selected_field) {
+        unsetSelectedField();
+        return;
+    }
+
+    for(int i = 0; i < possible_moves.size(); i++)
+    {
+        if(clicked_field == possible_moves[i])
+        {
+            UnitPtr tempUnit = selected_field->getOccupiedByUnit();
+            game->place_unit_at(clicked_field->getXCoord(), clicked_field->getYCoord(), selected_field->getOccupiedByUnit());
+            update_unit_pos(tempUnit);
+            unsetSelectedField();
+        }
+    }
+}
+
+void GameFrame::update_unit_pos(UnitPtr unit) {
+    FieldPtr field = unit->getField();
+
+    int x = field->getXCoord();
+    int y = field->getYCoord();
+    int id = getIdFromCoords(x, y);
+
+    int x1 = selected_field->getXCoord();
+    int y1 = selected_field->getYCoord();
+    int id1 = getIdFromCoords(x1, y1);
+
+    wxButton* btnTo = getButtonOfId(id);
+    wxButton* btnFrom = getButtonOfId(id1);
+
+    btnFrom->SetLabelText("\n\n\n");
+    btnFrom->Update();
+    btnFrom->Refresh();
+
+    btnTo->SetForegroundColour(getColour(unit->getColor()));
+    btnTo->SetLabelText(unit->getIcon());
+    btnTo->Update();
+    btnFrom->Refresh();
+
+}
+
+vector<int> GameFrame::getCoordsFromId(int id) {
+    vector<int> coords;
+    if(id < 10 && id >= 0)
+    {
+        coords.push_back(0);
+        coords.push_back(id);
+        return coords;
+    }
+
+    int x = id / 10 % 10;
+    int y = id % 10;
+    coords.push_back(x);
+    coords.push_back(y);
+    return coords;
 }

@@ -1,5 +1,5 @@
 #include <boost/test/unit_test.hpp>
-#include <bits/stdc++.h>
+//#include <bits/stdc++.h>
 #include <typedefs.h>
 #include "Game.h"
 #include "Field.h"

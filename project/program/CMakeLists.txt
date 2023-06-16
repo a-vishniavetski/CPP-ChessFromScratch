@@ -18,10 +18,12 @@ endif()
 #Włącz powyższy zbiór plików do zbudowania programu wykonywalnego Program
 add_executable(Program ${SOURCE_FILES})
 
-if(UNIX)
-    target_link_libraries(Program wx::net wx::core wx::base)
-elseif(APPLE)
+if(APPLE)
     target_link_libraries(Program ${wxWidgets_LIBRARIES})
+
+elseif(UNIX)
+    target_link_libraries(Program wx::net wx::core wx::base)
+
 endif()
 
 #Określenie zależności pomiędzy projektami Program i Biblioteka

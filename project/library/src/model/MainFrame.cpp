@@ -41,12 +41,6 @@ void MainFrame::OnButtonClicked(wxCommandEvent &event) {
     if(id == NEWGAME_BUTTON)
     {
         this->Hide();
-
-        ui = new UI("Game", *this);
-
-        vector<UnitPtr> units;
-        UnitPtr u = make_shared<Unit>(nullptr);
-        units.push_back(u);
         gameStarted = true;
 
         GamePtr game = make_shared<Game>(Game());
@@ -56,6 +50,7 @@ void MainFrame::OnButtonClicked(wxCommandEvent &event) {
         int x = board->getXDimension();
         int y = board->getYDimension();
 
+        ui = new UI("Game", *this, game);
         ui->create_board(x, y);
         ui->populate_board(board);
     }
