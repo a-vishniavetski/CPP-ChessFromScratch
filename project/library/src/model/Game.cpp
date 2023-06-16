@@ -73,7 +73,6 @@ void Game::create_and_place_unit(int x_coord, int y_coord, UnitPtr unit, PlayerP
 int Game::give_player_initial_units(PlayerPtr player, int initial_uuid) {
     int uuids = initial_uuid;
     FieldPtr temp_field = make_shared<Field>(nullptr);
-    UnitPtr temp_unit;
 
     if (player->getColor() == WHITE){
         // piony
@@ -125,7 +124,6 @@ void Game::new_game(){
     // tworzymy jednostki i ustawiamy ich na desce
     int next_uuid = give_player_initial_units(player_white, 0);
     give_player_initial_units(player_black, 0);
-
 
     setPlayers(vector<PlayerPtr> {player_white, player_black});
 }

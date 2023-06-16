@@ -2,10 +2,12 @@
 // Created by avish on 5/29/2023.
 //
 
+#include <stdexcept>
 #include <vector>
 #include "Field.h"
 #include <Unit.h>
 #include <Pawn.h>
+
 
 using namespace std;
 
@@ -50,6 +52,9 @@ void Field::setOccupied(bool _occupied) {
 }
 
 const UnitPtr &Field::getOccupiedByUnit() const {
+    if (!isOccupied()){
+        throw std::logic_error("The field is empty, can't return a unit");
+    }
     return occupied_by_unit;
 }
 
