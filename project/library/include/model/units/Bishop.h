@@ -11,6 +11,8 @@
 class Bishop : public Unit {
 public:
 
+    Bishop(const string &name, int uuid, const FieldPtr &field, bool alive);
+
     string getIcon() override;
 
 private:

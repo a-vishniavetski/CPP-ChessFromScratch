@@ -18,7 +18,7 @@ Field::Field(int xCoord, int yCoord, const string &color) : x_coord(xCoord), y_c
      * dlatego trzeba było dać Unitu konstruktor z nullptr-em.
     */
     UnitPtr null_unit = make_shared<Unit>(nullptr);
-    occupied_by_unit = null_unit;
+    occupied_by_unit = nullptr;
 }
 
 Field::Field(int xCoord, int yCoord, bool isOccupied, const UnitPtr &occupiedByUnit, const vector<UnitPtr> &seenByUnits,

@@ -11,6 +11,8 @@
 
 class King : public Unit {
 public:
+    King(const string &name, int uuid, const FieldPtr &field, bool alive);
+
     string getIcon() override;
 private:
     string icon = "\n♚\n";

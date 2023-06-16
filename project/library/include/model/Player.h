@@ -18,25 +18,26 @@ public:
     // Konstruktor i destruktor
     Player(const string &name, int upid, const vector<UnitPtr> &units);
 
+    Player(const string &name, int upid, Color color);
+
     virtual ~Player();
 
     string get_all_units_info() const;
     const string &getName() const;
-
     void setName(const string &name);
-
     int getUpid() const;
-
     void setUpid(int upid);
-
     const vector<UnitPtr> &getUnits() const;
-
     void setUnits(const vector<UnitPtr> &units);
+    void addUnit(UnitPtr unit);
+
+    Color getColor() const;
 
 private:
     string name;
     int UPID;  // unique player ID
     vector<UnitPtr> units;
+    Color color;
 
 };
 

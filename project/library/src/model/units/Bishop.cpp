@@ -7,3 +7,5 @@
 string Bishop::getIcon() {
     return icon;
 }
+
+Bishop::Bishop(const string &name, int uuid, const FieldPtr &field, bool alive) : Unit(name, uuid, field, alive) {}

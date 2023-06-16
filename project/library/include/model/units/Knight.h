@@ -10,6 +10,10 @@
 
 class Knight : public Unit {
 public:
+    Knight(const string &name, int uuid, const FieldPtr &field, bool alive, const string &icon);
+
+    Knight(const string &name, int uuid, const FieldPtr &field, bool alive);
+
     string getIcon() override;
 private:
     string icon = "\n♞\n";

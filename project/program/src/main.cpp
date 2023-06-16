@@ -21,35 +21,42 @@ using namespace std;
 void _print(BoardPtr board){
     int _len = 10;
     stringstream _prompt;
+    FieldPtr temp = nullptr;
 
     for (int j = 7; j >= 0; j--){
         cout << "\n|";
         for (int i = 0; i < 8; i++){
-            cout << " " << board->get_field(i, j)->get_field_info() << " |";
+            if (!board->get_field(i, j)->isOccupied()){
+                cout << " " << "    " << " |";
+            }
+            else{
+                cout << " " << board->get_field(i, j)->getOccupiedByUnit()->getName() << " |";
+            }
         }
     }
 }
 
-wxIMPLEMENT_APP_NO_MAIN(App);
+//wxIMPLEMENT_APP_NO_MAIN(App);
 
 int main(int argc, char *argv[]){
 
 //    wxString path = wxStandardPaths::Get().GetResourcesDir() + "/images/link.jpg";
 //    cout << path << endl;
 
-    App* app = new App();
-    wxApp::SetInstance(app);
-    wxEntryStart(argc, argv);
+    //App* app = new App();
+    //wxApp::SetInstance(app);
+    //wxEntryStart(argc, argv);
+
 //    wxTheApp->CallOnInit();
 //    app->CallOnInit();
 
 //    app->getMainFrame()->Hide();
 
-    //Player player_one("Player 1", 0, )
-//    GamePtr g1 = make_shared<Game>(Game());
-//
-//    g1->new_game();
-//    _print(g1->getBoard());
+    //Player player_one("Player 1", 0, );
+    GamePtr g1 = make_shared<Game>(Game());
+
+    g1->new_game();
+    _print(g1->getBoard());
 //
 //    cout << "\nUnit stuff";
 //    vector<PlayerPtr> temp = g1->getPlayers();
@@ -63,5 +70,6 @@ int main(int argc, char *argv[]){
 //
 //    wxTheApp->OnRun();
 //    wxEntryCleanup();
-    return wxEntry(argc, argv);
+    //return wxEntry(argc, argv);
+    return 0;
 }

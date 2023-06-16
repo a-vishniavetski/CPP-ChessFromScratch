@@ -44,7 +44,9 @@ private:
     BoardPtr board;
     int total_turns;
 
-    void fill_classic_unit_sets(vector<UnitPtr> &unit_set_one, vector<UnitPtr> &unit_set_two);
+    int give_player_initial_units(PlayerPtr player, int initial_uuid);
+
+    void create_and_place_unit(int x_coord, int y_coord, UnitPtr unit, PlayerPtr player, int *uuid_count);
 };
 
 

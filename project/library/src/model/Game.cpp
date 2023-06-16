@@ -6,6 +6,10 @@
 #include <Player.h>
 #include <Pawn.h>
 #include <Rook.h>
+#include <Knight.h>
+#include <Bishop.h>
+#include <Queen.h>
+#include <King.h>
 
 using namespace std;
 
@@ -60,51 +64,70 @@ BoardPtr Game::create_empty_board() const {
     return board;
 }
 
-void Game::fill_classic_unit_sets(vector<UnitPtr>& unit_set_one, vector<UnitPtr>& unit_set_two){
-    // todo wszystkie pozostałe jednostki
-    int uuids = 31;
+void Game::create_and_place_unit(int x_coord, int y_coord, UnitPtr unit, PlayerPtr player, int* uuid_count){
+    place_unit_at(x_coord, y_coord, unit);
+    player->addUnit(unit);
+    *uuid_count += 1;
+}
+
+int Game::give_player_initial_units(PlayerPtr player, int initial_uuid) {
+    int uuids = initial_uuid;
     FieldPtr temp_field = make_shared<Field>(nullptr);
     UnitPtr temp_unit;
 
-    // piony
-    for (int i = 0; i < 8; i++){
-        // białe (drugi rząd na desce)
-        temp_unit.reset(new Pawn("Pawn", uuids, temp_field, true));
-        place_unit_at(i, 1, temp_unit);
-        unit_set_one.push_back(temp_unit);
-        uuids = uuids - 1;
-
-        // czarne (siódmy rząd na desce)
-        temp_unit.reset(new Pawn("Pawn", uuids, temp_field, true));
-        place_unit_at(i, 6, temp_unit);
-        unit_set_two.push_back(temp_unit);
-        uuids = uuids - 1;
+    if (player->getColor() == WHITE){
+        // piony
+        for (int i = 0; i < 8; i++){
+            // białe (drugi rząd na desce)
+            create_and_place_unit(i,1,make_shared<Pawn>("Pawn", uuids, temp_field, true),player,&uuids);
+        }
+        // wieży
+        create_and_place_unit(0, 0, make_shared<Rook>("Rook", uuids, temp_field, true), player, &uuids);
+        create_and_place_unit(7, 0, make_shared<Rook>("Rook", uuids, temp_field, true), player, &uuids);
+        // knights
+        create_and_place_unit(1, 0, make_shared<Knight>("Knight", uuids, temp_field, true), player, &uuids);
+        create_and_place_unit(6, 0, make_shared<Knight>("Knight", uuids, temp_field, true), player, &uuids);
+        // bishops
+        create_and_place_unit(2, 0, make_shared<Bishop>("Bishop", uuids, temp_field, true), player, &uuids);
+        create_and_place_unit(5, 0, make_shared<Bishop>("Bishop", uuids, temp_field, true), player, &uuids);
+        // king and queen
+        create_and_place_unit(3, 0, make_shared<Queen>("Queen", uuids, temp_field, true), player, &uuids);
+        create_and_place_unit(4, 0, make_shared<King>("King", uuids, temp_field, true), player, &uuids);
     }
-
-    // wieży
-    temp_field = board->get_field(1, 1);
-    temp_unit.reset(new Rook("Rook", uuids, temp_field, true));
-    temp_field->occupy(temp_unit);
-    unit_set_one.push_back(temp_unit);
-    uuids = uuids - 1;
-
+    else{
+        // piony
+        for (int i = 0; i < 8; i++){
+            create_and_place_unit(i,6,make_shared<Pawn>("Pawn", uuids, temp_field, true),player,&uuids);
+        }
+        // wieży
+        create_and_place_unit(0, 7, make_shared<Rook>("Rook", uuids, temp_field, true), player, &uuids);
+        create_and_place_unit(7, 7, make_shared<Rook>("Rook", uuids, temp_field, true), player, &uuids);
+        // knights
+        create_and_place_unit(1, 7, make_shared<Knight>("Knight", uuids, temp_field, true), player, &uuids);
+        create_and_place_unit(6, 7, make_shared<Knight>("Knight", uuids, temp_field, true), player, &uuids);
+        // bishops
+        create_and_place_unit(2, 7, make_shared<Bishop>("Bishop", uuids, temp_field, true), player, &uuids);
+        create_and_place_unit(5, 7, make_shared<Bishop>("Bishop", uuids, temp_field, true), player, &uuids);
+        // king and queen
+        create_and_place_unit(3, 7, make_shared<Queen>("Queen", uuids, temp_field, true), player, &uuids);
+        create_and_place_unit(4, 7, make_shared<King>("King", uuids, temp_field, true), player, &uuids);
+    }
+    return uuids;
 }
 
 /*Tworzy nową grę z nowymi graczami i deską według standardowych reguł szachów*/
 void Game::new_game(){
     // towrzymy deskę
     board = create_empty_board();
-
-    // tworzymy jednostki i ustawiamy ich na desce
-    vector<UnitPtr> unit_set_one;
-    vector<UnitPtr> unit_set_two;
-    fill_classic_unit_sets(unit_set_one, unit_set_two);
-
     // tworzymy graczy
-    PlayerPtr player_one = make_shared<Player>(Player("Player 1", 0, unit_set_one));
-    PlayerPtr player_two = make_shared<Player>(Player("Player 2", 2, unit_set_two));
+    PlayerPtr player_white = make_shared<Player>("Player 1", 0, WHITE);
+    PlayerPtr player_black = make_shared<Player>("Player 2", 2, BLACK);
+    // tworzymy jednostki i ustawiamy ich na desce
+    int next_uuid = give_player_initial_units(player_white, 0);
+    give_player_initial_units(player_black, 0);
 
-    setPlayers(vector<PlayerPtr> {player_one, player_two});
+
+    setPlayers(vector<PlayerPtr> {player_white, player_black});
 }
 
 void Game::place_unit_at(int x_coord, int y_coord, UnitPtr unit) {

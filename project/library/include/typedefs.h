@@ -5,6 +5,10 @@
 
 using namespace std;
 
+enum Color {
+    WHITE,
+    BLACK
+};
 
 class Game;
 class Player;

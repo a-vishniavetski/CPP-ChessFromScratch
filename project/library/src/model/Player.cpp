@@ -44,3 +44,13 @@ string Player::get_all_units_info() const {
 
     return _prompt;
 }
+
+Player::Player(const string &name, int upid, Color color) : name(name), UPID(upid) {}
+
+Color Player::getColor() const {
+    return color;
+}
+
+void Player::addUnit(UnitPtr unit) {
+    units.push_back(unit);
+}
