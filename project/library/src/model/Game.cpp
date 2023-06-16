@@ -78,38 +78,38 @@ int Game::give_player_initial_units(PlayerPtr player, int initial_uuid) {
         // piony
         for (int i = 0; i < 8; i++){
             // białe (drugi rząd na desce)
-            create_and_place_unit(i,1,make_shared<Pawn>("Pawn", uuids, temp_field, true),player,&uuids);
+            create_and_place_unit(i,1,make_shared<Pawn>("Pawn", uuids, temp_field, true, WHITE),player,&uuids);
         }
         // wieży
-        create_and_place_unit(0, 0, make_shared<Rook>("Rook", uuids, temp_field, true), player, &uuids);
-        create_and_place_unit(7, 0, make_shared<Rook>("Rook", uuids, temp_field, true), player, &uuids);
+        create_and_place_unit(0, 0, make_shared<Rook>("Rook", uuids, temp_field, true, WHITE), player, &uuids);
+        create_and_place_unit(7, 0, make_shared<Rook>("Rook", uuids, temp_field, true, WHITE), player, &uuids);
         // knights
-        create_and_place_unit(1, 0, make_shared<Knight>("Knight", uuids, temp_field, true), player, &uuids);
-        create_and_place_unit(6, 0, make_shared<Knight>("Knight", uuids, temp_field, true), player, &uuids);
+        create_and_place_unit(1, 0, make_shared<Knight>("Knight", uuids, temp_field, true, WHITE), player, &uuids);
+        create_and_place_unit(6, 0, make_shared<Knight>("Knight", uuids, temp_field, true, WHITE), player, &uuids);
         // bishops
-        create_and_place_unit(2, 0, make_shared<Bishop>("Bishop", uuids, temp_field, true), player, &uuids);
-        create_and_place_unit(5, 0, make_shared<Bishop>("Bishop", uuids, temp_field, true), player, &uuids);
+        create_and_place_unit(2, 0, make_shared<Bishop>("Bishop", uuids, temp_field, true, WHITE), player, &uuids);
+        create_and_place_unit(5, 0, make_shared<Bishop>("Bishop", uuids, temp_field, true, WHITE), player, &uuids);
         // king and queen
-        create_and_place_unit(3, 0, make_shared<Queen>("Queen", uuids, temp_field, true), player, &uuids);
-        create_and_place_unit(4, 0, make_shared<King>("King", uuids, temp_field, true), player, &uuids);
+        create_and_place_unit(3, 0, make_shared<Queen>("Queen", uuids, temp_field, true, WHITE), player, &uuids);
+        create_and_place_unit(4, 0, make_shared<King>("King", uuids, temp_field, true, WHITE), player, &uuids);
     }
     else{
         // piony
         for (int i = 0; i < 8; i++){
-            create_and_place_unit(i,6,make_shared<Pawn>("Pawn", uuids, temp_field, true),player,&uuids);
+            create_and_place_unit(i,6,make_shared<Pawn>("Pawn", uuids, temp_field, true, BLACK),player,&uuids);
         }
         // wieży
-        create_and_place_unit(0, 7, make_shared<Rook>("Rook", uuids, temp_field, true), player, &uuids);
-        create_and_place_unit(7, 7, make_shared<Rook>("Rook", uuids, temp_field, true), player, &uuids);
+        create_and_place_unit(0, 7, make_shared<Rook>("Rook", uuids, temp_field, true, BLACK), player, &uuids);
+        create_and_place_unit(7, 7, make_shared<Rook>("Rook", uuids, temp_field, true, BLACK), player, &uuids);
         // knights
-        create_and_place_unit(1, 7, make_shared<Knight>("Knight", uuids, temp_field, true), player, &uuids);
-        create_and_place_unit(6, 7, make_shared<Knight>("Knight", uuids, temp_field, true), player, &uuids);
+        create_and_place_unit(1, 7, make_shared<Knight>("Knight", uuids, temp_field, true, BLACK), player, &uuids);
+        create_and_place_unit(6, 7, make_shared<Knight>("Knight", uuids, temp_field, true, BLACK), player, &uuids);
         // bishops
-        create_and_place_unit(2, 7, make_shared<Bishop>("Bishop", uuids, temp_field, true), player, &uuids);
-        create_and_place_unit(5, 7, make_shared<Bishop>("Bishop", uuids, temp_field, true), player, &uuids);
+        create_and_place_unit(2, 7, make_shared<Bishop>("Bishop", uuids, temp_field, true, BLACK), player, &uuids);
+        create_and_place_unit(5, 7, make_shared<Bishop>("Bishop", uuids, temp_field, true, BLACK), player, &uuids);
         // king and queen
-        create_and_place_unit(3, 7, make_shared<Queen>("Queen", uuids, temp_field, true), player, &uuids);
-        create_and_place_unit(4, 7, make_shared<King>("King", uuids, temp_field, true), player, &uuids);
+        create_and_place_unit(3, 7, make_shared<Queen>("Queen", uuids, temp_field, true, BLACK), player, &uuids);
+        create_and_place_unit(4, 7, make_shared<King>("King", uuids, temp_field, true, BLACK), player, &uuids);
     }
     return uuids;
 }

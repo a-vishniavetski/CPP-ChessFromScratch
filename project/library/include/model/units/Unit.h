@@ -19,38 +19,25 @@ class Field;
 class Unit {
 public:
 
-    Unit(const string &name, int uuid, const FieldPtr field, bool alive);
-
+    Unit(const string &name, int uuid, const FieldPtr field, bool alive, Color color);
     Unit(std::nullptr_t);
-
-    string getColor();
-
+    Color getColor();
     virtual vector<FieldPtr> get_moves(BoardPtr board);
-
     string get_unit_info() const;
-
     const string &getName() const;
-
     void setName(const string &name);
-
     int getUuid() const;
-
     void setUuid(int uuid);
-
     const FieldPtr getField() const;
-
     void setField(const FieldPtr &field);
-
     bool isAlive() const;
-
     void setAlive(bool alive);
-
     virtual string getIcon();
 
 private:
     string name;
     string icon = "\n\n";
-    string color = "";
+    Color color;
     int UUID; // unique unit id
     FieldPtr field;
     bool alive;

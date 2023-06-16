@@ -1,8 +1,9 @@
 #include <Unit.h>
 #include <Field.h>
 
-Unit::Unit(const string &name, int uuid, const FieldPtr field, bool alive) : name(name), UUID(uuid), field(field),
-                                                                             alive(alive) {
+Unit::Unit(const string &name, int uuid, const FieldPtr field, bool alive, Color color)
+        : name(name), UUID(uuid), field(field),
+          alive(alive) {
 
 }
 
@@ -61,6 +62,10 @@ string Unit::get_unit_info() const {
 
 string Unit::getIcon() {
     return std::string();
+}
+
+Color Unit::getColor() {
+    return color;
 }
 
 

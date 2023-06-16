@@ -13,6 +13,8 @@ class King : public Unit {
 public:
     King(const string &name, int uuid, const FieldPtr &field, bool alive);
 
+    King(const string &name, int uuid, const FieldPtr &field, bool alive, Color color);
+
     string getIcon() override;
 private:
     string icon = "\n♚\n";

@@ -13,6 +13,8 @@ public:
 
     Bishop(const string &name, int uuid, const FieldPtr &field, bool alive);
 
+    Bishop(const string &name, int uuid, const FieldPtr &field, bool alive, Color color);
+
     string getIcon() override;
 
 private:

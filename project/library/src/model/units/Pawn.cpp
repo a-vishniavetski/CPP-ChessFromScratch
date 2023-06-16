@@ -4,7 +4,7 @@
 
 #include "model/units/Pawn.h"
 
-Pawn::Pawn(const string &name, int uuid, const FieldPtr &field, bool alive) : Unit(name, uuid, field, alive) {}
+Pawn::Pawn(const string &name, int uuid, const FieldPtr &field, bool alive) : Unit(name, uuid, field, alive, BLACK) {}
 
 vector<FieldPtr> Pawn::get_moves(BoardPtr board) {
     return vector<FieldPtr>();
@@ -13,3 +13,6 @@ vector<FieldPtr> Pawn::get_moves(BoardPtr board) {
 string Pawn::getIcon() {
     return icon;
 }
+
+Pawn::Pawn(const string &name, int uuid, const FieldPtr &field, bool alive, Color color) : Unit(name, uuid, field,
+                                                                                                alive, color) {}

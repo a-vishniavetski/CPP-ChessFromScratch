@@ -22,19 +22,12 @@ public:
     void new_game();
     void place_unit_at(int x_coord, int y_coord, UnitPtr unit);
     BoardPtr create_empty_board() const;
-
     virtual ~Game();
-
     const vector<PlayerPtr> &getPlayers() const;
-
     void setPlayers(const vector<PlayerPtr> &players);
-
-     BoardPtr getBoard() ;
-
+    BoardPtr getBoard() ;
     void setBoard(const BoardPtr &board);
-
     int getTotalTurns() const;
-
     void setTotalTurns(int totalTurns);
 
 
