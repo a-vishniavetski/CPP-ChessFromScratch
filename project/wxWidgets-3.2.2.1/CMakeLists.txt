@@ -8,6 +8,13 @@
 #############################################################################
 
 cmake_minimum_required(VERSION 3.0)
+if(!APPLE)
+    if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.16.0")
+        message("CMake 3.16 target_precompile_headers")
+        target_precompile_headers(cocos2d PRIVATE
+                "$<$<COMPILE_LANGUAGE:CXX>:cocos2d.h>")
+    endif()
+endif()
 
 if(NOT CMAKE_CONFIGURATION_TYPES)
     get_property(HAVE_MULTI_CONFIG_GENERATOR GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)

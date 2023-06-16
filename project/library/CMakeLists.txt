@@ -1,4 +1,11 @@
 cmake_minimum_required(VERSION 3.4)
+if(!APPLE)
+    if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.16.0")
+        message("CMake 3.16 target_precompile_headers")
+        target_precompile_headers(cocos2d PRIVATE
+                "$<$<COMPILE_LANGUAGE:CXX>:cocos2d.h>")
+    endif()
+endif()
 project(Library)
 
 set(SOURCE_FILES
@@ -16,10 +23,12 @@ target_include_directories(Library PUBLIC src/model/units)
 
 #add_subdirectory(../wxWidgets-3.2.2.1)
 #
-#find_package(wxWidgets REQUIRED COMPONENTS net core base)
-#if(wxWidgets_USE_FILE) # not defined in CONFIG mode
-#    include(${wxWidgets_USE_FILE})
-#endif()
+if(APPLE)
+    find_package(wxWidgets REQUIRED COMPONENTS net core base)
+    if(wxWidgets_USE_FILE) # not defined in CONFIG mode
+        include(${wxWidgets_USE_FILE})
+    endif()
+endif()
 
 enable_testing()
 
@@ -34,7 +43,12 @@ set(SOURCE_TEST_FILES
         test/master.cpp) # tu w przyszłości będą dodawane pliki źródłowe testów
 
 add_executable (LibraryTest ${SOURCE_TEST_FILES})
-target_link_libraries(Library wx::net wx::core wx::base)
+
+if(!APPLE)
+    target_link_libraries(Library wx::net wx::core wx::base)
+else()
+    target_link_libraries(Library ${wxWidgets_LIBRARIES})
+endif()
 
 #dołącz bibliotekę z testowanymi klasami oraz bibliotekę boost.test do programu testów
 target_link_libraries (LibraryTest
