@@ -11,8 +11,6 @@
 #include "Field.h"
 #include "Unit.h"
 
-namespace fs = std::__fs::filesystem;
-
 enum Ids{
     A1 = 00,    A2 = 10,    A3 = 20,    A4 = 30,    A5 = 40,    A6 = 50,    A7 = 60,    A8 = 70,
     B1 = 01,    B2 = 11,    B3 = 21,    B4 = 31,    B5 = 41,    B6 = 51,    B7 = 61,    B8 = 71,
@@ -79,7 +77,7 @@ void GameFrame::populate_board(BoardPtr board) {
             string icon = unit->getIcon();
             btn->SetLabelText(icon);
 
-
+            cout << icon;
 
             btn->Update();
             btn->Refresh();

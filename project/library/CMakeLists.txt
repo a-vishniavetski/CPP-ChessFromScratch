@@ -14,10 +14,12 @@ target_include_directories(Library PUBLIC src)
 target_include_directories(Library PUBLIC src/model)
 target_include_directories(Library PUBLIC src/model/units)
 
-find_package(wxWidgets REQUIRED COMPONENTS net core base)
-if(wxWidgets_USE_FILE) # not defined in CONFIG mode
-    include(${wxWidgets_USE_FILE})
-endif()
+#add_subdirectory(../wxWidgets-3.2.2.1)
+#
+#find_package(wxWidgets REQUIRED COMPONENTS net core base)
+#if(wxWidgets_USE_FILE) # not defined in CONFIG mode
+#    include(${wxWidgets_USE_FILE})
+#endif()
 
 enable_testing()
 
@@ -32,7 +34,7 @@ set(SOURCE_TEST_FILES
         test/master.cpp) # tu w przyszłości będą dodawane pliki źródłowe testów
 
 add_executable (LibraryTest ${SOURCE_TEST_FILES})
-target_link_libraries(Library ${wxWidgets_LIBRARIES})
+target_link_libraries(Library wx::net wx::core wx::base)
 
 #dołącz bibliotekę z testowanymi klasami oraz bibliotekę boost.test do programu testów
 target_link_libraries (LibraryTest

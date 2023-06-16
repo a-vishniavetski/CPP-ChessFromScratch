@@ -34,15 +34,14 @@ wxIMPLEMENT_APP_NO_MAIN(App);
 
 int main(int argc, char *argv[]){
 
-    wxString path = wxStandardPaths::Get().GetResourcesDir() + "/images/link.jpg";
-    cout << path << endl;
+//    wxString path = wxStandardPaths::Get().GetResourcesDir() + "/images/link.jpg";
+//    cout << path << endl;
 
     App* app = new App();
     wxApp::SetInstance(app);
     wxEntryStart(argc, argv);
 //    wxTheApp->CallOnInit();
-
-    app->CallOnInit();
+//    app->CallOnInit();
 
 //    app->getMainFrame()->Hide();
 
@@ -58,11 +57,11 @@ int main(int argc, char *argv[]){
 //    cout << "\n";
 //    cout << g1->getPlayers()[1]->get_all_units_info();
 
-    app->OnRun();
+//    app->OnRun();
 
 
 //
 //    wxTheApp->OnRun();
-    wxEntryCleanup();
-    return 0;
+//    wxEntryCleanup();
+    return wxEntry(argc, argv);
 }
