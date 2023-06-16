@@ -18,9 +18,9 @@ endif()
 #Włącz powyższy zbiór plików do zbudowania programu wykonywalnego Program
 add_executable(Program ${SOURCE_FILES})
 
-if(!APPLE)
+if(UNIX)
     target_link_libraries(Program wx::net wx::core wx::base)
-else()
+elseif(APPLE)
     target_link_libraries(Program ${wxWidgets_LIBRARIES})
 endif()
 
