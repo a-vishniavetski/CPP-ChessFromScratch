@@ -30,6 +30,7 @@ public:
     const vector<UnitPtr> &getUnits() const;
     void setUnits(const vector<UnitPtr> &units);
     void addUnit(UnitPtr unit);
+    UnitPtr choose_unit();
 
     Color getColor() const;
 

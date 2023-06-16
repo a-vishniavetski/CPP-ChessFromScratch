@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.4)
 project(Library)
 
 set(SOURCE_FILES
-        test/master.cpp src/model/Game.cpp include/model/Game.h include/typedefs.h src/model/Player.cpp include/model/Player.h src/model/Board.cpp include/model/Board.h src/model/Field.cpp include/model/Field.h src/model/units/Unit.cpp include/model/units/Unit.h src/model/units/Pawn.cpp include/model/units/Pawn.h src/model/units/King.cpp include/model/units/King.h src/model/units/Queen.cpp include/model/units/Queen.h src/model/units/Rook.cpp include/model/units/Rook.h src/model/units/Bishop.cpp include/model/units/Bishop.h src/model/units/Knight.cpp include/model/units/Knight.h include/model/MainFrame.h src/model/MainFrame.cpp include/model/App.h src/model/App.cpp include/model/GameFrame.h include/model/UI.h src/model/UI.cpp src/model/GameFrame.cpp)
+        test/master.cpp src/model/Game.cpp include/model/Game.h include/typedefs.h src/model/Player.cpp include/model/Player.h src/model/Board.cpp include/model/Board.h src/model/Field.cpp include/model/Field.h src/model/units/Unit.cpp include/model/units/Unit.h src/model/units/Pawn.cpp include/model/units/Pawn.h src/model/units/King.cpp include/model/units/King.h src/model/units/Queen.cpp include/model/units/Queen.h src/model/units/Rook.cpp include/model/units/Rook.h src/model/units/Bishop.cpp include/model/units/Bishop.h src/model/units/Knight.cpp include/model/units/Knight.h include/model/MainFrame.h src/model/MainFrame.cpp include/model/App.h src/model/App.cpp include/model/GameFrame.h include/model/UI.h src/model/UI.cpp src/model/GameFrame.cpp test/UnitTest.cpp test/UnitTest.cpp)
 
 #Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł
 add_library(Library ${SOURCE_FILES})
@@ -34,7 +34,7 @@ include_directories(
 )
 
 set(SOURCE_TEST_FILES
-        test/master.cpp) # tu w przyszłości będą dodawane pliki źródłowe testów
+        test/master.cpp test/UnitTest.cpp test/UnitTest.cpp) # tu w przyszłości będą dodawane pliki źródłowe testów
 
 add_executable (LibraryTest ${SOURCE_TEST_FILES})
 if(LINUX)

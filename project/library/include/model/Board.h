@@ -16,17 +16,11 @@ class Field;
 class Board {
 public:
     Board(int _x_dimension, int _y_dimension, const vector<FieldPtr> &_fields);
-
     virtual ~Board();
-
     int getXDimension();
-
     void setXDimension(int xDimension);
-
     int getYDimension();
-
     void setYDimension(int yDimension);
-
     FieldPtr get_field(int x_dimension, int y_dimension) const;
 
 private:

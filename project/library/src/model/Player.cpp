@@ -45,8 +45,6 @@ string Player::get_all_units_info() const {
     return _prompt;
 }
 
-Player::Player(const string &name, int upid, Color color) : name(name), UPID(upid) {}
-
 Color Player::getColor() const {
     return color;
 }
@@ -54,3 +52,10 @@ Color Player::getColor() const {
 void Player::addUnit(UnitPtr unit) {
     units.push_back(unit);
 }
+
+UnitPtr Player::choose_unit() {
+    // todo
+    return UnitPtr();
+}
+
+Player::Player(const string &name, int upid, Color color) : name(name), UPID(upid), color(color) {}

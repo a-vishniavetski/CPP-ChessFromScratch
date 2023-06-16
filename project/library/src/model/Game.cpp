@@ -119,12 +119,11 @@ void Game::new_game(){
     // towrzymy deskę
     board = create_empty_board();
     // tworzymy graczy
-    PlayerPtr player_white = make_shared<Player>("Player 1", 0, WHITE);
-    PlayerPtr player_black = make_shared<Player>("Player 2", 2, BLACK);
+    PlayerPtr player_white = make_shared<Player>("Player WHITE", 0, WHITE);
+    PlayerPtr player_black = make_shared<Player>("Player BLACK", 2, BLACK);
     // tworzymy jednostki i ustawiamy ich na desce
     int next_uuid = give_player_initial_units(player_white, 0);
-    give_player_initial_units(player_black, 0);
-
+    give_player_initial_units(player_black, next_uuid);
     setPlayers(vector<PlayerPtr> {player_white, player_black});
 }
 

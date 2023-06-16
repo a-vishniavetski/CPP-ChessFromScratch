@@ -59,10 +59,10 @@ int main(int argc, char *argv[]){
     _print(g1->getBoard());
 //
 //    cout << "\nUnit stuff";
-//    vector<PlayerPtr> temp = g1->getPlayers();
-//    cout << temp[0]->get_all_units_info();
-//    cout << "\n";
-//    cout << g1->getPlayers()[1]->get_all_units_info();
+    vector<PlayerPtr> temp = g1->getPlayers();
+    cout << temp[0]->get_all_units_info();
+    cout << "\n";
+    cout << g1->getPlayers()[1]->get_all_units_info();
 
 //    app->OnRun();
 
