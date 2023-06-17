@@ -184,7 +184,7 @@ void Game::makeMove(UnitPtr unit, FieldPtr destination_field, BoardPtr board) {
         setWhiteTurn(false);
     }
     else{
-        setWhiteTurn(false);
+        setWhiteTurn(true);
     }
 }
 
