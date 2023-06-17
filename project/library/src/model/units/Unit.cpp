@@ -88,4 +88,12 @@ Color Unit::getColor() const{
     return color;
 }
 
+bool Unit::isEnpassantable() const {
+    return false;
+}
+
+void Unit::setEnpassantable(bool enpassantable) {
+
+}
+
 

@@ -33,6 +33,8 @@ public:
     bool isAlive() const;
     void setAlive(bool alive);
     virtual string getIcon();
+    bool isEnpassantable() const;
+    void setEnpassantable(bool enpassantable);
 
 private:
     string name;
@@ -41,7 +43,7 @@ private:
     int UUID; // unique unit id
     FieldPtr field;
     bool alive;
-
+    bool enpassantable = true;
 };
 
 

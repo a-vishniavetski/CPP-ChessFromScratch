@@ -282,7 +282,7 @@ void GameFrame::OnButtonClicked(wxCommandEvent &event) {
         setSelectedField(field);
         UnitPtr unit = field->getOccupiedByUnit();
 
-         possible_moves = unit->get_moves(board);
+         possible_moves = game->get_legal_moves(unit);
         //pokaz gdzie moge sie ruszyc
 
         for(int i = 0; i < possible_moves.size(); i++)
@@ -303,7 +303,8 @@ void GameFrame::OnButtonClicked(wxCommandEvent &event) {
         if(clicked_field == possible_moves[i])
         {
             UnitPtr tempUnit = selected_field->getOccupiedByUnit();
-            game->place_unit_at(clicked_field->getXCoord(), clicked_field->getYCoord(), selected_field->getOccupiedByUnit());
+            //game->place_unit_at(clicked_field->getXCoord(), clicked_field->getYCoord(), selected_field->getOccupiedByUnit());
+            game->makeMove(selected_field->getOccupiedByUnit(), clicked_field);
             update_unit_pos(tempUnit);
             unsetSelectedField();
         }

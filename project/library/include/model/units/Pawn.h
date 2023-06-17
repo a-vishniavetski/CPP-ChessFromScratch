@@ -11,13 +11,15 @@ class Pawn : public Unit {
 public:
 
     Pawn(const string &name, int uuid, const FieldPtr &field, bool alive, Color color);
-
-    //vector<FieldPtr> get_moves(BoardPtr board);
-
+    vector<FieldPtr> get_moves(BoardPtr board);
     string getIcon() override;
+
 
 private:
     string icon = "\n♟\n";
+
+
+
 };
 
 

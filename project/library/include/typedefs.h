@@ -11,6 +11,14 @@ enum Color {
     BLACK
 };
 
+enum Type {
+    PAWN,
+    ROOK,
+    KNIGHT,
+    BISHOP,
+    QUEEN,
+    KING
+};
 class Game;
 class Player;
 class Board;
