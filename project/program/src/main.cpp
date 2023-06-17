@@ -4,6 +4,7 @@
 #include <Board.h>
 #include <Field.h>
 #include "Unit.h"
+#include "Pawn.h"
 #include <typedefs.h>
 #include <memory>
 #include <sstream>
@@ -52,17 +53,7 @@ int main(int argc, char *argv[]){
 
 //    app->getMainFrame()->Hide();
 
-    //Player player_one("Player 1", 0, );
-    GamePtr g1 = make_shared<Game>(Game());
 
-    g1->new_game();
-    _print(g1->getBoard());
-//
-//    cout << "\nUnit stuff";
-    vector<PlayerPtr> temp = g1->getPlayers();
-    cout << temp[0]->get_all_units_info();
-    cout << "\n";
-    cout << g1->getPlayers()[1]->get_all_units_info();
 
 //    app->OnRun();
 

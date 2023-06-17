@@ -16,6 +16,8 @@ BOOST_AUTO_TEST_SUITE(TestSuiteUnit)
     BOOST_TEST(unit->getUuid() == 1);
     BOOST_TEST(unit->getName() == "Unit");
 }
+
+
     BOOST_AUTO_TEST_CASE(GetMovesTest) {
         GamePtr game = make_shared<Game>();
         game->new_game();

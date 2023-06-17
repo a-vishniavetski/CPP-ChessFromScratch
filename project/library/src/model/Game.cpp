@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 #include <Game.h>
 #include <Field.h>
 #include <Board.h>
@@ -65,7 +66,7 @@ BoardPtr Game::create_empty_board() const {
 }
 
 void Game::create_and_place_unit(int x_coord, int y_coord, UnitPtr unit, PlayerPtr player, int* uuid_count){
-    place_unit_at(x_coord, y_coord, unit);
+    place_unit_at(x_coord, y_coord, unit, this->board);
     player->addUnit(unit);
     *uuid_count += 1;
 }
@@ -127,7 +128,7 @@ void Game::new_game(){
     setPlayers(vector<PlayerPtr> {player_white, player_black});
 }
 
-void Game::place_unit_at(int x_coord, int y_coord, UnitPtr unit) {
+void Game::place_unit_at(int x_coord, int y_coord, UnitPtr unit, BoardPtr board) {
     FieldPtr previous_field = unit->getField();
 
     if (previous_field != nullptr){
@@ -174,7 +175,7 @@ bool Game::isWhiteTurn() const {
     return white_turn;
 }
 
-void Game::makeMove(UnitPtr unit, FieldPtr destination_field, BoardPtr board) {
+void Game::makeMove(UnitPtr unit, FieldPtr destination_field, BoardPtr board, GamePtr game) {
     string type = unit->getName();
     int from_x = unit->getField()->getXCoord();
     int from_y = unit->getField()->getYCoord();
@@ -195,13 +196,13 @@ void Game::makeMove(UnitPtr unit, FieldPtr destination_field, BoardPtr board) {
 
     if (!destination_field->isOccupied()){
         could_enpassant = true;
-        place_unit_at(to_x, to_y, unit);
+        place_unit_at(to_x, to_y, unit, this->board);
     } else{
         taken_unit = destination_field->getOccupiedByUnit();
         if (current_player->getColor() == WHITE) add_unit_to_taken(taken_unit, BLACK);
         else add_unit_to_taken(taken_unit, WHITE);
 
-        place_unit_at(to_x, to_y, unit);
+        place_unit_at(to_x, to_y, unit, this->board);
     }
 
     // PAWN
@@ -233,14 +234,14 @@ void Game::makeMove(UnitPtr unit, FieldPtr destination_field, BoardPtr board) {
             FieldPtr temp_field = nullptr;
             UnitPtr temp = make_shared<Queen>("Queen", temp_uuid, temp_field, true, WHITE);
             current_player->addUnit(temp);
-            place_unit_at(to_x, to_y, temp);
+            place_unit_at(to_x, to_y, temp, this->board);
         }
         if (unit->getColor() == BLACK && to_y == 0){
             int temp_uuid = unit->getUuid();
             FieldPtr temp_field = nullptr;
             UnitPtr temp = make_shared<Queen>("Queen", temp_uuid, temp_field, true, BLACK);
             current_player->addUnit(temp);
-            place_unit_at(to_x, to_y, temp);
+            place_unit_at(to_x, to_y, temp, this->board);
         }
     }
 
@@ -249,6 +250,16 @@ void Game::makeMove(UnitPtr unit, FieldPtr destination_field, BoardPtr board) {
     for (auto unit: enemy_player->getUnits()){
         unit->setEnpassantable(false);
     }
+
+    // IS CHECK?
+    /*
+    if(isCheckState(game, board, enemy_player->getColor())){
+        this->setCheckFor(enemy_player->getColor(), true);
+    }
+    else{
+        this->setCheckFor(enemy_player->getColor(), false);
+    }
+    */
 
     // ZMIEN GRACZA
     if (isWhiteTurn()){
@@ -259,11 +270,36 @@ void Game::makeMove(UnitPtr unit, FieldPtr destination_field, BoardPtr board) {
     }
 }
 
-vector<FieldPtr> Game::get_legal_moves(UnitPtr unit) {
-    vector<FieldPtr> unit_moves = unit->get_moves(this->getBoard());
 
-    return unit_moves;
+
+vector<FieldPtr> Game::get_legal_moves(UnitPtr unit) {
+    vector<FieldPtr> unchecked_moves = unit->get_moves(this->getBoard());
+    vector<FieldPtr> legal_moves;
+    FieldPtr unit_field = unit->getField();
+    int x = unit_field->getXCoord();
+    int y = unit_field->getYCoord();
+
+    for (auto destination_field: unchecked_moves){
+        // Tworzymy nową grę, deskę itp.
+        GamePtr fake_game = make_shared<Game>();
+        PlayerPtr player_white = make_shared<Player>("Player WHITE", 3, WHITE);
+        PlayerPtr player_black = make_shared<Player>("Player BLACK", 4, BLACK);
+        fake_game->setPlayers(vector<PlayerPtr> {player_white, player_black});
+        BoardPtr fake_board = copy_board(this->board);
+        fake_game->setBoard(fake_board);
+        FieldPtr fake_destination_field = fake_board->get_field(destination_field->getXCoord(), destination_field->getYCoord());
+        UnitPtr fake_unit = fake_board->get_field(x, y)->getOccupiedByUnit();
+        // sprawdzamy co będzie jeśli zrobimy ten ruch
+        fake_game->makeMove(fake_unit, fake_destination_field, fake_board, fake_game);
+        if (!isCheckState(fake_game, fake_board, unit->getColor())){
+            //unchecked_moves.erase(std::remove(unchecked_moves.begin(), unchecked_moves.end(), destination_field), unchecked_moves.end());
+            legal_moves.push_back(destination_field);
+        }
+    }
+
+    return legal_moves;
 }
+
 
 void Game::add_unit_to_taken(UnitPtr unit, Color color) {
     if (color == WHITE){
@@ -273,4 +309,122 @@ void Game::add_unit_to_taken(UnitPtr unit, Color color) {
         taken_black_units.push_back(unit);
     }
 }
+
+BoardPtr Game::copy_board(BoardPtr board) {
+    BoardPtr retval = create_empty_board();
+    UnitPtr actual_unit;
+    UnitPtr temp_unit;
+    FieldPtr temp_field;
+    for (auto field:board->getFields()){
+        int actual_x = field->getXCoord();
+        int actual_y = field->getYCoord();
+        temp_field = retval->get_field(actual_x, actual_y);
+
+        // UNIT
+        if (field->isOccupied()) {
+            actual_unit = field->getOccupiedByUnit();
+            string name = actual_unit->getName();
+            string icon = actual_unit->getIcon();
+            Color color = actual_unit->getColor();
+            int UUID = actual_unit->getUuid();
+            FieldPtr _field = nullptr;
+            bool alive = actual_unit->isAlive();
+            bool enpassantable = actual_unit->isEnpassantable();
+
+            if (actual_unit->getName() == "Pawn") {
+                temp_unit = make_shared<Pawn>(name, UUID, _field, alive, color);
+            } else if (actual_unit->getName() == "Rook") {
+                temp_unit = make_shared<Rook>(name, UUID, _field, alive, color);
+            } else if (actual_unit->getName() == "Knight") {
+                temp_unit = make_shared<Knight>(name, UUID, _field, alive, color);
+            } else if (actual_unit->getName() == "Bishop") {
+                temp_unit = make_shared<Bishop>(name, UUID, _field, alive, color);
+            } else if (actual_unit->getName() == "Queen") {
+                temp_unit = make_shared<Queen>(name, UUID, _field, alive, color);
+            } else if (actual_unit->getName() == "King") {
+                temp_unit = make_shared<King>(name, UUID, _field, alive, color);
+            }
+
+
+            place_unit_at(actual_x, actual_y, temp_unit, retval);
+        }
+    }
+    return retval;
+}
+
+bool Game::isCheckState(GamePtr game, BoardPtr board, Color color) {
+    // ZNALEŹĆ KRÓLA
+    int king_x = -1;
+    int king_y = -1;
+    UnitPtr temp_unit;
+    for(auto field:board->getFields()) {
+        if (!field->isOccupied()) continue;
+        temp_unit = field->getOccupiedByUnit();
+        if (temp_unit->getName() == "King" && temp_unit->getColor() == color) {
+            king_x = field->getXCoord();
+            king_y = field->getYCoord();
+            break;
+        }
+    }
+    // CZY KTOŚ WIDZI KRÓLA
+    temp_unit = nullptr;
+    for(auto field:board->getFields())
+    {
+        if(!field->isOccupied()) continue;
+        temp_unit = field->getOccupiedByUnit();
+        if(temp_unit->getColor() != color)
+        {
+            // Czy ta jednostka może zrobić ruch na króla?
+            vector<FieldPtr> moves = temp_unit->get_moves(board);
+            for(auto move:moves)
+            {
+                if(move->getXCoord() == king_x && move->getYCoord() == king_y) return true; // JEST CHECK
+            }
+        }
+    }
+    return false;
+}
+
+bool Game::isCheckWhite() const {
+    return is_check_white;
+}
+
+void Game::setIsCheckWhite(bool isCheckWhite) {
+    is_check_white = isCheckWhite;
+}
+
+bool Game::isCheckBlack() const {
+    return is_check_black;
+}
+
+void Game::setIsCheckBlack(bool isCheckBlack) {
+    is_check_black = isCheckBlack;
+}
+
+bool Game::isMate() const {
+    return is_mate;
+}
+
+void Game::setIsMate(bool isMate) {
+    is_mate = isMate;
+}
+
+Color Game::getVictoryColor() const {
+    return victory_color;
+}
+
+void Game::setVictoryColor(Color victoryColor) {
+    victory_color = victoryColor;
+}
+
+void Game::setCheckFor(Color color, bool is_check) {
+    if (color == WHITE){
+        setIsCheckWhite(true);
+    }
+    else{
+        setIsCheckBlack(true);
+    }
+}
+
+
 

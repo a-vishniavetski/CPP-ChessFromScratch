@@ -20,7 +20,7 @@ public:
 
     void gameloop();
     void new_game();
-    void place_unit_at(int x_coord, int y_coord, UnitPtr unit);
+    void place_unit_at(int x_coord, int y_coord, UnitPtr unit, BoardPtr board);
     BoardPtr create_empty_board() const;
     virtual ~Game();
     const vector<PlayerPtr> &getPlayers() const;
@@ -31,17 +31,30 @@ public:
     void setTotalTurns(int totalTurns);
     bool isWhiteTurn() const;
     void setWhiteTurn(bool whiteTurn);
-    void makeMove(UnitPtr unit, FieldPtr destination_field, BoardPtr board);
+    void makeMove(UnitPtr unit, FieldPtr destination_field, BoardPtr board, GamePtr game);
     vector<FieldPtr> get_legal_moves(UnitPtr unit);
     void add_unit_to_taken(UnitPtr unit, Color color);
+    BoardPtr copy_board(BoardPtr board);
+    bool isCheckState(GamePtr game, BoardPtr board, Color color);
+    bool isCheckWhite() const;
+    void setIsCheckWhite(bool isCheckWhite);
+    bool isCheckBlack() const;
+    void setIsCheckBlack(bool isCheckBlack);
+    void setCheckFor(Color color, bool is_check);
+    bool isMate() const;
+    void setIsMate(bool isMate);
+    Color getVictoryColor() const;
+    void setVictoryColor(Color victoryColor);
 
 private:
     vector<PlayerPtr> players;
     BoardPtr board;
     int total_turns;
     bool white_turn = true;
-    bool check = false;
-    bool mate = false;
+    bool is_check_white = false;
+    bool is_check_black = false;
+    bool is_mate = false;
+    Color victory_color;
     PlayerPtr victory_player = nullptr;
     vector<UnitPtr> taken_white_units;
     vector<UnitPtr> taken_black_units;

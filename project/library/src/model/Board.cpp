@@ -55,3 +55,16 @@ const vector<FieldPtr> &Board::getFields() const {
 void Board::setFields(const vector<FieldPtr> &fields) {
     Board::fields = fields;
 }
+
+Board::Board(const Board& other) {
+    x_dimension = other.x_dimension;
+    y_dimension = other.y_dimension;
+
+    // Deep copy the fields vector
+    for (const auto& field : other.fields) {
+        FieldPtr newField = make_shared<Field>(*field);
+        fields.push_back(newField);
+    }
+}
+
+

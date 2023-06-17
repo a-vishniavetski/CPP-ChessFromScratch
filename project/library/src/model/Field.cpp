@@ -53,7 +53,7 @@ void Field::setOccupied(bool _occupied) {
 
 const UnitPtr &Field::getOccupiedByUnit() const {
     if (!isOccupied()){
-        throw std::logic_error("The field is empty, can't return a unit");
+        throw std::logic_error("getOccupiedByUnit: The field is empty, can't return a unit");
     }
     return occupied_by_unit;
 }
@@ -104,5 +104,7 @@ string Field::get_field_info() const {
     _prompt.append(":").append(occupied_status);
     return _prompt;
 }
+
+
 
 

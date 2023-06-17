@@ -36,6 +36,7 @@ public:
     bool isEnpassantable() const;
     void setEnpassantable(bool _enpassantable);
 
+
 private:
     string name;
     string icon = "";
