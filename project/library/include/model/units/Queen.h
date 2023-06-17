@@ -16,10 +16,9 @@ public:
 
 
     Queen(const string &name, int uuid, const FieldPtr &field, bool alive);
-
     Queen(const string &name, int uuid, const FieldPtr &field, bool alive, Color color);
-
     string getIcon() override;
+    vector<FieldPtr> get_moves(BoardPtr board) override;
 private:
     string icon = "♛";
 };

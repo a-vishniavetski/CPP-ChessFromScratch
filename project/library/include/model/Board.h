@@ -27,6 +27,10 @@ private:
     int x_dimension;
     int y_dimension;
     vector<FieldPtr> fields;
+public:
+    const vector<FieldPtr> &getFields() const;
+
+    void setFields(const vector<FieldPtr> &fields);
 };
 
 

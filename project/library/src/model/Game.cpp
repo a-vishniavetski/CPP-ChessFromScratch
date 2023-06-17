@@ -135,7 +135,9 @@ void Game::place_unit_at(int x_coord, int y_coord, UnitPtr unit) {
     }
 
     FieldPtr new_field = board->get_field(x_coord, y_coord);
-    // todo field not found exception
+    //UnitPtr previous_unit = new_field->getOccupiedByUnit();
+    //previous_unit->setField(nullptr);
+
     new_field->occupy(unit);
     unit->setField(new_field);
 }
@@ -174,10 +176,79 @@ bool Game::isWhiteTurn() const {
 
 void Game::makeMove(UnitPtr unit, FieldPtr destination_field, BoardPtr board) {
     string type = unit->getName();
+    int from_x = unit->getField()->getXCoord();
+    int from_y = unit->getField()->getYCoord();
     int to_x = destination_field->getXCoord();
     int to_y = destination_field->getYCoord();
+    UnitPtr taken_unit = nullptr;
+    PlayerPtr current_player;
+    PlayerPtr enemy_player;
+    for (auto player:getPlayers()){
+        if (player->getColor() == unit->getColor()){
+            current_player = player;
+        }
+        else{
+            enemy_player = player;
+        }
+    }
+    bool could_enpassant = false;
 
-    place_unit_at(to_x, to_y, unit);
+    if (!destination_field->isOccupied()){
+        could_enpassant = true;
+        place_unit_at(to_x, to_y, unit);
+    } else{
+        taken_unit = destination_field->getOccupiedByUnit();
+        if (current_player->getColor() == WHITE) add_unit_to_taken(taken_unit, BLACK);
+        else add_unit_to_taken(taken_unit, WHITE);
+
+        place_unit_at(to_x, to_y, unit);
+    }
+
+    // PAWN
+    if (unit->getName() == "Pawn"){
+        // EN PASSANT
+        if (from_x != to_x && could_enpassant){
+            int enp_x = destination_field->getXCoord();
+            int enp_y = 0;
+            if (unit->getColor() == WHITE) enp_y = destination_field->getYCoord() - 1;
+            if (unit->getColor() == BLACK) enp_y = destination_field->getYCoord() + 1;
+
+            FieldPtr enp_field = board->get_field(enp_x, enp_y);
+            taken_unit = enp_field->getOccupiedByUnit();
+            taken_unit->setField(nullptr);
+            enp_field->deoccupy();
+
+            if (current_player->getColor() == WHITE) add_unit_to_taken(taken_unit, BLACK);
+            else add_unit_to_taken(taken_unit, WHITE);
+        }
+        // DOUBLE MOVE
+        if(abs(from_y - to_y) == 2){
+            unit->setEnpassantable(true);
+            //cout <<"DOUBLE MOVE";
+            //cout << "\n" << to_string(unit->isEnpassantable());
+        }
+        // PROMOCJA
+        if (unit->getColor() == WHITE && to_y == 7){
+            int temp_uuid = unit->getUuid();
+            FieldPtr temp_field = nullptr;
+            UnitPtr temp = make_shared<Queen>("Queen", temp_uuid, temp_field, true, WHITE);
+            current_player->addUnit(temp);
+            place_unit_at(to_x, to_y, temp);
+        }
+        if (unit->getColor() == BLACK && to_y == 0){
+            int temp_uuid = unit->getUuid();
+            FieldPtr temp_field = nullptr;
+            UnitPtr temp = make_shared<Queen>("Queen", temp_uuid, temp_field, true, BLACK);
+            current_player->addUnit(temp);
+            place_unit_at(to_x, to_y, temp);
+        }
+    }
+
+
+    // Bicie na przelocie jest możliwe tylko w ciągu 1 ruchu
+    for (auto unit: enemy_player->getUnits()){
+        unit->setEnpassantable(false);
+    }
 
     // ZMIEN GRACZA
     if (isWhiteTurn()){
@@ -192,5 +263,14 @@ vector<FieldPtr> Game::get_legal_moves(UnitPtr unit) {
     vector<FieldPtr> unit_moves = unit->get_moves(this->getBoard());
 
     return unit_moves;
+}
+
+void Game::add_unit_to_taken(UnitPtr unit, Color color) {
+    if (color == WHITE){
+        taken_white_units.push_back(unit);
+    }
+    else{
+        taken_black_units.push_back(unit);
+    }
 }
 

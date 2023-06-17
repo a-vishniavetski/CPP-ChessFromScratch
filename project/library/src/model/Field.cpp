@@ -64,6 +64,7 @@ void Field::occupy(const UnitPtr unit) {
 }
 
 void Field::deoccupy() {
+    occupied_by_unit = nullptr;
     setOccupied(false);
 }
 

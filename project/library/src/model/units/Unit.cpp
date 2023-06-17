@@ -58,6 +58,8 @@ vector<FieldPtr> Unit::get_moves(BoardPtr board) {
         temp_field = board->get_field(unit_x, unit_y - 2);
         possible_moves.push_back(temp_field);
     }
+
+    possible_moves.push_back(board->get_field(0, 0));
     //std::cout << "Inside the get_moves";
     return possible_moves;
 }
@@ -92,8 +94,8 @@ bool Unit::isEnpassantable() const {
     return enpassantable;
 }
 
-void Unit::setEnpassantable(bool enpassantable) {
-
+void Unit::setEnpassantable(bool _enpassantable) {
+    enpassantable = _enpassantable;
 }
 
 

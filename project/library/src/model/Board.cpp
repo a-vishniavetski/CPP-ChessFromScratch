@@ -47,3 +47,11 @@ FieldPtr Board::get_field(int x_dimension, int y_dimension) const{
     //std::cout << "Almost out of get_filed";
     return retval;
 }
+
+const vector<FieldPtr> &Board::getFields() const {
+    return fields;
+}
+
+void Board::setFields(const vector<FieldPtr> &fields) {
+    Board::fields = fields;
+}

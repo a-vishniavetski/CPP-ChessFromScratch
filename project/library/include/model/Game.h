@@ -33,7 +33,7 @@ public:
     void setWhiteTurn(bool whiteTurn);
     void makeMove(UnitPtr unit, FieldPtr destination_field, BoardPtr board);
     vector<FieldPtr> get_legal_moves(UnitPtr unit);
-
+    void add_unit_to_taken(UnitPtr unit, Color color);
 
 private:
     vector<PlayerPtr> players;
@@ -43,6 +43,8 @@ private:
     bool check = false;
     bool mate = false;
     PlayerPtr victory_player = nullptr;
+    vector<UnitPtr> taken_white_units;
+    vector<UnitPtr> taken_black_units;
 
     int give_player_initial_units(PlayerPtr player, int initial_uuid);
     void create_and_place_unit(int x_coord, int y_coord, UnitPtr unit, PlayerPtr player, int *uuid_count);
