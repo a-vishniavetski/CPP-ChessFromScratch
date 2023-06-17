@@ -304,7 +304,7 @@ void GameFrame::OnButtonClicked(wxCommandEvent &event) {
         {
             UnitPtr tempUnit = selected_field->getOccupiedByUnit();
             //game->place_unit_at(clicked_field->getXCoord(), clicked_field->getYCoord(), selected_field->getOccupiedByUnit());
-            game->makeMove(selected_field->getOccupiedByUnit(), clicked_field);
+            game->makeMove(selected_field->getOccupiedByUnit(), clicked_field, game->getBoard());
             update_unit_pos(tempUnit);
             unsetSelectedField();
         }

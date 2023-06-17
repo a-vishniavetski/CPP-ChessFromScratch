@@ -31,7 +31,7 @@ public:
     void setTotalTurns(int totalTurns);
     bool isWhiteTurn() const;
     void setWhiteTurn(bool whiteTurn);
-    void makeMove(UnitPtr unit, FieldPtr destination_field);
+    void makeMove(UnitPtr unit, FieldPtr destination_field, BoardPtr board);
     vector<FieldPtr> get_legal_moves(UnitPtr unit);
 
 
@@ -42,20 +42,6 @@ private:
     bool white_turn = true;
     bool check = false;
     bool mate = false;
-public:
-    bool isCheck() const;
-
-    void setCheck(bool check);
-
-    bool isMate() const;
-
-    void setMate(bool mate);
-
-    const PlayerPtr &getVictoryPlayer() const;
-
-    void setVictoryPlayer(const PlayerPtr &victoryPlayer);
-
-private:
     PlayerPtr victory_player = nullptr;
 
     int give_player_initial_units(PlayerPtr player, int initial_uuid);

@@ -172,7 +172,7 @@ bool Game::isWhiteTurn() const {
     return white_turn;
 }
 
-void Game::makeMove(UnitPtr unit, FieldPtr destination_field) {
+void Game::makeMove(UnitPtr unit, FieldPtr destination_field, BoardPtr board) {
     string type = unit->getName();
     int to_x = destination_field->getXCoord();
     int to_y = destination_field->getYCoord();
@@ -192,29 +192,5 @@ vector<FieldPtr> Game::get_legal_moves(UnitPtr unit) {
     vector<FieldPtr> unit_moves = unit->get_moves(this->getBoard());
 
     return unit_moves;
-}
-
-bool Game::isCheck() const {
-    return check;
-}
-
-void Game::setCheck(bool check) {
-    Game::check = check;
-}
-
-bool Game::isMate() const {
-    return mate;
-}
-
-void Game::setMate(bool mate) {
-    Game::mate = mate;
-}
-
-const PlayerPtr &Game::getVictoryPlayer() const {
-    return victory_player;
-}
-
-void Game::setVictoryPlayer(const PlayerPtr &victoryPlayer) {
-    victory_player = victoryPlayer;
 }
 
