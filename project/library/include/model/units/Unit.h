@@ -38,7 +38,7 @@ public:
 
 private:
     string name;
-    string icon = "\n\n";
+    string icon = "";
     Color color;
     int UUID; // unique unit id
     FieldPtr field;

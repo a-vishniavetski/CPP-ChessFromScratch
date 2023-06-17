@@ -18,7 +18,7 @@ public:
 
     string getIcon() override;
 private:
-    string icon = "\n♞\n";
+    string icon = "♞";
 
 };
 

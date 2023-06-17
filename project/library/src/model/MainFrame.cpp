@@ -25,6 +25,7 @@ MainFrame::MainFrame(const wxString &title): wxFrame(nullptr, 99, title) {
     wxButton* newGameBtn = new wxButton(panel, NEWGAME_BUTTON, "New Game", wxPoint(300, 50), wxSize(200, 150));
 //    newGameBtn->SetFont(font);
 
+
     CreateStatusBar();
 
     panel->Bind(wxEVT_LEFT_DOWN, &MainFrame::OnMouseEvent, this);

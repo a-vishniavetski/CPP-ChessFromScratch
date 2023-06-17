@@ -16,7 +16,7 @@ public:
 
 
 private:
-    string icon = "\n♟\n";
+    string icon = "♟";
 
 
 

@@ -101,13 +101,12 @@ void GameFrame::populate_board(BoardPtr board) {
 
             }
 
-//            cout << icon;
-            cout << endl << wxToString(btn->GetForegroundColour());
             btn->Refresh();
             btn->Update();
 
 
             i++;
+            cout << btn->GetLabelText();
         }
     }
     this->Refresh();
@@ -117,7 +116,7 @@ void GameFrame::populate_board(BoardPtr board) {
 
 
 void GameFrame::create_board(int xDim, int yDim) {
-    wxFont largeFont = wxFont(wxFontInfo()); largeFont.MakeLarger().MakeLarger().MakeBold().Scale(2.3);
+    wxFont largeFont = wxFont(wxFontInfo()); largeFont.MakeBold().Scale(2);
 
     vector<Ids> ids = getVectorOfIds();
 
@@ -129,7 +128,7 @@ void GameFrame::create_board(int xDim, int yDim) {
         vector<wxButton*> xBtns;
         for(int y = 0; y < yDim; y++)
         {
-            wxButton* btn = new wxButton(this, ids[k], "\n\n\n", wxPoint(0 + (x * 80), 0 + (y * 80)), wxSize(70, 70));
+            wxButton* btn = new wxButton(this, ids[k], "\n\n", wxPoint(0 + (x * 80), 0 + (y * 80)), wxSize(70, 70));
             btn->SetFont(largeFont);
             if(i == 1)
             {
@@ -140,11 +139,12 @@ void GameFrame::create_board(int xDim, int yDim) {
                 btn->SetBackgroundColour(BLACK_TILE);
             }
 
-            btn->Update();
+
             btn->Refresh();
+            btn->Update();
+
             i = 1 - i;
             xBtns.push_back(btn);
-            cout << btn->GetId();
             k++;
         }
         i = 1 - i;
