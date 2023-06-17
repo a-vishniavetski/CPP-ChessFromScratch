@@ -252,14 +252,18 @@ void Game::makeMove(UnitPtr unit, FieldPtr destination_field, BoardPtr board, Ga
     }
 
     // IS CHECK?
-    /*
-    if(isCheckState(game, board, enemy_player->getColor())){
-        this->setCheckFor(enemy_player->getColor(), true);
+    if(isCheckState(game, board, WHITE)){
+        this->setCheckFor(WHITE, true);
     }
     else{
-        this->setCheckFor(enemy_player->getColor(), false);
+        this->setCheckFor(WHITE, false);
     }
-    */
+    if(isCheckState(game, board, BLACK)){
+        this->setCheckFor(BLACK, true);
+    }
+    else{
+        this->setCheckFor(BLACK, false);
+    }
 
     // ZMIEN GRACZA
     if (isWhiteTurn()){
@@ -268,6 +272,7 @@ void Game::makeMove(UnitPtr unit, FieldPtr destination_field, BoardPtr board, Ga
     else{
         setWhiteTurn(true);
     }
+
 }
 
 
@@ -419,10 +424,10 @@ void Game::setVictoryColor(Color victoryColor) {
 
 void Game::setCheckFor(Color color, bool is_check) {
     if (color == WHITE){
-        setIsCheckWhite(true);
+        setIsCheckWhite(is_check);
     }
     else{
-        setIsCheckBlack(true);
+        setIsCheckBlack(is_check);
     }
 }
 
