@@ -12,10 +12,10 @@ class Bishop : public Unit {
 public:
 
     Bishop(const string &name, int uuid, const FieldPtr &field, bool alive);
-
     Bishop(const string &name, int uuid, const FieldPtr &field, bool alive, Color color);
-
     string getIcon() override;
+    vector<FieldPtr> get_moves(BoardPtr board) override;
+    int checkMove(FieldPtr temp_field);
 
 private:
     string icon = "♝";

@@ -12,14 +12,13 @@
 class Rook : public Unit {
 public:
     Rook(const string &name, int uuid, const FieldPtr &field, bool alive);
-
     Rook(const string &name, int uuid, const FieldPtr &field, bool alive, Color color);
-
     vector<FieldPtr> get_moves(BoardPtr board);
-
     string getIcon() override;
+
 private:
     string icon = "♜";
+    int checkMove(FieldPtr temp_field);
 };
 
 
