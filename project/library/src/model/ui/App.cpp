@@ -2,8 +2,8 @@
 // Created by Hubert Klonowski on 11/06/2023.
 //
 
-#include "model/App.h"
-#include "MainFrame.h"
+#include "model/ui/App.h"
+#include "model/ui/MainFrame.h"
 #include "wx/wx.h"
 #include "typedefs.h"
 

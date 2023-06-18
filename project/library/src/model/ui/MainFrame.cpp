@@ -2,8 +2,8 @@
 // Created by Hubert Klonowski on 11/06/2023.
 //
 
-#include "MainFrame.h"
-#include "UI.h"
+#include "model/ui/MainFrame.h"
+#include "model/ui/UI.h"
 #include "Unit.h"
 #include "wx/wx.h"
 #include "Game.h"

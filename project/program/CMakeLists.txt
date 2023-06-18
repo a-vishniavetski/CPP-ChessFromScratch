@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.4)
 project(Program)
 
 #Ustaw we własnej zmiennej SOURCE_FILES zbiór plików źródłowych projektu
-set(SOURCE_FILES src/main.cpp ../library/include/model/MainFrame.h ../library/src/model/MainFrame.cpp ../library/include/model/App.h ../library/src/model/App.cpp ../library/include/model/GameFrame.h ../library/include/model/UI.h ../library/src/model/UI.cpp ../library/src/model/GameFrame.cpp)
+set(SOURCE_FILES src/main.cpp ../library/include/model/ui/MainFrame.h ../library/src/model/ui/MainFrame.cpp ../library/include/model/ui/App.h ../library/src/model/ui/App.cpp ../library/include/model/ui/GameFrame.h ../library/include/model/ui/UI.h ../library/src/model/ui/UI.cpp ../library/src/model/ui/GameFrame.cpp)
 
 if(APPLE)
     find_package(wxWidgets REQUIRED COMPONENTS net core base)

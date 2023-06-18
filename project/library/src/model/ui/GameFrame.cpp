@@ -1,8 +1,8 @@
 //
 // Created by Hubert Klonowski on 11/06/2023.
 //
-#include "GameFrame.h"
-#include "UI.h"
+#include "model/ui/GameFrame.h"
+#include "model/ui/UI.h"
 #include "wx/wx.h"
 #include "wx/stdpaths.h"
 #include <filesystem>

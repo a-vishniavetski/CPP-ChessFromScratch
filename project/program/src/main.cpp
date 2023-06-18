@@ -10,11 +10,11 @@
 #include <sstream>
 #include "wx/stdpaths.h"
 
-#include "App.h"
+#include "model/ui/App.h"
 
 
 #include "wx/wx.h"
-#include "UI.h"
+#include "model/ui/UI.h"
 
 using namespace std;
 

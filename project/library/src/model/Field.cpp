@@ -2,7 +2,7 @@
 // Created by avish on 5/29/2023.
 //
 
-#include <stdexcept>
+#include <exceptions.h>
 #include <vector>
 #include "Field.h"
 #include <Unit.h>
@@ -53,7 +53,7 @@ void Field::setOccupied(bool _occupied) {
 
 const UnitPtr &Field::getOccupiedByUnit() const {
     if (!isOccupied()){
-        throw std::logic_error("getOccupiedByUnit: The field is empty, can't return a unit");
+        throw NoUnitFoundException("getOccupiedByUnit: The field is empty, can't return a unit");
     }
     return occupied_by_unit;
 }
