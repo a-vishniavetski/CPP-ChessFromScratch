@@ -42,26 +42,7 @@ void Unit::setAlive(bool alive) {
 }
 
 vector<FieldPtr> Unit::get_moves(BoardPtr board) {
-    vector<FieldPtr> possible_moves;
-    int unit_x = getField()->getXCoord();
-    int unit_y = getField()->getYCoord();
-    FieldPtr temp_field;
-    if (getColor() == WHITE){
-        temp_field = board->get_field(unit_x, unit_y + 1);
-        possible_moves.push_back(temp_field);
-        temp_field = board->get_field(unit_x, unit_y + 2);
-        possible_moves.push_back(temp_field);
-    }
-    else{
-        board->get_field(unit_x, unit_y - 1);
-        possible_moves.push_back(temp_field);
-        temp_field = board->get_field(unit_x, unit_y - 2);
-        possible_moves.push_back(temp_field);
-    }
-
-    possible_moves.push_back(board->get_field(0, 0));
-    //std::cout << "Inside the get_moves";
-    return possible_moves;
+    return vector<FieldPtr>();
 }
 
 Unit::Unit(std::nullptr_t) {

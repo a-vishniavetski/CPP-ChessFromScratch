@@ -47,7 +47,7 @@ vector<FieldPtr> Pawn::get_moves(BoardPtr board) {
         // LEFT
         to_x = from_x - 1;
         to_y = from_y + 1;
-        if(to_y >= 0 && to_y < board->getYDimension() && to_x >= 0 && to_x <= board->getXDimension())
+        if(to_y >= 0 && to_y < board->getYDimension() && to_x >= 0 && to_x < board->getXDimension())
         {
             if(board->get_field(to_x, to_y)->isOccupied())
             {
@@ -58,7 +58,7 @@ vector<FieldPtr> Pawn::get_moves(BoardPtr board) {
         // RIGHT
         to_x = from_x + 1;
         to_y = from_y + 1;
-        if(to_y >= 0 && to_y < board->getYDimension() && to_x >= 0 && to_x <= board->getXDimension())
+        if(to_y >= 0 && to_y < board->getYDimension() && to_x >= 0 && to_x < board->getXDimension())
         {
             if(board->get_field(to_x, to_y)->isOccupied())
             {
@@ -124,7 +124,7 @@ vector<FieldPtr> Pawn::get_moves(BoardPtr board) {
         // LEFT
         to_x = from_x + 1;
         to_y = from_y - 1;
-        if(to_y >= 0 && to_y < board->getYDimension() && to_x >= 0 && to_x <= board->getXDimension())
+        if(to_y >= 0 && to_y < board->getYDimension() && to_x >= 0 && to_x < board->getXDimension())
         {
             if(board->get_field(to_x, to_y)->isOccupied())
             {
@@ -135,7 +135,7 @@ vector<FieldPtr> Pawn::get_moves(BoardPtr board) {
         // RIGHT
         to_x = from_x - 1;
         to_y = from_y - 1;
-        if(to_y >= 0 && to_y < board->getYDimension() && to_x >= 0 && to_x <= board->getXDimension())
+        if(to_y >= 0 && to_y < board->getYDimension() && to_x >= 0 && to_x < board->getXDimension())
         {
             if(board->get_field(to_x, to_y)->isOccupied())
             {

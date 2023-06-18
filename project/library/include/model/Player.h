@@ -17,9 +17,7 @@ class Player {
 public:
     // Konstruktor i destruktor
     Player(const string &name, int upid, const vector<UnitPtr> &units);
-
     Player(const string &name, int upid, Color color);
-
     virtual ~Player();
 
     string get_all_units_info() const;
@@ -30,7 +28,7 @@ public:
     const vector<UnitPtr> &getUnits() const;
     void setUnits(const vector<UnitPtr> &units);
     void addUnit(UnitPtr unit);
-    UnitPtr choose_unit();
+    virtual UnitPtr choose_unit();
 
     Color getColor() const;
 

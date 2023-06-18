@@ -54,7 +54,6 @@ void Player::addUnit(UnitPtr unit) {
 }
 
 UnitPtr Player::choose_unit() {
-    // todo
     return UnitPtr();
 }
 
