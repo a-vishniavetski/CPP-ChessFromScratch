@@ -7,13 +7,11 @@
 #include "Pawn.h"
 #include "Queen.h"
 
-
 BOOST_AUTO_TEST_SUITE(TestSuiteGame)
 
     BOOST_AUTO_TEST_CASE(ConstructorTest){
 
     }
-
 
     BOOST_AUTO_TEST_CASE(CopyBoardTest) {
         GamePtr game = make_shared<Game>();

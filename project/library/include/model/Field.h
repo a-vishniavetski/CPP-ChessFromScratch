@@ -51,7 +51,7 @@ private:
     bool occupied = false;
     UnitPtr occupied_by_unit;
     vector<UnitPtr> seen_by_units;
-    string color;
+    string color = "none";
 
 };
 

@@ -23,4 +23,11 @@ public:
     explicit LoadFailedException(const std::string &arg);
 
 };
+
+/*
+class FieldNotFoundException : public std::logic_error {
+public:
+    explicit FieldNotFoundException(const std::string &arg);
+
+};*/
 #endif //CHESS_EXCEPTIONS_H

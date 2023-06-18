@@ -2,6 +2,7 @@
 #include <Board.h>
 #include <Field.h>
 #include "Unit.h"
+#include <exceptions.h>
 using namespace std;
 
 
@@ -40,10 +41,9 @@ FieldPtr Board::get_field(int x_dimension, int y_dimension) const{
             break;
         }
         else{
-            //std::cout << "Field not found";
+            //throw FieldNotFoundException("Board::getField: No field with such coordinates");
         }
     }
-    // todo field_not_found exception czy coś takiego
     //std::cout << "Almost out of get_filed";
     return retval;
 }

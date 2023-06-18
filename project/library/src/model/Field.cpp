@@ -1,7 +1,3 @@
-//
-// Created by avish on 5/29/2023.
-//
-
 #include <exceptions.h>
 #include <vector>
 #include "Field.h"
@@ -104,7 +100,3 @@ string Field::get_field_info() const {
     _prompt.append(":").append(occupied_status);
     return _prompt;
 }
-
-
-
-
