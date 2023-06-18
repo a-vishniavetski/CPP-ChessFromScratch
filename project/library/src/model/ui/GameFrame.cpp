@@ -109,7 +109,7 @@ vector<Ids> getVectorOfIds()
     return vector<Ids>(all, all + sizeof(all) / sizeof(Ids));
 }
 
-void GameFrame::populate_board(BoardPtr board) {
+void GameFrame::populateBoard(BoardPtr board) {
     int xDim = board->getXDimension();
     int yDim = board->getYDimension();
 
@@ -150,7 +150,7 @@ void GameFrame::populate_board(BoardPtr board) {
 }
 
 
-void GameFrame::create_board(int xDim, int yDim) {
+void GameFrame::createBoard(int xDim, int yDim) {
     wxFont largeFont = wxFont(wxFontInfo()); largeFont.MakeBold().Scale(2.2);
     wxFont coordsFont = wxFont(wxFontInfo()); coordsFont.Scale(1.5);
 
@@ -233,7 +233,7 @@ int getIdFromCoords(int xCoord, int yCoord)
     return id;
 }
 
-void GameFrame::highlight_field(FieldPtr field, wxColour color) {
+void GameFrame::highlightField(FieldPtr field, wxColour color) {
     if(field == nullptr)
         return;
     wxButton* btn = getButtonOfId(getIdFromCoords(field->getXCoord(), field->getYCoord()));
@@ -243,7 +243,7 @@ void GameFrame::highlight_field(FieldPtr field, wxColour color) {
 }
 
 
-void GameFrame::revert_fields_colors() {
+void GameFrame::revertFieldsColors() {
     vector<Ids> ids = getVectorOfIds();
 
     int xDim = game->getBoard()->getXDimension();
@@ -276,12 +276,12 @@ void GameFrame::revert_fields_colors() {
     if(game->isCheckBlack())
     {
         FieldPtr king = game->findKingByColor(BLACK);
-        highlight_field(king, DANGER);
+        highlightField(king, DANGER);
     }
     if(game->isCheckWhite())
     {
         FieldPtr king = game->findKingByColor(WHITE);
-        highlight_field(king, DANGER);
+        highlightField(king, DANGER);
     }
 }
 
@@ -305,7 +305,7 @@ void GameFrame::unsetSelectedField() {
 //    if(xi % 2 == 1 && yi % 2 == 1)
 //        btn->SetBackgroundColour(WHITE_TILE);
 
-    revert_fields_colors();
+    revertFieldsColors();
 
     btn->Update();
     btn->Refresh();
@@ -370,7 +370,7 @@ void GameFrame::OnButtonClicked(wxCommandEvent &event) {
 
         for(int i = 0; i < possible_moves.size(); i++)
         {
-            highlight_field(possible_moves[i], POSSIBLE_MOVE);
+            highlightField(possible_moves[i], POSSIBLE_MOVE);
         }
 
         return;
@@ -401,12 +401,12 @@ void GameFrame::OnButtonClicked(wxCommandEvent &event) {
             if(game->isCheckBlack())
             {
                 FieldPtr king = game->findKingByColor(BLACK);
-                highlight_field(king, DANGER);
+                highlightField(king, DANGER);
             }
 
             if(game->isCheckWhite()){
                 FieldPtr king = game->findKingByColor(WHITE);
-                highlight_field(king, DANGER);
+                highlightField(king, DANGER);
             }
         }
     }

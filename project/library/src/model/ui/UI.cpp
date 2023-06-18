@@ -22,10 +22,10 @@ UI::~UI() noexcept {
 //    gameFrame->update_unit_pos(units);
 //}
 
-void UI::create_board(int xDim, int yDim) {
-    gameFrame->create_board(xDim, yDim);
+void UI::createBoard(int xDim, int yDim) {
+    gameFrame->createBoard(xDim, yDim);
 }
 
-void UI::populate_board(BoardPtr board) {
-    gameFrame->populate_board(board);
+void UI::populateBoard(BoardPtr board) {
+    gameFrame->populateBoard(board);
 }

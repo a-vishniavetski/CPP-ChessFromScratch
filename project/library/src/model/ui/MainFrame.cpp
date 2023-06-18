@@ -52,8 +52,8 @@ void MainFrame::OnButtonClicked(wxCommandEvent &event) {
         int y = board->getYDimension();
 
         ui = new UI("Game", *this, game);
-        ui->create_board(x, y);
-        ui->populate_board(board);
+        ui->createBoard(x, y);
+        ui->populateBoard(board);
     }
     wxString msg = wxString::Format("Button clicked, ID=%d", event.GetId());
     wxLogStatus(msg);
