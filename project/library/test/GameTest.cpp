@@ -24,10 +24,6 @@ struct GameFixture {
 
 BOOST_FIXTURE_TEST_SUITE(TestSuiteGame, GameFixture)
 
-    BOOST_AUTO_TEST_CASE(ConstructorTest){
-
-    }
-
     BOOST_AUTO_TEST_CASE(CopyBoardTest) {
         GamePtr game = make_shared<Game>();
         game->new_game();
