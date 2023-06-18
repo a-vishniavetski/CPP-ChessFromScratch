@@ -389,7 +389,9 @@ void GameFrame::OnButtonClicked(wxCommandEvent &event) {
             Color color = tempUnit->getColor();
             //game->place_unit_at(clicked_field->getXCoord(), clicked_field->getYCoord(), selected_field->getOccupiedByUnit());
             game->makeMove(selected_field->getOccupiedByUnit(), clicked_field, game->getBoard(), game);
+            game->updateGameStatus(game, game->getBoard());
             update_unit_pos(clicked_field->getOccupiedByUnit());
+
 
             unsetSelectedField();
             setTurnText();
