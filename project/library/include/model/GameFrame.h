@@ -30,6 +30,7 @@ public:
 
     wxButton* getButtonOfId(int id);
 
+
 private:
     wxFrame& parent;
     GamePtr game;
@@ -37,7 +38,7 @@ private:
     void OnButtonClicked(wxCommandEvent& event);
     void OnClose(wxCloseEvent& event);
     FieldPtr selected_field = nullptr;
-    void highlight_field(FieldPtr field);
+    void highlight_field(FieldPtr field, wxColour color);
     void revert_fields_colors();
     void setTurnText();
 

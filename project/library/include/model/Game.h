@@ -46,6 +46,10 @@ public:
     Color getVictoryColor() const;
     void setVictoryColor(Color victoryColor);
 
+    FieldPtr findKingByColor(Color color);
+
+    vector<UnitPtr> getTakenUnitsByColor(Color color);
+
 private:
     vector<PlayerPtr> players;
     BoardPtr board;

@@ -357,6 +357,21 @@ BoardPtr Game::copy_board(BoardPtr board) {
     return retval;
 }
 
+FieldPtr Game::findKingByColor(Color color) {
+    // ZNALEŹĆ KRÓLA
+    int king_x = -1;
+    int king_y = -1;
+    UnitPtr temp_unit;
+    for(auto field:board->getFields()) {
+        if (!field->isOccupied()) continue;
+        temp_unit = field->getOccupiedByUnit();
+        if (temp_unit->getName() == "King" && temp_unit->getColor() == color) {
+            return field;
+            break;
+        }
+    }
+}
+
 bool Game::isCheckState(GamePtr game, BoardPtr board, Color color) {
     // ZNALEŹĆ KRÓLA
     int king_x = -1;
@@ -431,5 +446,9 @@ void Game::setCheckFor(Color color, bool is_check) {
     }
 }
 
-
-
+vector<UnitPtr> Game::getTakenUnitsByColor(Color color) {
+    if(color == BLACK)
+        return taken_black_units;
+    if(color == WHITE)
+        return taken_white_units;
+}
