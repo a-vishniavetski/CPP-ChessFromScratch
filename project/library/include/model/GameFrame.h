@@ -16,7 +16,7 @@ class GameFrame : public wxFrame
 public:
     GameFrame(const wxString& title, wxFrame& parent, GamePtr game);
     ~GameFrame();
-    void update_unit_pos(vector<UnitPtr> units);
+//    void update_unit_pos(vector<UnitPtr> units);
     void create_board(int xDim, int yDim);
     void populate_board(BoardPtr board);
 
@@ -39,6 +39,9 @@ private:
     FieldPtr selected_field = nullptr;
     void highlight_field(FieldPtr field);
     void revert_fields_colors();
+    void setTurnText();
+
+    void updateAliveUnits();
 
 
 

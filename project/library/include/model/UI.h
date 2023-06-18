@@ -15,8 +15,8 @@ class UI : public wxFrame{
 public:
     UI(const wxString& title, wxFrame& parent, GamePtr game);
     ~UI();
-
-    void update_units_pos(vector<UnitPtr> units);
+//
+//    void update_units_pos(vector<UnitPtr> units);
     virtual void create_board(int xDim, int yDim);
     virtual void populate_board(BoardPtr board);
 private:

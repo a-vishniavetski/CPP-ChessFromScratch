@@ -40,7 +40,7 @@ void _print(BoardPtr board){
 wxIMPLEMENT_APP_NO_MAIN(App);
 
 int main(int argc, char *argv[]){
-    std::setlocale(LC_CTYPE, "");
+    setlocale(LC_CTYPE, "");
 //    wxString path = wxStandardPaths::Get().GetResourcesDir() + "/images/link.jpg";
 //    cout << path << endl;
 //

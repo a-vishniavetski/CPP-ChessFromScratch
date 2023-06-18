@@ -1,7 +1,7 @@
 #include <iostream>
 #include <Board.h>
 #include <Field.h>
-
+#include "Unit.h"
 using namespace std;
 
 
@@ -67,4 +67,35 @@ Board::Board(const Board& other) {
     }
 }
 
+vector<FieldPtr> Board::getFieldsOccupiedByColor(Color color) {
+    vector<FieldPtr> occupied;
+    for(int i = 0; i < fields.size(); i++)
+    {
+        if(fields[i]->isOccupied())
+        {
+            if(fields[i]->getOccupiedByUnit()->getColor() == color)
+            {
+                occupied.push_back(fields[i]);
+            }
+        }
 
+    }
+    return occupied;
+}
+
+vector<UnitPtr> Board::getKnockedOffUnitsByColor(Color color) {
+    vector<UnitPtr> knockedOff;
+    for(int i = 0; i < fields.size(); i++)
+    {
+        if(fields[i]->isOccupied()){
+            if(fields[i]->getOccupiedByUnit()->getColor() == color)
+            {
+                if(fields[i]->getOccupiedByUnit()->isAlive() == false)
+                {
+                    knockedOff.push_back(fields[i]->getOccupiedByUnit());
+                }
+            }
+        }
+    }
+    return knockedOff;
+}

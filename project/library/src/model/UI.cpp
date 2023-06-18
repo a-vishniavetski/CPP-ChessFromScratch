@@ -18,9 +18,9 @@ UI::~UI() noexcept {
 //    delete this;
 }
 
-void UI::update_units_pos(vector<UnitPtr> units) {
-    gameFrame->update_unit_pos(units);
-}
+//void UI::update_units_pos(vector<UnitPtr> units) {
+//    gameFrame->update_unit_pos(units);
+//}
 
 void UI::create_board(int xDim, int yDim) {
     gameFrame->create_board(xDim, yDim);
