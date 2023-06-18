@@ -33,6 +33,10 @@ public:
     void setWhiteTurn(bool whiteTurn);
     Color getVictoryColor() const;
     void setVictoryColor(Color victoryColor);
+    bool isTie() const;
+    void setIsTie(bool isTie);
+    bool isStalemate() const;
+    void setIsStalemate(bool isStalemate);
     // --------------- logika gry, deska i ruchi ---------------
     void new_game();
     void place_unit_at(int x_coord, int y_coord, UnitPtr unit, BoardPtr board);
@@ -60,6 +64,8 @@ private:
     bool is_check_white = false;
     bool is_check_black = false;
     bool is_mate = false;
+    bool is_stalemate = false;
+    bool is_tie = false;
     Color victory_color;
     //PlayerPtr victory_player = nullptr;
     vector<UnitPtr> taken_white_units;

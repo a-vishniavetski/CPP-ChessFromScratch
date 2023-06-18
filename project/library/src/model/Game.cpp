@@ -135,6 +135,14 @@ void Game::makeMove(UnitPtr unit, FieldPtr destination_field, BoardPtr board, Ga
 
 // zawsze musi być wywołana po makeMove
 void Game::updateGameStatus(GamePtr game, BoardPtr board) {
+    // --------------- ZMIEN GRACZA ---------------
+    if (isWhiteTurn()){
+        setWhiteTurn(false);
+    }
+    else{
+        setWhiteTurn(true);
+    }
+
     // --------------- SET CHECK ---------------
     if(isCheckState(game, board, WHITE)){
         this->setCheckFor(WHITE, true);
@@ -166,13 +174,31 @@ void Game::updateGameStatus(GamePtr game, BoardPtr board) {
     }
 
     // --------------- SET POZYCJA PATOWA ---------------
-
-    // --------------- ZMIEN GRACZA ---------------
-    if (isWhiteTurn()){
-        setWhiteTurn(false);
+    // WHITE
+    if (!isCheckWhite() && isCheckmateState(game, board, WHITE)){
+        setIsStalemate(true);
+        //setVictoryColor(BLACK);
+        cout << "\nLOGIC: STALEMATE";
+        return;
     }
-    else{
-        setWhiteTurn(true);
+    // BLACK
+    if (!isCheckBlack() && isCheckmateState(game, board, BLACK)){
+        setIsStalemate(true);
+        //setVictoryColor(WHITE);
+        cout << "\nLOGIC: STALEMATE";
+        return;
+    }
+    // --------------- SET TIE ---------------
+    int count = 0;
+    for (auto field:board->getFields()){
+        if (field->isOccupied()){
+            count += 1;
+        }
+    }
+    if (count == 2){
+        setIsTie(true);
+        cout << "\nLOGIC: TIE, NO ONE WINS";
+        return;
     }
 }
 
@@ -476,4 +502,20 @@ vector<UnitPtr> Game::getTakenUnitsByColor(Color color) {
         return taken_black_units;
     if(color == WHITE)
         return taken_white_units;
+}
+
+bool Game::isStalemate() const {
+    return is_stalemate;
+}
+
+void Game::setIsStalemate(bool isStalemate) {
+    is_stalemate = isStalemate;
+}
+
+bool Game::isTie() const {
+    return is_tie;
+}
+
+void Game::setIsTie(bool isTie) {
+    is_tie = isTie;
 }
