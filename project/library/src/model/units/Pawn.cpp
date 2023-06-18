@@ -14,7 +14,7 @@ string Pawn::getIcon() {
 Pawn::Pawn(const string &name, int uuid, const FieldPtr &field, bool alive, Color color) : Unit(name, uuid, field,
                                                                                                 alive, color) {}
 
-vector<FieldPtr> Pawn::get_moves(BoardPtr board) {
+vector<FieldPtr> Pawn::getMoves(BoardPtr board) {
     vector<FieldPtr> moves;
     int from_x = this->getField()->getXCoord();
     int from_y = this->getField()->getYCoord();

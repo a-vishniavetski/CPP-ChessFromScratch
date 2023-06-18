@@ -68,7 +68,7 @@ void Unit::setEnpassantable(bool _enpassantable) {
 }
 
 // ---------------- LOGIC ----------------
-string Unit::get_unit_info() const {
+string Unit::getUnitInfo() const {
     if (this == nullptr){
         return "NULL";
     }
@@ -76,12 +76,12 @@ string Unit::get_unit_info() const {
     _prompt.append(this->getName());
     _prompt.append(", ").append(to_string(this->getUuid()));
     _prompt.append(", ").append(to_string(this->isAlive()));
-    _prompt.append(", ").append(this->getField()->get_field_info());
+    _prompt.append(", ").append(this->getField()->getFieldInfo());
     _prompt.append(", ").append(to_string(this->getColor()));
     return _prompt;
 }
 
-vector<FieldPtr> Unit::get_moves(BoardPtr board) {
+vector<FieldPtr> Unit::getMoves(BoardPtr board) {
     return vector<FieldPtr>();
 }
 

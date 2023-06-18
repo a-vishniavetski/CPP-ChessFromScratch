@@ -44,7 +44,7 @@ int Knight::checkMove(FieldPtr temp_field){
     }
 }
 
-vector<FieldPtr> Knight::get_moves(BoardPtr board) {
+vector<FieldPtr> Knight::getMoves(BoardPtr board) {
     vector<FieldPtr> moves;
     int from_x = this->getField()->getXCoord();
     int from_y = this->getField()->getYCoord();

@@ -85,7 +85,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteField, FieldFixture)
     
     BOOST_AUTO_TEST_CASE(test_GetFieldInfo) {
         std::string expected = "Field(0, 0)white:Not_Occupied";
-        std::string info = field->get_field_info();
+        std::string info = field->getFieldInfo();
         BOOST_CHECK_EQUAL(info, expected);
     }
 

@@ -20,7 +20,7 @@ public:
     Player(const string &name, int upid, Color color);
     virtual ~Player();
 
-    string get_all_units_info() const;
+    string getAllUnitsInfo() const;
     const string &getName() const;
     void setName(const string &name);
     int getUpid() const;

@@ -14,7 +14,7 @@ public:
     Knight(const string &name, int uuid, const FieldPtr &field, bool alive);
     Knight(const string &name, int uuid, const FieldPtr &field, bool alive, Color color);
     string getIcon() override;
-    vector<FieldPtr> get_moves(BoardPtr board);
+    vector<FieldPtr> getMoves(BoardPtr board);
 
 private:
     string icon = "♞";

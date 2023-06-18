@@ -357,7 +357,7 @@ void GameFrame::OnButtonClicked(wxCommandEvent &event) {
     if(selected_field != nullptr)
     {
         UnitPtr unit = selected_field->getOccupiedByUnit();
-        possible_moves = game->get_legal_moves(unit);
+        possible_moves = game->getLegalMoves(unit);
     }
 
     if(selected_field == nullptr)
@@ -365,7 +365,7 @@ void GameFrame::OnButtonClicked(wxCommandEvent &event) {
         setSelectedField(field);
         UnitPtr unit = field->getOccupiedByUnit();
 
-         possible_moves = game->get_legal_moves(unit);
+         possible_moves = game->getLegalMoves(unit);
         //pokaz gdzie moge sie ruszyc
 
         for(int i = 0; i < possible_moves.size(); i++)
@@ -387,7 +387,7 @@ void GameFrame::OnButtonClicked(wxCommandEvent &event) {
         {
             UnitPtr tempUnit = selected_field->getOccupiedByUnit();
             Color color = tempUnit->getColor();
-            //game->place_unit_at(clicked_field->getXCoord(), clicked_field->getYCoord(), selected_field->getOccupiedByUnit());
+            //game->placeUnitAt(clicked_field->getXCoord(), clicked_field->getYCoord(), selected_field->getOccupiedByUnit());
             game->makeMove(selected_field->getOccupiedByUnit(), clicked_field, game->getBoard(), game);
             game->updateGameStatus(game, game->getBoard());
             update_unit_pos(clicked_field->getOccupiedByUnit());

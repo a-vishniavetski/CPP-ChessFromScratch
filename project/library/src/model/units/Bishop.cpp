@@ -37,7 +37,7 @@ int Bishop::checkMove(FieldPtr temp_field){
     }
 }
 
-vector<FieldPtr> Bishop::get_moves(BoardPtr board) {
+vector<FieldPtr> Bishop::getMoves(BoardPtr board) {
     vector<FieldPtr> moves;
     int from_x = this->getField()->getXCoord();
     int from_y = this->getField()->getYCoord();

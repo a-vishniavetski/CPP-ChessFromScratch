@@ -27,7 +27,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteUnit, UnitFixture)
 
     BOOST_AUTO_TEST_CASE(GetMovesTest) {
         GamePtr game = make_shared<Game>();
-        game->new_game();
+        game->newGame();
         int x = 1;
         int y = 1;
         vector<FieldPtr> need_moves;
@@ -35,7 +35,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteUnit, UnitFixture)
         need_moves.push_back(game->getBoard()->get_field(1, 3));
         UnitPtr temp_unit =  game->getBoard()->get_field(x, y)->getOccupiedByUnit();
         BoardPtr temp = game->getBoard();
-        vector<FieldPtr> returned_moves = temp_unit->get_moves(game->getBoard());
+        vector<FieldPtr> returned_moves = temp_unit->getMoves(game->getBoard());
         sort(returned_moves.begin(), returned_moves.end());
         sort(need_moves.begin(), need_moves.end());
 
@@ -99,13 +99,13 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteUnit, UnitFixture)
 
     BOOST_AUTO_TEST_CASE(test_GetUnitInfo) {
         std::string expected = "Unit1, 1234, 1, Field(0, 0)white:Not_Occupied, 0";
-        std::string info = unit->get_unit_info();
+        std::string info = unit->getUnitInfo();
         BOOST_CHECK_EQUAL(info, expected);
     }
 
     BOOST_AUTO_TEST_CASE(test_GetMoves) {
         BoardPtr board = std::make_shared<Board>(8, 8, std::vector<FieldPtr>());
-        std::vector<FieldPtr> moves = unit->get_moves(board);
+        std::vector<FieldPtr> moves = unit->getMoves(board);
         BOOST_CHECK(moves.empty());
     }
 

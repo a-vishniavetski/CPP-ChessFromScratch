@@ -36,8 +36,8 @@ public:
     bool isEnpassantable() const;
     void setEnpassantable(bool _enpassantable);
     // ---------------- LOGIC ----------------
-    string get_unit_info() const;
-    virtual vector<FieldPtr> get_moves(BoardPtr board);
+    string getUnitInfo() const;
+    virtual vector<FieldPtr> getMoves(BoardPtr board);
 
 
 private:
