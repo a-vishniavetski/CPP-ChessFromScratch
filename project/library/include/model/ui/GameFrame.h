@@ -45,13 +45,13 @@ private:
     void OnButtonClicked(wxCommandEvent& event);
     void OnClose(wxCloseEvent& event);
     FieldPtr selected_field = nullptr;
-    void highlight_field(FieldPtr field, wxColour color);
-    void revert_fields_colors();
+    void highlightField(FieldPtr field, wxColour color);
+    void revertFieldsColors();
 
     void surrender(Color color);
     void showResultsScreen(string outcome);
 
-    void set_enabled_every_button(bool state);
+    void setEnabledEveryButton(bool state);
 
     UI* ui;
 

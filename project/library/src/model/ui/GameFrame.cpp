@@ -249,7 +249,7 @@ int getIdFromCoords(int xCoord, int yCoord)
     return id;
 }
 
-void GameFrame::highlight_field(FieldPtr field, wxColour color) {
+void GameFrame::highlightField(FieldPtr field, wxColour color) {
     if(field == nullptr)
         return;
     wxButton* btn = getButtonOfId(getIdFromCoords(field->getXCoord(), field->getYCoord()));
@@ -259,7 +259,7 @@ void GameFrame::highlight_field(FieldPtr field, wxColour color) {
 }
 
 
-void GameFrame::revert_fields_colors() {
+void GameFrame::revertFieldsColors() {
     vector<Ids> ids = getVectorOfIds();
 
     int xDim = game->getBoard()->getXDimension();
@@ -292,12 +292,12 @@ void GameFrame::revert_fields_colors() {
     if(game->isCheckBlack())
     {
         FieldPtr king = game->findKingByColor(BLACK);
-        highlight_field(king, DANGER);
+        highlightField(king, DANGER);
     }
     if(game->isCheckWhite())
     {
         FieldPtr king = game->findKingByColor(WHITE);
-        highlight_field(king, DANGER);
+        highlightField(king, DANGER);
     }
 }
 
@@ -321,7 +321,7 @@ void GameFrame::unsetSelectedField() {
 //    if(xi % 2 == 1 && yi % 2 == 1)
 //        btn->SetBackgroundColour(WHITE_TILE);
 
-    revert_fields_colors();
+    revertFieldsColors();
 
     btn->Update();
     btn->Refresh();
@@ -407,7 +407,7 @@ void GameFrame::OnButtonClicked(wxCommandEvent &event) {
 
         for(int i = 0; i < possible_moves.size(); i++)
         {
-            highlight_field(possible_moves[i], POSSIBLE_MOVE);
+            highlightField(possible_moves[i], POSSIBLE_MOVE);
         }
 
         return;
@@ -462,7 +462,7 @@ void GameFrame::checkForCheck() {
     if(game->isCheckBlack())
     {
         FieldPtr king = game->findKingByColor(BLACK);
-        highlight_field(king, DANGER);
+        highlightField(king, DANGER);
         if(game->isCheckmateState(game, game->getBoard(), BLACK)){
             cout << endl <<  "GAME OVER, WHITE WON" << endl;
             showResultsScreen("Checkmate");
@@ -471,7 +471,7 @@ void GameFrame::checkForCheck() {
 
     if(game->isCheckWhite()){
         FieldPtr king = game->findKingByColor(WHITE);
-        highlight_field(king, DANGER);
+        highlightField(king, DANGER);
         if(game->isCheckmateState(game, game->getBoard(), WHITE)) {
             cout << endl << "GAME OVER, BLACK WON" << endl;
             showResultsScreen("Checkmate");
@@ -634,11 +634,11 @@ void GameFrame::surrender(Color color) {
     }
 
     cout << endl << endl<< color << " GAVE UP" << endl << victoryColor << " WON!";
-    set_enabled_every_button(false);
+    setEnabledEveryButton(false);
     showResultsScreen("Surrender");
 }
 
-void GameFrame::set_enabled_every_button(bool state) {
+void GameFrame::setEnabledEveryButton(bool state) {
     vector<Ids> ids = getVectorOfIds();
 
     for(int i = 0; i < ids.size(); i++)

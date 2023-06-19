@@ -68,7 +68,7 @@ void MainFrame::OnButtonClicked(wxCommandEvent &event) {
     if(id == NEWGAME_BUTTON)
     {
         this->Hide();
-        gameStarted = true;
+        game_started = true;
 
         GamePtr game = make_shared<Game>(Game());
         game->newGame(false, WHITE);
@@ -108,7 +108,7 @@ UI* MainFrame::getUI() {
 }
 
 bool MainFrame::getGameStarted() {
-    return gameStarted;
+    return game_started;
 }
 //
 //void MainFrame::OnClose(wxCloseEvent &event) {

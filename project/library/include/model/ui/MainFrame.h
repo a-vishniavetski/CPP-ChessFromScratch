@@ -20,7 +20,7 @@ public:
 
 private:
     UI* ui;
-    bool gameStarted = false;
+    bool game_started = false;
 
     void OnMouseEvent(wxMouseEvent& event);
     void OnButtonClicked(wxCommandEvent& event);
