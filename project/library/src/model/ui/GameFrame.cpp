@@ -46,42 +46,45 @@ wxEND_EVENT_TABLE()
 
 GameFrame::GameFrame(const wxString &title, wxFrame& parent, GamePtr game, UI* ui): wxFrame(&parent, 101, title), parent(parent), game(game), ui(ui) {
     wxPanel *panel = new wxPanel(this);
+    SetMinClientSize(wxSize(1120, 750));
+    SetMaxClientSize(wxSize(1120, 750));
+    SetOwnBackgroundColour(wxColour(179, 179, 179));
 
     wxFont infoFont = wxFont(wxFontInfo());
     infoFont.Scale(1.5);
 
     wxFont detailsFont = wxFont(wxFontInfo());
-    detailsFont.Scale(1.5).MakeBold();
+    detailsFont.Scale(1.2).MakeBold();
 
     wxFont chessFont = wxFont(wxFontInfo());
-    chessFont.Scale(2.5).MakeBold();
+    chessFont.Scale(2).MakeBold();
 
     //buttons
 
-    wxButton* surrenderBtn = new wxButton(this, SURRENDER_BTN, "\nSURRENDER\n", wxPoint(900, 20), wxSize(200, 70));
+    wxButton* surrenderBtn = new wxButton(this, SURRENDER_BTN, "SURRENDER", wxPoint(900, 20), wxSize(200, 70));
     surrenderBtn->SetFont(detailsFont);
 
-    wxButton* saveGameBtn = new wxButton(this, SAVE_GAME_BTN, "\nSAVE GAME\n", wxPoint(900, 100), wxSize(200, 70));
+    wxButton* saveGameBtn = new wxButton(this, SAVE_GAME_BTN, "SAVE GAME", wxPoint(900, 100), wxSize(200, 70));
 
 
     //text
-    wxStaticText* text = new wxStaticText(this, wxID_ANY, "TURN: ", wxPoint(700, 40), wxSize(100,50));
+    wxStaticText* text = new wxStaticText(this, wxID_ANY, "TURN: ", wxPoint(700, 20), wxSize(100,50));
     text->SetFont(infoFont);
 
-    wxStaticText* whose_turn_text = new wxStaticText(this, WHOSE_TURN_TEXT, "WHITE", wxPoint(770, 40), wxSize(100,50));
+    wxStaticText* whose_turn_text = new wxStaticText(this, WHOSE_TURN_TEXT, "WHITE", wxPoint(795, 21), wxSize(140,50));
     whose_turn_text->SetFont(detailsFont);
 
-    wxStaticText* knocked_units_1_text = new wxStaticText(this, wxID_ANY, "KNOCKED:", wxPoint(700, 100), wxSize(50,50));
+    wxStaticText* knocked_units_1_text = new wxStaticText(this, wxID_ANY, "KNOCKED:", wxPoint(700, 55), wxSize(140,50));
     knocked_units_1_text->SetFont(infoFont);
 
-    wxStaticText* knocked_units_1 = new wxStaticText(this, KNOCKED_OFF_UNITS_1, "", wxPoint(720, 90), wxSize(100,50));
+    wxStaticText* knocked_units_1 = new wxStaticText(this, KNOCKED_OFF_UNITS_1, "", wxPoint(720, 40), wxSize(100,600));
     knocked_units_1->SetFont(chessFont);
     knocked_units_1->SetForegroundColour(wxColour(255,255,255));
 
 //    wxStaticText* knocked_units_2_text = new wxStaticText(this, wxID_ANY, "KNOCKED OFF BLACK:", wxPoint(700, 160), wxSize(100,50));
 //    knocked_units_2_text->SetFont(infoFont);
 
-    wxStaticText* knocked_units_2 = new wxStaticText(this, KNOCKED_OFF_UNITS_2, "", wxPoint(760, 90), wxSize(100,50));
+    wxStaticText* knocked_units_2 = new wxStaticText(this, KNOCKED_OFF_UNITS_2, "", wxPoint(760, 40), wxSize(100,50));
     knocked_units_2->SetFont(chessFont);
     knocked_units_2->SetForegroundColour(wxColour(0,0,0));
 

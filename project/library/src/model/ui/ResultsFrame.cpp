@@ -19,21 +19,23 @@ enum Ids{
 ResultsFrame::ResultsFrame(const wxString &title, wxFrame &parent, GamePtr game, GameFrame* gameFrame): wxFrame(&parent, 102, title), parent(parent), game(std::move(game)), gameFrame(gameFrame) {
     wxPanel *panel = new wxPanel(this);
     wxFont titleFont = wxFont(wxFontInfo());
-    titleFont.Scale(3).MakeBold();
+    SetMinClientSize(wxSize(450, 250));
+    SetMaxClientSize(wxSize(450, 250));
+    titleFont.Scale(2.1).MakeBold();
 
     wxFont italic = wxFont(wxFontInfo());
     italic.Scale(2).MakeItalic();
 
-    wxStaticText* text = new wxStaticText(this, wxID_ANY, "GAME OVER", wxPoint(50,50), wxSize(100,50));
+    wxStaticText* text = new wxStaticText(this, wxID_ANY, "GAME OVER", wxPoint(100,50), wxSize(400,100));
     text->SetFont(titleFont);
 
-    wxStaticText* whoWonText = new wxStaticText(this, WHOWON_TEXT, "", wxPoint(135,100), wxSize(100,50));
+    wxStaticText* whoWonText = new wxStaticText(this, WHOWON_TEXT, "", wxPoint(180,100), wxSize(100,50));
     whoWonText->SetFont(italic);
 
-    wxStaticText* outcomeText = new wxStaticText(this, OUTCOME_TEXT, "", wxPoint(135,120), wxSize(100,50));
+    wxStaticText* outcomeText = new wxStaticText(this, OUTCOME_TEXT, "", wxPoint(190,120), wxSize(100,50));
     whoWonText->SetFont(italic.Scale(0.5));
 
-    wxButton* menuBtn = new wxButton(this, MENU_BUTTON, "Main Menu", wxPoint(120, 140), wxSize(100,50));
+    wxButton* menuBtn = new wxButton(this, MENU_BUTTON, "Main Menu", wxPoint(180, 170), wxSize(100,50));
 }
 ResultsFrame::~ResultsFrame() {}
 

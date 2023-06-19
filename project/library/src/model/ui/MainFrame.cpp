@@ -28,17 +28,17 @@ MainFrame::MainFrame(const wxString &title): wxFrame(nullptr, 99, title) {
     wxPanel* panel = new wxPanel(this);
     wxFont font(36, wxFONTFAMILY_DEFAULT, wxNORMAL, wxNORMAL);
 
-    wxStaticText* titleText = new wxStaticText(panel, wxID_ANY, "Chess", wxPoint(145, 50), wxSize(100,50));
+    wxStaticText* titleText = new wxStaticText(panel, wxID_ANY, "Chess", wxPoint(175, 50), wxSize(300,80));
     titleText->SetFont(font.MakeBold());
 
-    wxButton* newGameBtn = new wxButton(panel, NEWGAME_BUTTON, "New Game", wxPoint(100, 100), wxSize(200, 50));
+    wxButton* newGameBtn = new wxButton(panel, NEWGAME_BUTTON, "New Game", wxPoint(175, 140), wxSize(200, 50));
 //    newGameBtn->SetFont(font);
-    wxButton* loadGameBtn = new wxButton(panel, LOADGAME_BTN, "Load Game", wxPoint(100, 150), wxSize(200, 50));
+    wxButton* loadGameBtn = new wxButton(panel, LOADGAME_BTN, "Load Game", wxPoint(175, 190), wxSize(200, 50));
 
     checkForSaveFile();
 
-    SetMinClientSize(wxSize(400, 250));
-    SetMaxClientSize(wxSize(400, 250));
+    SetMinClientSize(wxSize(600, 350));
+    SetMaxClientSize(wxSize(600, 350));
 //    CreateStatusBar();
 
 //    panel->Bind(wxEVT_LEFT_DOWN, &MainFrame::OnMouseEvent, this);
