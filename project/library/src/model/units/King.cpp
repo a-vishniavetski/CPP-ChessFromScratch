@@ -53,6 +53,7 @@ vector<FieldPtr> King::get_moves(BoardPtr board) {
             {1, -1}
     };
 
+    // default
     for (int i = 0; i < 8; i++) {
         int to_x = from_x + king_moves[i][0];
         int to_y = from_y + king_moves[i][1];
@@ -73,6 +74,95 @@ vector<FieldPtr> King::get_moves(BoardPtr board) {
             }
         }
     }
+    // castling
+    if (!this->isMoved()){
+        FieldPtr rook_field_left;
+        FieldPtr rook_field_right;
+        bool can_castle_left = false;
+        bool can_castle_right = false;
+        // WHITE
+        if (this->getColor() == WHITE){
+            rook_field_left = board->get_field(0,0);
+            // Left side castling
+            if (rook_field_left->isOccupied()){
+                if (rook_field_left->getOccupiedByUnit()->getName() == "Rook" && !rook_field_left->getOccupiedByUnit()->isMoved()){
+                    can_castle_left = true;
+                    for (int i = 1; i <= 3; i++) {
+                        if (board->get_field(from_x - i, from_y)->isOccupied()) {
+                            can_castle_left = false;
+                            break;
+                        }
+                    }
+
+                    if (can_castle_left) {
+                        temp_field = board->get_field(from_x - 2, from_y);
+                        moves.push_back(temp_field);
+                    }
+                }
+            }
+            rook_field_right = board->get_field(7,0);
+            // Right side castling
+            if (rook_field_right->isOccupied()){
+                if (rook_field_right->getOccupiedByUnit()->getName() == "Rook" && !rook_field_right->getOccupiedByUnit()->isMoved()){
+                    can_castle_right = true;
+                    for (int i = 1; i <= 2; i++) {
+                        if (board->get_field(from_x + i, from_y)->isOccupied()) {
+                            can_castle_right = false;
+                            break;
+                        }
+                    }
+
+                    if (can_castle_right) {
+                        temp_field = board->get_field(from_x + 2, from_y);
+                        moves.push_back(temp_field);
+                    }
+                }
+            }
+        }
+            // BLACK
+        else{
+            rook_field_left = board->get_field(0,7);
+            // Left side castling
+            if (rook_field_left->isOccupied()){
+                if (rook_field_left->getOccupiedByUnit()->getName() == "Rook" && !rook_field_left->getOccupiedByUnit()->isMoved()){
+                    can_castle_left = true;
+                    for (int i = 1; i <= 3; i++) {
+                        if (board->get_field(from_x - i, from_y)->isOccupied()) {
+                            can_castle_left = false;
+                            break;
+                        }
+                    }
+
+                    if (can_castle_left) {
+                        temp_field = board->get_field(from_x - 2, from_y);
+                        moves.push_back(temp_field);
+                    }
+                }
+            }
+            rook_field_right = board->get_field(7,7);
+            // Right side castling
+            if (rook_field_right->isOccupied()){
+                if (rook_field_right->getOccupiedByUnit()->getName() == "Rook" && !rook_field_right->getOccupiedByUnit()->isMoved()){
+                    can_castle_right = true;
+                    for (int i = 1; i <= 2; i++) {
+                        if (board->get_field(from_x + i, from_y)->isOccupied()) {
+                            can_castle_right = false;
+                            break;
+                        }
+                    }
+
+                    if (can_castle_right) {
+                        temp_field = board->get_field(from_x + 2, from_y);
+                        moves.push_back(temp_field);
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
 
     return moves;
 }

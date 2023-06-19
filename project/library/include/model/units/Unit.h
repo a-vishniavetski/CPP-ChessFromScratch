@@ -36,7 +36,8 @@ public:
     bool isEnpassantable() const;
     void setEnpassantable(bool _enpassantable);
     void setColor(Color color);
-
+    bool isMoved() const;
+    void setMoved(bool moved);
 
 private:
     string name;
@@ -46,6 +47,7 @@ private:
     FieldPtr field;
     bool alive;
     bool enpassantable = false;
+    bool moved = false;
 };
 
 

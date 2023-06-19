@@ -126,7 +126,51 @@ void Game::makeMove(UnitPtr unit, FieldPtr destination_field, BoardPtr board, Ga
             place_unit_at(to_x, to_y, temp, this->board);
         }
     }
+    // KING
+    if (unit->getName() == "King"){
+        UnitPtr rook;
+        FieldPtr rook_field;
+        // CASTLE LEFT
+        // WHITE
+        if (from_x - to_x == 2 && unit->getColor() == WHITE){
+            rook_field = board->get_field(0,0);
+            if (rook_field->isOccupied()){
+                rook = rook_field->getOccupiedByUnit();
+                place_unit_at(3, 0, rook, board);
+            }
+        }
+        // BLACK
+        else if (from_x - to_x == 2 && unit->getColor() == BLACK){
+            rook_field = board->get_field(0,7);
+            if (rook_field->isOccupied()){
+                rook = rook_field->getOccupiedByUnit();
+                place_unit_at(3, 7, rook, board);
+            }
+        }
+        // CASTLE RIGHT
+        // WHITE
+        if (from_x - to_x == -2 && unit->getColor() == WHITE){
+            rook_field = board->get_field(7,0);
+            if (rook_field->isOccupied()){
+                rook = rook_field->getOccupiedByUnit();
+                place_unit_at(5, 0, rook, board);
+            }
+        }
+        // BLACK
+        else if (from_x - to_x == -2 && unit->getColor() == BLACK){
+            rook_field = board->get_field(7,7);
+            if (rook_field->isOccupied()){
+                rook = rook_field->getOccupiedByUnit();
+                place_unit_at(5, 7, rook, board);
+            }
+        }
 
+    }
+
+    // setMoved
+    if (!unit->isMoved()){
+        unit->setMoved(true);
+    }
 
     // Bicie na przelocie jest możliwe tylko w ciągu 1 ruchu
     for (auto unit: enemy_player->getUnits()){

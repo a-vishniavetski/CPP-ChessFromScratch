@@ -83,6 +83,14 @@ void Unit::setEnpassantable(bool _enpassantable) {
     enpassantable = _enpassantable;
 }
 
+bool Unit::isMoved() const {
+    return moved;
+}
+
+void Unit::setMoved(bool moved) {
+    Unit::moved = moved;
+}
+
 
 
 
