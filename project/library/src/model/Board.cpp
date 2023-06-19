@@ -29,7 +29,7 @@ void Board::setYDimension(int yDimension) {
     y_dimension = yDimension;
 }
 
-FieldPtr Board::get_field(int x_dimension, int y_dimension) const{
+FieldPtr Board::getField(int x_dimension, int y_dimension) const{
     //std::cout << "In get_filed";
     FieldPtr retval = make_shared<Field>(nullptr);
 

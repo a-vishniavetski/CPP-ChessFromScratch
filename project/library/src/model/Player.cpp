@@ -34,12 +34,12 @@ void Player::setUnits(const vector<UnitPtr> &units) {
     Player::units = units;
 }
 
-string Player::get_all_units_info() const {
+string Player::getAllUnitsInfo() const {
 
     string _prompt;
 
     for (int i = 0; i < units.size(); i++){
-        _prompt.append(units[i]->get_unit_info()).append("\n");
+        _prompt.append(units[i]->getUnitInfo()).append("\n");
     }
 
     return _prompt;

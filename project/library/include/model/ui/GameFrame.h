@@ -17,16 +17,16 @@ class GameFrame : public wxFrame
 public:
     GameFrame(const wxString& title, wxFrame& parent, GamePtr game, UI* ui);
     ~GameFrame();
-//    void update_unit_pos(vector<UnitPtr> units);
-    void create_board(int xDim, int yDim);
-    void populate_board(BoardPtr board);
+//    void updateUnitPos(vector<UnitPtr> units);
+    void createBoard(int xDim, int yDim);
+    void populateBoard(BoardPtr board);
 
 
     void setSelectedField(FieldPtr field);
     void unsetSelectedField();
 
-    void update_unit_pos(UnitPtr unit);
-    void update_unit_pos_arr(vector<UnitPtr> units);
+    void updateUnitPos(UnitPtr unit);
+    void updateUnitPosArr(vector<UnitPtr> units);
 
     vector<int> getCoordsFromId(int id);
 

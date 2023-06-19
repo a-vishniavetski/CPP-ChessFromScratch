@@ -126,7 +126,7 @@ vector<Ids> getVectorOfIds()
     return vector<Ids>(all, all + sizeof(all) / sizeof(Ids));
 }
 
-void GameFrame::populate_board(BoardPtr board) {
+void GameFrame::populateBoard(BoardPtr board) {
     int xDim = board->getXDimension();
     int yDim = board->getYDimension();
 
@@ -136,7 +136,7 @@ void GameFrame::populate_board(BoardPtr board) {
     {
         for(int x = 0; x < yDim; x++)
         {
-            FieldPtr field = board->get_field(y, x);
+            FieldPtr field = board->getField(y, x);
 
             wxButton* btn = (wxButton*) wxWindow::FindWindowById(ids[i]);
             if(field->isOccupied() == true)
@@ -166,7 +166,7 @@ void GameFrame::populate_board(BoardPtr board) {
 }
 
 
-void GameFrame::create_board(int xDim, int yDim) {
+void GameFrame::createBoard(int xDim, int yDim) {
     wxFont largeFont = wxFont(wxFontInfo()); largeFont.MakeBold().Scale(2.2);
     wxFont coordsFont = wxFont(wxFontInfo()); coordsFont.Scale(1.5);
 
@@ -355,7 +355,7 @@ void GameFrame::OnButtonClicked(wxCommandEvent &event) {
     if(id < 0 || id > 78)
         return;
     vector<int> coords = getCoordsFromId(id);
-    FieldPtr f = game->getBoard()->get_field(coords[0], coords[1]);
+    FieldPtr f = game->getBoard()->getField(coords[0], coords[1]);
 
     if(game->isWhiteTurn() && selected_field == nullptr)
     {
@@ -388,13 +388,13 @@ void GameFrame::OnButtonClicked(wxCommandEvent &event) {
     int y = coords[1];
 
     BoardPtr board = game->getBoard();
-    FieldPtr field = board->get_field(x, y);
+    FieldPtr field = board->getField(x, y);
     vector<FieldPtr> possible_moves;
 
     if(selected_field != nullptr)
     {
         UnitPtr unit = selected_field->getOccupiedByUnit();
-        possible_moves = game->get_legal_moves(unit);
+        possible_moves = game->getLegalMoves(unit);
     }
 
     if(selected_field == nullptr)
@@ -402,7 +402,7 @@ void GameFrame::OnButtonClicked(wxCommandEvent &event) {
         setSelectedField(field);
         UnitPtr unit = field->getOccupiedByUnit();
 
-         possible_moves = game->get_legal_moves(unit);
+         possible_moves = game->getLegalMoves(unit);
         //pokaz gdzie moge sie ruszyc
 
         for(int i = 0; i < possible_moves.size(); i++)
@@ -412,7 +412,7 @@ void GameFrame::OnButtonClicked(wxCommandEvent &event) {
 
         return;
     }
-    FieldPtr clicked_field = board->get_field(x, y);
+    FieldPtr clicked_field = board->getField(x, y);
     if(clicked_field == selected_field) {
         unsetSelectedField();
         return;
@@ -424,7 +424,7 @@ void GameFrame::OnButtonClicked(wxCommandEvent &event) {
         {
             UnitPtr tempUnit = selected_field->getOccupiedByUnit();
             Color color = tempUnit->getColor();
-            //game->place_unit_at(clicked_field->getXCoord(), clicked_field->getYCoord(), selected_field->getOccupiedByUnit());
+            //game->placeUnitAt(clicked_field->getXCoord(), clicked_field->getYCoord(), selected_field->getOccupiedByUnit());
             game->makeMove(selected_field->getOccupiedByUnit(), clicked_field, game->getBoard(), game);
             game->updateGameStatus(game, game->getBoard());
 
@@ -433,12 +433,12 @@ void GameFrame::OnButtonClicked(wxCommandEvent &event) {
             {
                 for(int j = 0; j < 8; j++)
                 {
-                    if(game->getBoard()->get_field(i,j)->isOccupied())
-                        units.push_back(game->getBoard()->get_field(i, j)->getOccupiedByUnit());
+                    if(game->getBoard()->getField(i, j)->isOccupied())
+                        units.push_back(game->getBoard()->getField(i, j)->getOccupiedByUnit());
                 }
             }
-//            update_unit_pos(clicked_field->getOccupiedByUnit());
-            update_unit_pos_arr(units);
+//            updateUnitPos(clicked_field->getOccupiedByUnit());
+            updateUnitPosArr(units);
 
             unsetSelectedField();
             setTurnText();
@@ -479,7 +479,7 @@ void GameFrame::checkForCheck() {
     }
 }
 
-void GameFrame::update_unit_pos_arr(vector<UnitPtr> units) {
+void GameFrame::updateUnitPosArr(vector<UnitPtr> units) {
     for(int i = 0; i < units.size(); i++)
     {
         UnitPtr unit = units[i];
@@ -511,7 +511,7 @@ void GameFrame::update_unit_pos_arr(vector<UnitPtr> units) {
 }
 
 
-void GameFrame::update_unit_pos(UnitPtr unit) {
+void GameFrame::updateUnitPos(UnitPtr unit) {
     FieldPtr field = unit->getField();
 
     int x = field->getXCoord();
@@ -606,7 +606,7 @@ void GameFrame::checkForKnocks() {
     {
         for(int y = 0; y < yDim; y++)
         {
-            FieldPtr field = game->getBoard()->get_field(x, y);
+            FieldPtr field = game->getBoard()->getField(x, y);
             if(!field->isOccupied())
             {
                 int id = getIdFromCoords(x, y);

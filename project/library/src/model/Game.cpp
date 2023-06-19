@@ -23,14 +23,14 @@ Game::Game(const vector<PlayerPtr> &_players, BoardPtr const _board, int _totalT
 Game::~Game() {}
 
 // LOGIKA
-void Game::place_unit_at(int x_coord, int y_coord, UnitPtr unit, BoardPtr board) {
+void Game::placeUnitAt(int x_coord, int y_coord, UnitPtr unit, BoardPtr board) {
     FieldPtr previous_field = unit->getField();
 
     if (previous_field != nullptr){
         previous_field->deoccupy();
     }
 
-    FieldPtr new_field = board->get_field(x_coord, y_coord);
+    FieldPtr new_field = board->getField(x_coord, y_coord);
     //UnitPtr previous_unit = new_field->getOccupiedByUnit();
     //previous_unit->setField(nullptr);
 
@@ -38,7 +38,7 @@ void Game::place_unit_at(int x_coord, int y_coord, UnitPtr unit, BoardPtr board)
     unit->setField(new_field);
 }
 
-void Game::add_unit_to_taken(UnitPtr unit, Color color) {
+void Game::addUnitToTaken(UnitPtr unit, Color color) {
     unit->setAlive(false);
     if (color == WHITE){
         taken_white_units.push_back(unit);
@@ -78,13 +78,13 @@ void Game::makeMove(UnitPtr unit, FieldPtr destination_field, BoardPtr board, Ga
 
     if (!destination_field->isOccupied()){
         could_enpassant = true;
-        place_unit_at(to_x, to_y, unit, this->board);
+        placeUnitAt(to_x, to_y, unit, this->board);
     } else{
         taken_unit = destination_field->getOccupiedByUnit();
-        if (current_player->getColor() == WHITE) add_unit_to_taken(taken_unit, BLACK);
-        else add_unit_to_taken(taken_unit, WHITE);
+        if (current_player->getColor() == WHITE) addUnitToTaken(taken_unit, BLACK);
+        else addUnitToTaken(taken_unit, WHITE);
 
-        place_unit_at(to_x, to_y, unit, this->board);
+        placeUnitAt(to_x, to_y, unit, this->board);
     }
 
     // PAWN
@@ -96,13 +96,13 @@ void Game::makeMove(UnitPtr unit, FieldPtr destination_field, BoardPtr board, Ga
             if (unit->getColor() == WHITE) enp_y = destination_field->getYCoord() - 1;
             if (unit->getColor() == BLACK) enp_y = destination_field->getYCoord() + 1;
 
-            FieldPtr enp_field = board->get_field(enp_x, enp_y);
+            FieldPtr enp_field = board->getField(enp_x, enp_y);
             taken_unit = enp_field->getOccupiedByUnit();
             taken_unit->setField(nullptr);
             enp_field->deoccupy();
 
-            if (current_player->getColor() == WHITE) add_unit_to_taken(taken_unit, BLACK);
-            else add_unit_to_taken(taken_unit, WHITE);
+            if (current_player->getColor() == WHITE) addUnitToTaken(taken_unit, BLACK);
+            else addUnitToTaken(taken_unit, WHITE);
         }
         // DOUBLE MOVE
         if(abs(from_y - to_y) == 2){
@@ -116,14 +116,14 @@ void Game::makeMove(UnitPtr unit, FieldPtr destination_field, BoardPtr board, Ga
             FieldPtr temp_field = nullptr;
             UnitPtr temp = make_shared<Queen>("Queen", temp_uuid, temp_field, true, WHITE);
             current_player->addUnit(temp);
-            place_unit_at(to_x, to_y, temp, this->board);
+            placeUnitAt(to_x, to_y, temp, this->board);
         }
         if (unit->getColor() == BLACK && to_y == 0){
             int temp_uuid = unit->getUuid();
             FieldPtr temp_field = nullptr;
             UnitPtr temp = make_shared<Queen>("Queen", temp_uuid, temp_field, true, BLACK);
             current_player->addUnit(temp);
-            place_unit_at(to_x, to_y, temp, this->board);
+            placeUnitAt(to_x, to_y, temp, this->board);
         }
     }
     // KING
@@ -133,35 +133,35 @@ void Game::makeMove(UnitPtr unit, FieldPtr destination_field, BoardPtr board, Ga
         // CASTLE LEFT
         // WHITE
         if (from_x - to_x == 2 && unit->getColor() == WHITE){
-            rook_field = board->get_field(0,0);
+            rook_field = board->getField(0, 0);
             if (rook_field->isOccupied()){
                 rook = rook_field->getOccupiedByUnit();
-                place_unit_at(3, 0, rook, board);
+                placeUnitAt(3, 0, rook, board);
             }
         }
         // BLACK
         else if (from_x - to_x == 2 && unit->getColor() == BLACK){
-            rook_field = board->get_field(0,7);
+            rook_field = board->getField(0, 7);
             if (rook_field->isOccupied()){
                 rook = rook_field->getOccupiedByUnit();
-                place_unit_at(3, 7, rook, board);
+                placeUnitAt(3, 7, rook, board);
             }
         }
         // CASTLE RIGHT
         // WHITE
         if (from_x - to_x == -2 && unit->getColor() == WHITE){
-            rook_field = board->get_field(7,0);
+            rook_field = board->getField(7, 0);
             if (rook_field->isOccupied()){
                 rook = rook_field->getOccupiedByUnit();
-                place_unit_at(5, 0, rook, board);
+                placeUnitAt(5, 0, rook, board);
             }
         }
         // BLACK
         else if (from_x - to_x == -2 && unit->getColor() == BLACK){
-            rook_field = board->get_field(7,7);
+            rook_field = board->getField(7, 7);
             if (rook_field->isOccupied()){
                 rook = rook_field->getOccupiedByUnit();
-                place_unit_at(5, 7, rook, board);
+                placeUnitAt(5, 7, rook, board);
             }
         }
 
@@ -247,8 +247,8 @@ void Game::updateGameStatus(GamePtr game, BoardPtr board) {
     }
 }
 
-vector<FieldPtr> Game::get_legal_moves(UnitPtr unit) {
-    vector<FieldPtr> unchecked_moves = unit->get_moves(this->getBoard());
+vector<FieldPtr> Game::getLegalMoves(UnitPtr unit) {
+    vector<FieldPtr> unchecked_moves = unit->getMoves(this->getBoard());
     vector<FieldPtr> legal_moves;
     FieldPtr unit_field = unit->getField();
     int x = unit_field->getXCoord();
@@ -260,10 +260,11 @@ vector<FieldPtr> Game::get_legal_moves(UnitPtr unit) {
         PlayerPtr player_white = make_shared<Player>("Player WHITE", 3, WHITE);
         PlayerPtr player_black = make_shared<Player>("Player BLACK", 4, BLACK);
         fake_game->setPlayers(vector<PlayerPtr> {player_white, player_black});
-        BoardPtr fake_board = copy_board(this->board);
+        BoardPtr fake_board = copyBoard(this->board);
         fake_game->setBoard(fake_board);
-        FieldPtr fake_destination_field = fake_board->get_field(destination_field->getXCoord(), destination_field->getYCoord());
-        UnitPtr fake_unit = fake_board->get_field(x, y)->getOccupiedByUnit();
+        FieldPtr fake_destination_field = fake_board->getField(destination_field->getXCoord(),
+                                                               destination_field->getYCoord());
+        UnitPtr fake_unit = fake_board->getField(x, y)->getOccupiedByUnit();
         // sprawdzamy co będzie jeśli zrobimy ten ruch
         fake_game->makeMove(fake_unit, fake_destination_field, fake_board, fake_game);
         if (!isCheckState(fake_game, fake_board, unit->getColor())){
@@ -298,7 +299,7 @@ bool Game::isCheckState(GamePtr game, BoardPtr board, Color color) {
         if(temp_unit->getColor() != color)
         {
             // Czy ta jednostka może zrobić ruch na króla?
-            vector<FieldPtr> moves = temp_unit->get_moves(board);
+            vector<FieldPtr> moves = temp_unit->getMoves(board);
             for(auto move:moves)
             {
                 if(move->getXCoord() == king_x && move->getYCoord() == king_y) return true; // JEST CHECK
@@ -323,7 +324,7 @@ int Game::allLegalMoveCount(GamePtr game, BoardPtr board, Color color) {
                 temp_unit = field->getOccupiedByUnit();
                 if(temp_unit->getColor() == color)
                 {
-                    count += game->get_legal_moves(temp_unit).size();
+                    count += game->getLegalMoves(temp_unit).size();
                 }
             }
         }
@@ -347,7 +348,7 @@ FieldPtr Game::findKingByColor(Color color) {
 }
 
 // DZIAŁANIA Z DESKĄ
-BoardPtr Game::create_empty_board() const {
+BoardPtr Game::createEmptyBoard() const {
     // tworzymy wszystkie pola deski
     vector<FieldPtr> _fields;
 
@@ -371,15 +372,15 @@ BoardPtr Game::create_empty_board() const {
     return board;
 }
 
-BoardPtr Game::copy_board(BoardPtr board) {
-    BoardPtr retval = create_empty_board();
+BoardPtr Game::copyBoard(BoardPtr board) {
+    BoardPtr retval = createEmptyBoard();
     UnitPtr actual_unit;
     UnitPtr temp_unit;
     FieldPtr temp_field;
     for (auto field:board->getFields()){
         int actual_x = field->getXCoord();
         int actual_y = field->getYCoord();
-        temp_field = retval->get_field(actual_x, actual_y);
+        temp_field = retval->getField(actual_x, actual_y);
 
         // UNIT
         if (field->isOccupied()) {
@@ -407,7 +408,7 @@ BoardPtr Game::copy_board(BoardPtr board) {
             }
 
 
-            place_unit_at(actual_x, actual_y, temp_unit, retval);
+            placeUnitAt(actual_x, actual_y, temp_unit, retval);
         }
     }
     return retval;
@@ -415,19 +416,19 @@ BoardPtr Game::copy_board(BoardPtr board) {
 
 // TWORZENIA GRY PODTAWOWEJ
 /*Tworzy nową grę z nowymi graczami i deską według standardowych reguł szachów*/
-void Game::new_game(bool is_against_ai, Color ai_color) {
+void Game::newGame(bool is_against_ai, Color ai_color) {
     // towrzymy deskę
-    board = create_empty_board();
+    board = createEmptyBoard();
     // tworzymy graczy
     PlayerPtr player_white = make_shared<Player>("Player WHITE", 0, WHITE);
     PlayerPtr player_black = make_shared<Player>("Player BLACK", 2, BLACK);
     // tworzymy jednostki i ustawiamy ich na desce
-    int next_uuid = give_player_initial_units(player_white, 0);
-    give_player_initial_units(player_black, next_uuid);
+    int next_uuid = givePlayerInitialUnits(player_white, 0);
+    givePlayerInitialUnits(player_black, next_uuid);
     setPlayers(vector<PlayerPtr> {player_white, player_black});
 }
 
-int Game::give_player_initial_units(PlayerPtr player, int initial_uuid) {
+int Game::givePlayerInitialUnits(PlayerPtr player, int initial_uuid) {
     int uuids = initial_uuid;
     FieldPtr temp_field = make_shared<Field>(nullptr);
 
@@ -435,44 +436,44 @@ int Game::give_player_initial_units(PlayerPtr player, int initial_uuid) {
         // piony
         for (int i = 0; i < 8; i++){
             // białe (drugi rząd na desce)
-            create_and_place_unit(i,1,make_shared<Pawn>("Pawn", 1 + i, temp_field, true, WHITE),player,&uuids);
+            createAndPlaceUnit(i, 1, make_shared<Pawn>("Pawn", 1 + i, temp_field, true, WHITE), player, &uuids);
         }
         // wieży
-        create_and_place_unit(0, 0, make_shared<Rook>("Rook", 20, temp_field, true, WHITE), player, &uuids);
-        create_and_place_unit(7, 0, make_shared<Rook>("Rook", 21, temp_field, true, WHITE), player, &uuids);
+        createAndPlaceUnit(0, 0, make_shared<Rook>("Rook", 20, temp_field, true, WHITE), player, &uuids);
+        createAndPlaceUnit(7, 0, make_shared<Rook>("Rook", 21, temp_field, true, WHITE), player, &uuids);
         // knights
-        create_and_place_unit(1, 0, make_shared<Knight>("Knight", 22, temp_field, true, WHITE), player, &uuids);
-        create_and_place_unit(6, 0, make_shared<Knight>("Knight", 23, temp_field, true, WHITE), player, &uuids);
+        createAndPlaceUnit(1, 0, make_shared<Knight>("Knight", 22, temp_field, true, WHITE), player, &uuids);
+        createAndPlaceUnit(6, 0, make_shared<Knight>("Knight", 23, temp_field, true, WHITE), player, &uuids);
         // bishops
-        create_and_place_unit(2, 0, make_shared<Bishop>("Bishop", 24, temp_field, true, WHITE), player, &uuids);
-        create_and_place_unit(5, 0, make_shared<Bishop>("Bishop", 25, temp_field, true, WHITE), player, &uuids);
+        createAndPlaceUnit(2, 0, make_shared<Bishop>("Bishop", 24, temp_field, true, WHITE), player, &uuids);
+        createAndPlaceUnit(5, 0, make_shared<Bishop>("Bishop", 25, temp_field, true, WHITE), player, &uuids);
         // king and queen
-        create_and_place_unit(3, 0, make_shared<Queen>("Queen", 26, temp_field, true, WHITE), player, &uuids);
-        create_and_place_unit(4, 0, make_shared<King>("King", 27, temp_field, true, WHITE), player, &uuids);
+        createAndPlaceUnit(3, 0, make_shared<Queen>("Queen", 26, temp_field, true, WHITE), player, &uuids);
+        createAndPlaceUnit(4, 0, make_shared<King>("King", 27, temp_field, true, WHITE), player, &uuids);
     }
     else{
         // piony
         for (int i = 0; i < 8; i++){
-            create_and_place_unit(i,6,make_shared<Pawn>("Pawn", 30 + i, temp_field, true, BLACK),player,&uuids);
+            createAndPlaceUnit(i, 6, make_shared<Pawn>("Pawn", 30 + i, temp_field, true, BLACK), player, &uuids);
         }
         // wieży
-        create_and_place_unit(0, 7, make_shared<Rook>("Rook", 40, temp_field, true, BLACK), player, &uuids);
-        create_and_place_unit(7, 7, make_shared<Rook>("Rook", 41, temp_field, true, BLACK), player, &uuids);
+        createAndPlaceUnit(0, 7, make_shared<Rook>("Rook", 40, temp_field, true, BLACK), player, &uuids);
+        createAndPlaceUnit(7, 7, make_shared<Rook>("Rook", 41, temp_field, true, BLACK), player, &uuids);
         // knights
-        create_and_place_unit(1, 7, make_shared<Knight>("Knight", 42, temp_field, true, BLACK), player, &uuids);
-        create_and_place_unit(6, 7, make_shared<Knight>("Knight", 43, temp_field, true, BLACK), player, &uuids);
+        createAndPlaceUnit(1, 7, make_shared<Knight>("Knight", 42, temp_field, true, BLACK), player, &uuids);
+        createAndPlaceUnit(6, 7, make_shared<Knight>("Knight", 43, temp_field, true, BLACK), player, &uuids);
         // bishops
-        create_and_place_unit(2, 7, make_shared<Bishop>("Bishop", 44, temp_field, true, BLACK), player, &uuids);
-        create_and_place_unit(5, 7, make_shared<Bishop>("Bishop", 45, temp_field, true, BLACK), player, &uuids);
+        createAndPlaceUnit(2, 7, make_shared<Bishop>("Bishop", 44, temp_field, true, BLACK), player, &uuids);
+        createAndPlaceUnit(5, 7, make_shared<Bishop>("Bishop", 45, temp_field, true, BLACK), player, &uuids);
         // king and queen
-        create_and_place_unit(3, 7, make_shared<Queen>("Queen", 46, temp_field, true, BLACK), player, &uuids);
-        create_and_place_unit(4, 7, make_shared<King>("King", 47, temp_field, true, BLACK), player, &uuids);
+        createAndPlaceUnit(3, 7, make_shared<Queen>("Queen", 46, temp_field, true, BLACK), player, &uuids);
+        createAndPlaceUnit(4, 7, make_shared<King>("King", 47, temp_field, true, BLACK), player, &uuids);
     }
     return uuids;
 }
 
-void Game::create_and_place_unit(int x_coord, int y_coord, UnitPtr unit, PlayerPtr player, int* uuid_count){
-    place_unit_at(x_coord, y_coord, unit, this->board);
+void Game::createAndPlaceUnit(int x_coord, int y_coord, UnitPtr unit, PlayerPtr player, int* uuid_count){
+    placeUnitAt(x_coord, y_coord, unit, this->board);
     player->addUnit(unit);
     *uuid_count += 1;
 }

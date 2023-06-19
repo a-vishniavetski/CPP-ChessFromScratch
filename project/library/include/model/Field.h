@@ -38,10 +38,10 @@ public:
     void setColor(const string &color);
     // seen by units
     const vector<UnitPtr> &getSeenByUnits() const;
-    void add_seeing_unit(const UnitPtr _unit);
-    void remove_seeing_unit(const int UUID);
+    void addSeeingUnit(const UnitPtr _unit);
+    void removeSeeingUnit(const int UUID);
     // print
-    string get_field_info() const;
+    string getFieldInfo() const;
 
 
 

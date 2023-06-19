@@ -22,7 +22,7 @@ public:
     void setXDimension(int xDimension);
     int getYDimension();
     void setYDimension(int yDimension);
-    FieldPtr get_field(int x_dimension, int y_dimension) const;
+    FieldPtr getField(int x_dimension, int y_dimension) const;
     vector<FieldPtr> getFieldsOccupiedByColor(Color color);
 
     vector<UnitPtr> getKnockedOffUnitsByColor(Color color);

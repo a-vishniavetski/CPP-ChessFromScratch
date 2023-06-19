@@ -22,8 +22,8 @@ public:
     Unit(const string &name, int uuid, const FieldPtr field, bool alive, Color color);
     Unit(std::nullptr_t);
     Color getColor() const;
-    virtual vector<FieldPtr> get_moves(BoardPtr board);
-    string get_unit_info() const;
+    virtual vector<FieldPtr> getMoves(BoardPtr board);
+    string getUnitInfo() const;
     const string &getName() const;
     void setName(const string &name);
     int getUuid() const;

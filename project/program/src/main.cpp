@@ -27,11 +27,11 @@ void _print(BoardPtr board){
     for (int j = 7; j >= 0; j--){
         cout << "\n|";
         for (int i = 0; i < 8; i++){
-            if (!board->get_field(i, j)->isOccupied()){
+            if (!board->getField(i, j)->isOccupied()){
                 cout << " " << "    " << " |";
             }
             else{
-                cout << " " << board->get_field(i, j)->getOccupiedByUnit()->getName() << " |";
+                cout << " " << board->getField(i, j)->getOccupiedByUnit()->getName() << " |";
             }
         }
     }

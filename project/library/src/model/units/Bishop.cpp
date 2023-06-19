@@ -37,7 +37,7 @@ int Bishop::checkMove(FieldPtr temp_field){
     }
 }
 
-vector<FieldPtr> Bishop::get_moves(BoardPtr board) {
+vector<FieldPtr> Bishop::getMoves(BoardPtr board) {
     vector<FieldPtr> moves;
     int from_x = this->getField()->getXCoord();
     int from_y = this->getField()->getYCoord();
@@ -49,7 +49,7 @@ vector<FieldPtr> Bishop::get_moves(BoardPtr board) {
     to_x = from_x + 1;
     to_y = from_y + 1;
     while (to_x < board->getXDimension() && to_y < board->getYDimension()) {
-        temp_field = board->get_field(to_x, to_y);
+        temp_field = board->getField(to_x, to_y);
         // PUSTE POLE
         if (checkMove(temp_field) == 0) {
             moves.push_back(temp_field);
@@ -72,7 +72,7 @@ vector<FieldPtr> Bishop::get_moves(BoardPtr board) {
     to_x = from_x - 1;
     to_y = from_y + 1;
     while (to_x >= 0 && to_y < board->getYDimension()) {
-        temp_field = board->get_field(to_x, to_y);
+        temp_field = board->getField(to_x, to_y);
         // PUSTE POLE
         if (checkMove(temp_field) == 0) {
             moves.push_back(temp_field);
@@ -95,7 +95,7 @@ vector<FieldPtr> Bishop::get_moves(BoardPtr board) {
     to_x = from_x + 1;
     to_y = from_y - 1;
     while (to_x < board->getXDimension() && to_y >= 0) {
-        temp_field = board->get_field(to_x, to_y);
+        temp_field = board->getField(to_x, to_y);
         // PUSTE POLE
         if (checkMove(temp_field) == 0) {
             moves.push_back(temp_field);
@@ -118,7 +118,7 @@ vector<FieldPtr> Bishop::get_moves(BoardPtr board) {
     to_x = from_x - 1;
     to_y = from_y - 1;
     while (to_x >= 0 && to_y >= 0) {
-        temp_field = board->get_field(to_x, to_y);
+        temp_field = board->getField(to_x, to_y);
         // PUSTE POLE
         if (checkMove(temp_field) == 0) {
             moves.push_back(temp_field);

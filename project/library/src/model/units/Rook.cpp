@@ -29,7 +29,7 @@ int Rook::checkMove(FieldPtr temp_field){
     }
 }
 
-vector<FieldPtr> Rook::get_moves(BoardPtr board) {
+vector<FieldPtr> Rook::getMoves(BoardPtr board) {
     vector<FieldPtr> moves;
     int from_x = this->getField()->getXCoord();
     int from_y = this->getField()->getYCoord();
@@ -41,7 +41,7 @@ vector<FieldPtr> Rook::get_moves(BoardPtr board) {
     to_x = from_x - 1;
     to_y = from_y;
     while (to_x >= 0){
-        temp_field = board->get_field(to_x, to_y);
+        temp_field = board->getField(to_x, to_y);
         // PUSTE POLE
         if(checkMove(temp_field) == 0){
             moves.push_back(temp_field);
@@ -62,7 +62,7 @@ vector<FieldPtr> Rook::get_moves(BoardPtr board) {
     to_x = from_x + 1;
     to_y = from_y;
     while (to_x < board->getXDimension()){
-        temp_field = board->get_field(to_x, to_y);
+        temp_field = board->getField(to_x, to_y);
         // PUSTE POLE
         if(checkMove(temp_field) == 0){
             moves.push_back(temp_field);
@@ -83,7 +83,7 @@ vector<FieldPtr> Rook::get_moves(BoardPtr board) {
     to_x = from_x;
     to_y = from_y + 1;
     while (to_y < board->getYDimension()){
-        temp_field = board->get_field(to_x, to_y);
+        temp_field = board->getField(to_x, to_y);
         // PUSTE POLE
         if(checkMove(temp_field) == 0){
             moves.push_back(temp_field);
@@ -104,7 +104,7 @@ vector<FieldPtr> Rook::get_moves(BoardPtr board) {
     to_x = from_x;
     to_y = from_y - 1;
     while (to_y >= 0){
-        temp_field = board->get_field(to_x, to_y);
+        temp_field = board->getField(to_x, to_y);
         // PUSTE POLE
         if(checkMove(temp_field) == 0){
             moves.push_back(temp_field);

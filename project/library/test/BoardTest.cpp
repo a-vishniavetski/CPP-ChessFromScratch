@@ -42,7 +42,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteBoard, BoardFixture)
     }
 
     BOOST_AUTO_TEST_CASE(test_GetField) {
-        FieldPtr field = board->get_field(0, 0);
+        FieldPtr field = board->getField(0, 0);
         BOOST_CHECK_EQUAL(field->getXCoord(), 0);
         BOOST_CHECK_EQUAL(field->getYCoord(), 0);
     }

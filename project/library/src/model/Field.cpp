@@ -80,11 +80,11 @@ const vector<UnitPtr> &Field::getSeenByUnits() const {
     return seen_by_units;
 }
 
-void Field::remove_seeing_unit(const int UUID) {
+void Field::removeSeeingUnit(const int UUID) {
     //todo
 }
 
-void Field::add_seeing_unit(const UnitPtr _unit) {
+void Field::addSeeingUnit(const UnitPtr _unit) {
     //todo
 }
 
@@ -92,7 +92,7 @@ Field::Field(nullptr_t) {
 
 }
 
-string Field::get_field_info() const {
+string Field::getFieldInfo() const {
     string occupied_status = "Not_Occupied";
     if (isOccupied()){
         occupied_status = "Occupied";

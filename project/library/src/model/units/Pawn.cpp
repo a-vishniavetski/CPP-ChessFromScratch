@@ -14,7 +14,7 @@ string Pawn::getIcon() {
 Pawn::Pawn(const string &name, int uuid, const FieldPtr &field, bool alive, Color color) : Unit(name, uuid, field,
                                                                                                 alive, color) {}
 
-vector<FieldPtr> Pawn::get_moves(BoardPtr board) {
+vector<FieldPtr> Pawn::getMoves(BoardPtr board) {
     vector<FieldPtr> moves;
     int from_x = this->getField()->getXCoord();
     int from_y = this->getField()->getYCoord();
@@ -28,8 +28,8 @@ vector<FieldPtr> Pawn::get_moves(BoardPtr board) {
         to_y = from_y + 1;
         if (to_y < board->getYDimension()) { // to_y <= 7
             // If not occupied, can move
-            if (!board->get_field(to_x, to_y)->isOccupied()){
-                moves.push_back(board->get_field(to_x, to_y));
+            if (!board->getField(to_x, to_y)->isOccupied()){
+                moves.push_back(board->getField(to_x, to_y));
             }
         }
         // DOUBLE MOVE
@@ -38,8 +38,8 @@ vector<FieldPtr> Pawn::get_moves(BoardPtr board) {
             to_y = from_y + 2;
             if (to_y < board->getYDimension()) { // to_y <= 7
                 // If path not obstructed, can move
-                if (!board->get_field(to_x, to_y)->isOccupied() && !board->get_field(to_x, to_y - 1)->isOccupied()){
-                    moves.push_back(board->get_field(to_x, to_y));
+                if (!board->getField(to_x, to_y)->isOccupied() && !board->getField(to_x, to_y - 1)->isOccupied()){
+                    moves.push_back(board->getField(to_x, to_y));
                 }
             }
         }
@@ -49,10 +49,10 @@ vector<FieldPtr> Pawn::get_moves(BoardPtr board) {
         to_y = from_y + 1;
         if(to_y >= 0 && to_y < board->getYDimension() && to_x >= 0 && to_x < board->getXDimension())
         {
-            if(board->get_field(to_x, to_y)->isOccupied())
+            if(board->getField(to_x, to_y)->isOccupied())
             {
-                if(board->get_field(to_x, to_y)->getOccupiedByUnit()->getColor() != this->getColor())
-                    moves.push_back(board->get_field(to_x, to_y));
+                if(board->getField(to_x, to_y)->getOccupiedByUnit()->getColor() != this->getColor())
+                    moves.push_back(board->getField(to_x, to_y));
             }
         }
         // RIGHT
@@ -60,10 +60,10 @@ vector<FieldPtr> Pawn::get_moves(BoardPtr board) {
         to_y = from_y + 1;
         if(to_y >= 0 && to_y < board->getYDimension() && to_x >= 0 && to_x < board->getXDimension())
         {
-            if(board->get_field(to_x, to_y)->isOccupied())
+            if(board->getField(to_x, to_y)->isOccupied())
             {
-                if(board->get_field(to_x, to_y)->getOccupiedByUnit()->getColor() != this->getColor())
-                    moves.push_back(board->get_field(to_x, to_y));
+                if(board->getField(to_x, to_y)->getOccupiedByUnit()->getColor() != this->getColor())
+                    moves.push_back(board->getField(to_x, to_y));
             }
         }
         // BICIE NA PRZELOCIE (EN PASSANT)
@@ -72,26 +72,26 @@ vector<FieldPtr> Pawn::get_moves(BoardPtr board) {
             // LEFT
             to_x = from_x - 1;
             to_y = from_y + 1;
-            if(to_x > 0 && !board->get_field(to_x, to_y)->isOccupied())
+            if(to_x > 0 && !board->getField(to_x, to_y)->isOccupied())
             {
-                if(board->get_field(to_x, from_y)->isOccupied())
+                if(board->getField(to_x, from_y)->isOccupied())
                 {
-                    UnitPtr possible_capture = board->get_field(to_x, from_y)->getOccupiedByUnit();
+                    UnitPtr possible_capture = board->getField(to_x, from_y)->getOccupiedByUnit();
                     if(possible_capture->getName() == "Pawn" && possible_capture->getColor() != this->getColor() && possible_capture->isEnpassantable()){
-                        moves.push_back(board->get_field(to_x, to_y));
+                        moves.push_back(board->getField(to_x, to_y));
                     }
                 }
             }
             // RIGHT
             to_x = from_x + 1;
             to_y = from_y + 1;
-            if(to_x < board->getXDimension() && !board->get_field(to_x, to_y)->isOccupied())
+            if(to_x < board->getXDimension() && !board->getField(to_x, to_y)->isOccupied())
             {
-                if(board->get_field(to_x, from_y)->isOccupied())
+                if(board->getField(to_x, from_y)->isOccupied())
                 {
-                    UnitPtr possible_capture = board->get_field(to_x, from_y)->getOccupiedByUnit();
+                    UnitPtr possible_capture = board->getField(to_x, from_y)->getOccupiedByUnit();
                     if(possible_capture->getName() == "Pawn" && (possible_capture->getColor() != this->getColor()) && possible_capture->isEnpassantable()){
-                        moves.push_back(board->get_field(to_x, to_y));
+                        moves.push_back(board->getField(to_x, to_y));
                     }
                 }
             }
@@ -105,8 +105,8 @@ vector<FieldPtr> Pawn::get_moves(BoardPtr board) {
         to_y = from_y - 1;
         if (to_y >= 0) {
             // If not occupied, can move
-            if (!board->get_field(to_x, to_y)->isOccupied()){
-                moves.push_back(board->get_field(to_x, to_y));
+            if (!board->getField(to_x, to_y)->isOccupied()){
+                moves.push_back(board->getField(to_x, to_y));
             }
         }
         // DOUBLE MOVE
@@ -115,8 +115,8 @@ vector<FieldPtr> Pawn::get_moves(BoardPtr board) {
             to_y = from_y - 2;
             if (to_y >= 0) {
                 // If not occupied, can move
-                if (!board->get_field(to_x, to_y)->isOccupied() && !board->get_field(to_x, to_y + 1)->isOccupied()){
-                    moves.push_back(board->get_field(to_x, to_y));
+                if (!board->getField(to_x, to_y)->isOccupied() && !board->getField(to_x, to_y + 1)->isOccupied()){
+                    moves.push_back(board->getField(to_x, to_y));
                 }
             }
         }
@@ -126,10 +126,10 @@ vector<FieldPtr> Pawn::get_moves(BoardPtr board) {
         to_y = from_y - 1;
         if(to_y >= 0 && to_y < board->getYDimension() && to_x >= 0 && to_x < board->getXDimension())
         {
-            if(board->get_field(to_x, to_y)->isOccupied())
+            if(board->getField(to_x, to_y)->isOccupied())
             {
-                if(board->get_field(to_x, to_y)->getOccupiedByUnit()->getColor() != this->getColor())
-                    moves.push_back(board->get_field(to_x, to_y));
+                if(board->getField(to_x, to_y)->getOccupiedByUnit()->getColor() != this->getColor())
+                    moves.push_back(board->getField(to_x, to_y));
             }
         }
         // RIGHT
@@ -137,10 +137,10 @@ vector<FieldPtr> Pawn::get_moves(BoardPtr board) {
         to_y = from_y - 1;
         if(to_y >= 0 && to_y < board->getYDimension() && to_x >= 0 && to_x < board->getXDimension())
         {
-            if(board->get_field(to_x, to_y)->isOccupied())
+            if(board->getField(to_x, to_y)->isOccupied())
             {
-                if(board->get_field(to_x, to_y)->getOccupiedByUnit()->getColor() != this->getColor()) {
-                    moves.push_back(board->get_field(to_x, to_y));
+                if(board->getField(to_x, to_y)->getOccupiedByUnit()->getColor() != this->getColor()) {
+                    moves.push_back(board->getField(to_x, to_y));
                 }
             }
         }
@@ -150,26 +150,26 @@ vector<FieldPtr> Pawn::get_moves(BoardPtr board) {
             // LEFT
             to_x = from_x + 1;
             to_y = from_y - 1;
-            if(to_x < board->getXDimension() && !board->get_field(to_x, to_y)->isOccupied())
+            if(to_x < board->getXDimension() && !board->getField(to_x, to_y)->isOccupied())
             {
-                if(board->get_field(to_x, from_y)->isOccupied())
+                if(board->getField(to_x, from_y)->isOccupied())
                 {
-                    UnitPtr possible_capture = board->get_field(to_x, from_y)->getOccupiedByUnit();
+                    UnitPtr possible_capture = board->getField(to_x, from_y)->getOccupiedByUnit();
                     if(possible_capture->getName() == "Pawn" && possible_capture->getColor() != this->getColor() && possible_capture->isEnpassantable()){
-                        moves.push_back(board->get_field(to_x, to_y));
+                        moves.push_back(board->getField(to_x, to_y));
                     }
                 }
             }
             // RIGHT
             to_x = from_x - 1;
             to_y = from_y - 1;
-            if(to_x > 0 && !board->get_field(to_x, to_y)->isOccupied())
+            if(to_x > 0 && !board->getField(to_x, to_y)->isOccupied())
             {
-                if(board->get_field(to_x, from_y)->isOccupied())
+                if(board->getField(to_x, from_y)->isOccupied())
                 {
-                    UnitPtr possible_capture = board->get_field(to_x, from_y)->getOccupiedByUnit();
+                    UnitPtr possible_capture = board->getField(to_x, from_y)->getOccupiedByUnit();
                     if(possible_capture->getName() == "Pawn" && (possible_capture->getColor() != this->getColor()) && possible_capture->isEnpassantable()){
-                        moves.push_back(board->get_field(to_x, to_y));
+                        moves.push_back(board->getField(to_x, to_y));
                     }
                 }
             }

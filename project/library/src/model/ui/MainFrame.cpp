@@ -71,29 +71,29 @@ void MainFrame::OnButtonClicked(wxCommandEvent &event) {
         gameStarted = true;
 
         GamePtr game = make_shared<Game>(Game());
-        game->new_game(false, WHITE);
+        game->newGame(false, WHITE);
         BoardPtr board = game->getBoard();
 
         int x = board->getXDimension();
         int y = board->getYDimension();
 
         ui = new UI("Game", *this, game, *this);
-        ui->create_board(x, y);
-        ui->populate_board(board);
+        ui->createBoard(x, y);
+        ui->populateBoard(board);
         return;
     }
     if(id == LOADGAME_BTN)
     {
         GamePtr game = make_shared<Game>(Game());
-        game->new_game(false, WHITE);
+        game->newGame(false, WHITE);
         BoardPtr board = game->getBoard();
         int x = board->getXDimension();
         int y = board->getYDimension();
         ui = new UI("Game", *this, game, *this);
-        ui->create_board(x, y);
+        ui->createBoard(x, y);
         SaveManager* saveManager = new SaveManager(game, board);
         saveManager->LoadGame(game);
-        ui->populate_board(board);
+        ui->populateBoard(board);
         ui->getGameFrame()->setTurnText();
         ui->getGameFrame()->updateAliveUnits();
         ui->getGameFrame()->checkForCheck();

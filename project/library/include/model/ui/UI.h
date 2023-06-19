@@ -19,8 +19,8 @@ public:
     ~UI();
 //
 //    void update_units_pos(vector<UnitPtr> units);
-    virtual void create_board(int xDim, int yDim);
-    virtual void populate_board(BoardPtr board);
+    virtual void createBoard(int xDim, int yDim);
+    virtual void populateBoard(BoardPtr board);
 
     void showResults();
     ResultsFrame* getResultsFrame();

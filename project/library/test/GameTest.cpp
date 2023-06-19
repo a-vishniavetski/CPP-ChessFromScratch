@@ -27,18 +27,18 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteGame, GameFixture)
 
     BOOST_AUTO_TEST_CASE(CopyBoardTest) {
         GamePtr game = make_shared<Game>();
-        game->new_game(false, WHITE);
+        game->newGame(false, WHITE);
         BoardPtr game_board = game->getBoard();
-        game->place_unit_at(4, 4, make_shared<Pawn>("Pawn", -1, nullptr, true, WHITE), game_board);
-        game->place_unit_at(5, 5, make_shared<Queen>("Queen", -1, nullptr, true, WHITE), game_board);
+        game->placeUnitAt(4, 4, make_shared<Pawn>("Pawn", -1, nullptr, true, WHITE), game_board);
+        game->placeUnitAt(5, 5, make_shared<Queen>("Queen", -1, nullptr, true, WHITE), game_board);
 
-        BoardPtr new_board = game->copy_board(game_board);
+        BoardPtr new_board = game->copyBoard(game_board);
 
         for (auto field:game_board->getFields()){
-            BOOST_TEST_REQUIRE(field->isOccupied() == new_board->get_field(field->getXCoord(), field->getYCoord())->isOccupied());
+            BOOST_TEST_REQUIRE(field->isOccupied() == new_board->getField(field->getXCoord(), field->getYCoord())->isOccupied());
             if (field->isOccupied()){
-                BOOST_TEST(field->getOccupiedByUnit()->get_unit_info() == new_board->get_field(field->getXCoord(),
-                                                                                             field->getYCoord())->getOccupiedByUnit()->get_unit_info());
+                BOOST_TEST(field->getOccupiedByUnit()->getUnitInfo() == new_board->getField(field->getXCoord(),
+                                                                                            field->getYCoord())->getOccupiedByUnit()->getUnitInfo());
             }
         }
     }

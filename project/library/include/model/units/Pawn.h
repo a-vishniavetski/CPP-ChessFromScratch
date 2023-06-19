@@ -11,7 +11,7 @@ class Pawn : public Unit {
 public:
 
     Pawn(const string &name, int uuid, const FieldPtr &field, bool alive, Color color);
-    vector<FieldPtr> get_moves(BoardPtr board);
+    vector<FieldPtr> getMoves(BoardPtr board);
     string getIcon() override;
 
 

@@ -132,7 +132,7 @@ bool getEnpassantable(string str)
 }
 void addUnitToTaken(Color color, UnitPtr unit, GamePtr game)
 {
-    game->add_unit_to_taken(unit, color);
+    game->addUnitToTaken(unit, color);
 }
 
 bool SaveManager::LoadGame(GamePtr game) {
@@ -215,8 +215,8 @@ bool SaveManager::LoadGame(GamePtr game) {
                     {
                         for(int p = 0; p < game->getBoard()->getYDimension(); p++)
                         {
-                            if(game->getBoard()->get_field(o, p)->isOccupied())
-                                units.push_back(game->getBoard()->get_field(o,p)->getOccupiedByUnit());
+                            if(game->getBoard()->getField(o, p)->isOccupied())
+                                units.push_back(game->getBoard()->getField(o, p)->getOccupiedByUnit());
                         }
                     }
 
@@ -231,8 +231,8 @@ bool SaveManager::LoadGame(GamePtr game) {
                                 addUnitToTaken(getColor(str), units[i], game);
                                 break;
                             }
-                            units[i]->setField(game->getBoard()->get_field(x, y));
-                            game->getBoard()->get_field(x,y)->occupy(units[i]);
+                            units[i]->setField(game->getBoard()->getField(x, y));
+                            game->getBoard()->getField(x, y)->occupy(units[i]);
                             units[i]->setAlive(isAlive);
                             units[i]->setEnpassantable(isEnpassantable);
                             units[i]->setColor(getColor(str));
@@ -285,7 +285,7 @@ bool SaveManager::SaveGame() {
 //        for(int y = 0; y < board->getYDimension(); y++)
 //        {
 //            out << "FIELD" << endl;
-//            out << *board->get_field(x, y);
+//            out << *board->getField(x, y);
 //        }
 //    }
 
@@ -309,10 +309,10 @@ bool SaveManager::SaveGame() {
     {
         for(int y = 0; y < board->getYDimension(); y++)
         {
-            if(board->get_field(x, y)->isOccupied())
+            if(board->getField(x, y)->isOccupied())
             {
                 out << "UNIT" << endl;
-                out << *board->get_field(x, y)->getOccupiedByUnit();
+                out << *board->getField(x, y)->getOccupiedByUnit();
             }
         }
     }
