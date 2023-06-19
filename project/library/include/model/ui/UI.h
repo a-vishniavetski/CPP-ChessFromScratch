@@ -10,19 +10,29 @@
 #include <vector>
 #include "typedefs.h"
 #include "Game.h"
+#include "ResultsFrame.h"
+#include "MainFrame.h"
 
 class UI : public wxFrame{
 public:
-    UI(const wxString& title, wxFrame& parent, GamePtr game);
+    UI(const wxString& title, wxFrame& parent, GamePtr game, MainFrame& mainFrame);
     ~UI();
 //
 //    void update_units_pos(vector<UnitPtr> units);
-    virtual void createBoard(int xDim, int yDim);
-    virtual void populateBoard(BoardPtr board);
+    virtual void create_board(int xDim, int yDim);
+    virtual void populate_board(BoardPtr board);
+
+    void showResults();
+    ResultsFrame* getResultsFrame();
+    GameFrame* getGameFrame();
+    MainFrame& getMainFrame();
+
 private:
     GameFrame* gameFrame;
+    ResultsFrame* resultsFrame;
     GamePtr game;
     wxFrame& parent;
+    MainFrame& mainFrame;
 };
 
 #endif //CHESS_UI_H

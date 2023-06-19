@@ -18,12 +18,12 @@ class Field;
 */
 class Unit {
 public:
-    // ---------------- Konstruktro a destruktor ----------------
+
     Unit(const string &name, int uuid, const FieldPtr field, bool alive, Color color);
     Unit(std::nullptr_t);
-    virtual ~Unit();
-    // ---------------- GETTERS AND SETTERS ----------------
     Color getColor() const;
+    virtual vector<FieldPtr> get_moves(BoardPtr board);
+    string get_unit_info() const;
     const string &getName() const;
     void setName(const string &name);
     int getUuid() const;
@@ -35,9 +35,7 @@ public:
     virtual string getIcon();
     bool isEnpassantable() const;
     void setEnpassantable(bool _enpassantable);
-    // ---------------- LOGIC ----------------
-    string getUnitInfo() const;
-    virtual vector<FieldPtr> getMoves(BoardPtr board);
+    void setColor(Color color);
 
 
 private:

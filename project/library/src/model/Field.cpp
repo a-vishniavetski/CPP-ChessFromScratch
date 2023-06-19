@@ -1,3 +1,7 @@
+//
+// Created by avish on 5/29/2023.
+//
+
 #include <exceptions.h>
 #include <vector>
 #include "Field.h"
@@ -76,11 +80,19 @@ const vector<UnitPtr> &Field::getSeenByUnits() const {
     return seen_by_units;
 }
 
+void Field::remove_seeing_unit(const int UUID) {
+    //todo
+}
+
+void Field::add_seeing_unit(const UnitPtr _unit) {
+    //todo
+}
+
 Field::Field(nullptr_t) {
 
 }
 
-string Field::getFieldInfo() const {
+string Field::get_field_info() const {
     string occupied_status = "Not_Occupied";
     if (isOccupied()){
         occupied_status = "Occupied";
@@ -92,3 +104,7 @@ string Field::getFieldInfo() const {
     _prompt.append(":").append(occupied_status);
     return _prompt;
 }
+
+
+
+

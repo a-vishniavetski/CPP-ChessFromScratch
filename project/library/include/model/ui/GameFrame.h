@@ -10,15 +10,16 @@
 #include "UI.h"
 #include "typedefs.h"
 #include "Game.h"
+#include "MainFrame.h"
 
 class GameFrame : public wxFrame
 {
 public:
-    GameFrame(const wxString& title, wxFrame& parent, GamePtr game);
+    GameFrame(const wxString& title, wxFrame& parent, GamePtr game, UI* ui);
     ~GameFrame();
 //    void update_unit_pos(vector<UnitPtr> units);
-    void createBoard(int xDim, int yDim);
-    void populateBoard(BoardPtr board);
+    void create_board(int xDim, int yDim);
+    void populate_board(BoardPtr board);
 
 
     void setSelectedField(FieldPtr field);
@@ -30,6 +31,11 @@ public:
 
     wxButton* getButtonOfId(int id);
 
+    void checkForKnocks();
+    void updateAliveUnits();
+
+    void setTurnText();
+    void checkForCheck();
 
 private:
     wxFrame& parent;
@@ -38,11 +44,16 @@ private:
     void OnButtonClicked(wxCommandEvent& event);
     void OnClose(wxCloseEvent& event);
     FieldPtr selected_field = nullptr;
-    void highlightField(FieldPtr field, wxColour color);
-    void revertFieldsColors();
-    void setTurnText();
+    void highlight_field(FieldPtr field, wxColour color);
+    void revert_fields_colors();
 
-    void updateAliveUnits();
+
+    void surrender(Color color);
+    void showResultsScreen(string outcome);
+
+    void set_enabled_every_button(bool state);
+
+    UI* ui;
 
 
 

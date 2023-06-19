@@ -29,7 +29,7 @@ int Rook::checkMove(FieldPtr temp_field){
     }
 }
 
-vector<FieldPtr> Rook::getMoves(BoardPtr board) {
+vector<FieldPtr> Rook::get_moves(BoardPtr board) {
     vector<FieldPtr> moves;
     int from_x = this->getField()->getXCoord();
     int from_y = this->getField()->getYCoord();

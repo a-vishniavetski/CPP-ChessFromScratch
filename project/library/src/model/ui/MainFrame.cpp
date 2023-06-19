@@ -7,28 +7,54 @@
 #include "Unit.h"
 #include "wx/wx.h"
 #include "Game.h"
+#include "SaveManager.h"
+
+#include <iostream>
+#include <fstream>
 
 #include "typedefs.h"
 
 enum IDs{
     NEWGAME_BUTTON = 100,
+    LOADGAME_BTN = 101
 };
 
 wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
-    EVT_BUTTON(NEWGAME_BUTTON, MainFrame::OnButtonClicked)
+    EVT_BUTTON(wxID_ANY, MainFrame::OnButtonClicked)
 //    EVT_CLOSE(MainFrame::OnClose)
 wxEND_EVENT_TABLE()
 
 MainFrame::MainFrame(const wxString &title): wxFrame(nullptr, 99, title) {
     wxPanel* panel = new wxPanel(this);
     wxFont font(36, wxFONTFAMILY_DEFAULT, wxNORMAL, wxNORMAL);
-    wxButton* newGameBtn = new wxButton(panel, NEWGAME_BUTTON, "New Game", wxPoint(300, 50), wxSize(200, 150));
+
+    wxStaticText* titleText = new wxStaticText(panel, wxID_ANY, "Chess", wxPoint(145, 50), wxSize(100,50));
+    titleText->SetFont(font.MakeBold());
+
+    wxButton* newGameBtn = new wxButton(panel, NEWGAME_BUTTON, "New Game", wxPoint(100, 100), wxSize(200, 50));
 //    newGameBtn->SetFont(font);
+    wxButton* loadGameBtn = new wxButton(panel, LOADGAME_BTN, "Load Game", wxPoint(100, 150), wxSize(200, 50));
 
+    checkForSaveFile();
 
-    CreateStatusBar();
+    SetMinClientSize(wxSize(400, 250));
+    SetMaxClientSize(wxSize(400, 250));
+//    CreateStatusBar();
 
-    panel->Bind(wxEVT_LEFT_DOWN, &MainFrame::OnMouseEvent, this);
+//    panel->Bind(wxEVT_LEFT_DOWN, &MainFrame::OnMouseEvent, this);
+}
+
+void MainFrame::checkForSaveFile() {
+    ifstream saveFile;
+    saveFile.open("SaveData.txt");
+    wxButton* btn = (wxButton*) wxWindow::FindWindowById(LOADGAME_BTN);
+    if(saveFile) {
+        btn->Enable(true);
+    } else {
+        btn->Enable(false);
+    }
+    btn->Update();
+    btn->Refresh();
 }
 
 void MainFrame::OnMouseEvent(wxMouseEvent &event) {
@@ -45,18 +71,36 @@ void MainFrame::OnButtonClicked(wxCommandEvent &event) {
         gameStarted = true;
 
         GamePtr game = make_shared<Game>(Game());
-        game->newGame();
+        game->new_game();
         BoardPtr board = game->getBoard();
 
         int x = board->getXDimension();
         int y = board->getYDimension();
 
-        ui = new UI("Game", *this, game);
-        ui->createBoard(x, y);
-        ui->populateBoard(board);
+        ui = new UI("Game", *this, game, *this);
+        ui->create_board(x, y);
+        ui->populate_board(board);
+        return;
     }
-    wxString msg = wxString::Format("Button clicked, ID=%d", event.GetId());
-    wxLogStatus(msg);
+    if(id == LOADGAME_BTN)
+    {
+        GamePtr game = make_shared<Game>(Game());
+        game->new_game();
+        BoardPtr board = game->getBoard();
+        int x = board->getXDimension();
+        int y = board->getYDimension();
+        ui = new UI("Game", *this, game, *this);
+        ui->create_board(x, y);
+        SaveManager* saveManager = new SaveManager(game, board);
+        saveManager->LoadGame(game);
+        ui->populate_board(board);
+        ui->getGameFrame()->setTurnText();
+        ui->getGameFrame()->updateAliveUnits();
+        ui->getGameFrame()->checkForCheck();
+        cout << endl << game->getTakenUnitsByColor(BLACK).size();
+        cout << endl << game->getTakenUnitsByColor(WHITE).size();
+    }
+
 }
 
 UI* MainFrame::getUI() {

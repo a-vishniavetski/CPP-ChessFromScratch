@@ -38,8 +38,10 @@ public:
     void setColor(const string &color);
     // seen by units
     const vector<UnitPtr> &getSeenByUnits() const;
+    void add_seeing_unit(const UnitPtr _unit);
+    void remove_seeing_unit(const int UUID);
     // print
-    string getFieldInfo() const;
+    string get_field_info() const;
 
 
 
@@ -49,7 +51,7 @@ private:
     bool occupied = false;
     UnitPtr occupied_by_unit;
     vector<UnitPtr> seen_by_units;
-    string color = "none";
+    string color;
 
 };
 

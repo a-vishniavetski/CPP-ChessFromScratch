@@ -38,15 +38,15 @@ public:
     bool isStalemate() const;
     void setIsStalemate(bool isStalemate);
     // --------------- logika gry, deska i ruchi ---------------
-    void newGame();
-    void placeUnitAt(int x_coord, int y_coord, UnitPtr unit, BoardPtr board);
-    BoardPtr createEmptyBoard() const;
+    void new_game();
+    void place_unit_at(int x_coord, int y_coord, UnitPtr unit, BoardPtr board);
+    BoardPtr create_empty_board() const;
     virtual ~Game();
     const vector<PlayerPtr> &getPlayers() const;
     void makeMove(UnitPtr unit, FieldPtr destination_field, BoardPtr board, GamePtr game);
-    vector<FieldPtr> getLegalMoves(UnitPtr unit);
-    void addUnitToTaken(UnitPtr unit, Color color);
-    BoardPtr copyBoard(BoardPtr board);
+    vector<FieldPtr> get_legal_moves(UnitPtr unit);
+    void add_unit_to_taken(UnitPtr unit, Color color);
+    BoardPtr copy_board(BoardPtr board);
     // --------------- logika gry, check, checkmate, update ---------------
     bool isCheckState(GamePtr game, BoardPtr board, Color color);
     bool isCheckmateState(GamePtr game, BoardPtr board, Color color);

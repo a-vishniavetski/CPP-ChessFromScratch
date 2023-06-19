@@ -15,13 +15,16 @@ public:
 
     UI* getUI();
     bool getGameStarted();
+    void checkForSaveFile();
+
+
 private:
     UI* ui;
     bool gameStarted = false;
 
     void OnMouseEvent(wxMouseEvent& event);
     void OnButtonClicked(wxCommandEvent& event);
-//    void OnClose(wxCloseEvent& event);
+    //    void OnClose(wxCloseEvent& event);
 
     wxDECLARE_EVENT_TABLE();
 };

@@ -11,6 +11,8 @@
 #include "Field.h"
 #include "Unit.h"
 #include <string>
+#include "ui/MainFrame.h"
+#include "SaveManager.h"
 
 const wxColour BLACK_TILE = wxColour(59, 59, 59);
 const wxColour WHITE_TILE = wxColour(196, 196, 196);
@@ -32,7 +34,9 @@ enum Ids{
 
     KNOCKED_OFF_UNITS_1 = 80,
     KNOCKED_OFF_UNITS_2 = 81,
-    WHOSE_TURN_TEXT = 82
+    WHOSE_TURN_TEXT = 82,
+    SURRENDER_BTN = 83,
+    SAVE_GAME_BTN = 84
 };
 
 wxBEGIN_EVENT_TABLE(GameFrame, wxFrame)
@@ -40,7 +44,7 @@ wxBEGIN_EVENT_TABLE(GameFrame, wxFrame)
     EVT_BUTTON(wxID_ANY, GameFrame::OnButtonClicked)
 wxEND_EVENT_TABLE()
 
-GameFrame::GameFrame(const wxString &title, wxFrame& parent, GamePtr game): wxFrame(&parent, 101, title), parent(parent), game(game) {
+GameFrame::GameFrame(const wxString &title, wxFrame& parent, GamePtr game, UI* ui): wxFrame(&parent, 101, title), parent(parent), game(game), ui(ui) {
     wxPanel *panel = new wxPanel(this);
 
     wxFont infoFont = wxFont(wxFontInfo());
@@ -52,23 +56,32 @@ GameFrame::GameFrame(const wxString &title, wxFrame& parent, GamePtr game): wxFr
     wxFont chessFont = wxFont(wxFontInfo());
     chessFont.Scale(2.5).MakeBold();
 
+    //buttons
+
+    wxButton* surrenderBtn = new wxButton(this, SURRENDER_BTN, "\nSURRENDER\n", wxPoint(900, 20), wxSize(200, 70));
+    surrenderBtn->SetFont(detailsFont);
+
+    wxButton* saveGameBtn = new wxButton(this, SAVE_GAME_BTN, "\nSAVE GAME\n", wxPoint(900, 100), wxSize(200, 70));
+
+
+    //text
     wxStaticText* text = new wxStaticText(this, wxID_ANY, "TURN: ", wxPoint(700, 40), wxSize(100,50));
     text->SetFont(infoFont);
 
     wxStaticText* whose_turn_text = new wxStaticText(this, WHOSE_TURN_TEXT, "WHITE", wxPoint(770, 40), wxSize(100,50));
     whose_turn_text->SetFont(detailsFont);
 
-    wxStaticText* knocked_units_1_text = new wxStaticText(this, wxID_ANY, "KNOCKED OFF WHITE:", wxPoint(700, 100), wxSize(100,50));
+    wxStaticText* knocked_units_1_text = new wxStaticText(this, wxID_ANY, "KNOCKED:", wxPoint(700, 100), wxSize(50,50));
     knocked_units_1_text->SetFont(infoFont);
 
-    wxStaticText* knocked_units_1 = new wxStaticText(this, KNOCKED_OFF_UNITS_1, "", wxPoint(920, 90), wxSize(200,100));
+    wxStaticText* knocked_units_1 = new wxStaticText(this, KNOCKED_OFF_UNITS_1, "", wxPoint(720, 90), wxSize(100,50));
     knocked_units_1->SetFont(chessFont);
     knocked_units_1->SetForegroundColour(wxColour(255,255,255));
 
-    wxStaticText* knocked_units_2_text = new wxStaticText(this, wxID_ANY, "KNOCKED OFF BLACK:", wxPoint(700, 160), wxSize(100,50));
-    knocked_units_2_text->SetFont(infoFont);
+//    wxStaticText* knocked_units_2_text = new wxStaticText(this, wxID_ANY, "KNOCKED OFF BLACK:", wxPoint(700, 160), wxSize(100,50));
+//    knocked_units_2_text->SetFont(infoFont);
 
-    wxStaticText* knocked_units_2 = new wxStaticText(this, KNOCKED_OFF_UNITS_2, "", wxPoint(920, 150), wxSize(200,100));
+    wxStaticText* knocked_units_2 = new wxStaticText(this, KNOCKED_OFF_UNITS_2, "", wxPoint(760, 90), wxSize(100,50));
     knocked_units_2->SetFont(chessFont);
     knocked_units_2->SetForegroundColour(wxColour(0,0,0));
 
@@ -80,6 +93,7 @@ GameFrame::~GameFrame() noexcept {
 
 void GameFrame::OnClose(wxCloseEvent &event) {
     parent.Show();
+    ui->getMainFrame().checkForSaveFile();
     Destroy();
     delete this;
     return;
@@ -109,28 +123,27 @@ vector<Ids> getVectorOfIds()
     return vector<Ids>(all, all + sizeof(all) / sizeof(Ids));
 }
 
-void GameFrame::populateBoard(BoardPtr board) {
+void GameFrame::populate_board(BoardPtr board) {
     int xDim = board->getXDimension();
     int yDim = board->getYDimension();
 
     vector<Ids> ids = getVectorOfIds();
     int i = 0;
-    for(int x = 0; x < xDim; x++)
+    for(int y = 0; y < xDim; y++)
     {
-        for(int y = 0; y < yDim; y++)
+        for(int x = 0; x < yDim; x++)
         {
-            FieldPtr field = board->get_field(x, y);
+            FieldPtr field = board->get_field(y, x);
 
             wxButton* btn = (wxButton*) wxWindow::FindWindowById(ids[i]);
             if(field->isOccupied() == true)
             {
-
                 UnitPtr unit = field->getOccupiedByUnit();
                 string icon = unit->getIcon();
                 Color color = unit->getColor();
                 btn->wxControl::SetForegroundColour(wxColor(getColour(color)));
                 btn->SetLabelText(icon);
-                cout << endl << "FIELD: " << field->getOccupiedByUnit()->getIcon() << endl << "COORDS: " << "x=" << x << ", y=" << y << endl << "BTN ID=" << btn->GetId() << ", icon= " << btn->GetLabelText();
+                cout << endl << "FIELD: " << field->getOccupiedByUnit()->getIcon() << endl << "COORDS: " << "x=" << x << ", y=" << y << endl << "BTN ID=" << btn->GetId() << ", icon= " << btn->GetLabelText() << endl << "COLOR=" << color;
             }
 
             btn->Update();
@@ -150,7 +163,7 @@ void GameFrame::populateBoard(BoardPtr board) {
 }
 
 
-void GameFrame::createBoard(int xDim, int yDim) {
+void GameFrame::create_board(int xDim, int yDim) {
     wxFont largeFont = wxFont(wxFontInfo()); largeFont.MakeBold().Scale(2.2);
     wxFont coordsFont = wxFont(wxFontInfo()); coordsFont.Scale(1.5);
 
@@ -164,9 +177,9 @@ void GameFrame::createBoard(int xDim, int yDim) {
     for(int x = 0; x < xDim; x++)
     {
         vector<wxButton*> xBtns;
-        wxStaticText* coordsNum = new wxStaticText(this, wxID_ANY, to_string(x + 1), wxPoint(20, 45 + (x * 80)), wxSize(70,70));
+        wxStaticText* coordsNum = new wxStaticText(this, wxID_ANY, to_string(xDim - x), wxPoint(20, 45 + (x * 80)), wxSize(70,70));
         coordsNum->SetFont(coordsFont);
-        for(int y = 0; y < yDim; y++)
+        for(int y = yDim - 1; y >= 0 ; y--)
         {
             wxButton* btn = new wxButton(this, ids[k], "\n\n", wxPoint(50 + (x * 80), 20 + (y * 80)), wxSize(70, 70));
             btn->SetFont(largeFont);
@@ -233,7 +246,7 @@ int getIdFromCoords(int xCoord, int yCoord)
     return id;
 }
 
-void GameFrame::highlightField(FieldPtr field, wxColour color) {
+void GameFrame::highlight_field(FieldPtr field, wxColour color) {
     if(field == nullptr)
         return;
     wxButton* btn = getButtonOfId(getIdFromCoords(field->getXCoord(), field->getYCoord()));
@@ -243,7 +256,7 @@ void GameFrame::highlightField(FieldPtr field, wxColour color) {
 }
 
 
-void GameFrame::revertFieldsColors() {
+void GameFrame::revert_fields_colors() {
     vector<Ids> ids = getVectorOfIds();
 
     int xDim = game->getBoard()->getXDimension();
@@ -276,12 +289,12 @@ void GameFrame::revertFieldsColors() {
     if(game->isCheckBlack())
     {
         FieldPtr king = game->findKingByColor(BLACK);
-        highlightField(king, DANGER);
+        highlight_field(king, DANGER);
     }
     if(game->isCheckWhite())
     {
         FieldPtr king = game->findKingByColor(WHITE);
-        highlightField(king, DANGER);
+        highlight_field(king, DANGER);
     }
 }
 
@@ -305,7 +318,7 @@ void GameFrame::unsetSelectedField() {
 //    if(xi % 2 == 1 && yi % 2 == 1)
 //        btn->SetBackgroundColour(WHITE_TILE);
 
-    revertFieldsColors();
+    revert_fields_colors();
 
     btn->Update();
     btn->Refresh();
@@ -314,6 +327,27 @@ void GameFrame::unsetSelectedField() {
 
 void GameFrame::OnButtonClicked(wxCommandEvent &event) {
     int id = event.GetId();
+    if(id == SURRENDER_BTN)
+    {
+        Color color;
+        if(game->isWhiteTurn())
+            color = WHITE;
+        else color = BLACK;
+        surrender(color);
+        return;
+    }
+
+    if(id == SAVE_GAME_BTN)
+    {
+        SaveManager* saveManager = new SaveManager(game, game->getBoard());
+        if(saveManager->SaveGame())
+        {
+            SetStatusText("Game saved!");
+        }
+
+        cout << endl << endl << "SAVING: " << saveManager->SaveGame();
+        return;
+    }
     //obsluga tylko przyciskow planszy
     if(id < 0 || id > 78)
         return;
@@ -357,7 +391,7 @@ void GameFrame::OnButtonClicked(wxCommandEvent &event) {
     if(selected_field != nullptr)
     {
         UnitPtr unit = selected_field->getOccupiedByUnit();
-        possible_moves = game->getLegalMoves(unit);
+        possible_moves = game->get_legal_moves(unit);
     }
 
     if(selected_field == nullptr)
@@ -365,12 +399,12 @@ void GameFrame::OnButtonClicked(wxCommandEvent &event) {
         setSelectedField(field);
         UnitPtr unit = field->getOccupiedByUnit();
 
-         possible_moves = game->getLegalMoves(unit);
+         possible_moves = game->get_legal_moves(unit);
         //pokaz gdzie moge sie ruszyc
 
         for(int i = 0; i < possible_moves.size(); i++)
         {
-            highlightField(possible_moves[i], POSSIBLE_MOVE);
+            highlight_field(possible_moves[i], POSSIBLE_MOVE);
         }
 
         return;
@@ -387,7 +421,7 @@ void GameFrame::OnButtonClicked(wxCommandEvent &event) {
         {
             UnitPtr tempUnit = selected_field->getOccupiedByUnit();
             Color color = tempUnit->getColor();
-            //game->placeUnitAt(clicked_field->getXCoord(), clicked_field->getYCoord(), selected_field->getOccupiedByUnit());
+            //game->place_unit_at(clicked_field->getXCoord(), clicked_field->getYCoord(), selected_field->getOccupiedByUnit());
             game->makeMove(selected_field->getOccupiedByUnit(), clicked_field, game->getBoard(), game);
             game->updateGameStatus(game, game->getBoard());
             update_unit_pos(clicked_field->getOccupiedByUnit());
@@ -398,16 +432,36 @@ void GameFrame::OnButtonClicked(wxCommandEvent &event) {
             updateAliveUnits();
 
             //check
-            if(game->isCheckBlack())
+            checkForCheck();
+
+            if(game->isStalemate())
             {
-                FieldPtr king = game->findKingByColor(BLACK);
-                highlightField(king, DANGER);
+                cout << endl << "GAME OVER, TIE (stalemate)" << endl;
+                showResultsScreen("Stalemate");
             }
 
-            if(game->isCheckWhite()){
-                FieldPtr king = game->findKingByColor(WHITE);
-                highlightField(king, DANGER);
-            }
+            checkForKnocks();
+        }
+    }
+}
+
+void GameFrame::checkForCheck() {
+    if(game->isCheckBlack())
+    {
+        FieldPtr king = game->findKingByColor(BLACK);
+        highlight_field(king, DANGER);
+        if(game->isCheckmateState(game, game->getBoard(), BLACK)){
+            cout << endl <<  "GAME OVER, WHITE WON" << endl;
+            showResultsScreen("Checkmate");
+        }
+    }
+
+    if(game->isCheckWhite()){
+        FieldPtr king = game->findKingByColor(WHITE);
+        highlight_field(king, DANGER);
+        if(game->isCheckmateState(game, game->getBoard(), WHITE)) {
+            cout << endl << "GAME OVER, BLACK WON" << endl;
+            showResultsScreen("Checkmate");
         }
     }
 }
@@ -478,7 +532,7 @@ void GameFrame::updateAliveUnits() {
     string x = "";
     for(int i = 0; i < knockedWhiteUnits.size(); i++)
     {
-        x.append(" ");
+        x.append("\n");
         x.append(knockedWhiteUnits[i]->getIcon());
     }
 
@@ -489,7 +543,7 @@ void GameFrame::updateAliveUnits() {
     x = "";
     for(int i = 0; i < knockedBlackUnits.size(); i++)
     {
-        x.append(" ");
+        x.append("\n");
         x.append(knockedBlackUnits[i]->getIcon());
     }
 
@@ -497,4 +551,76 @@ void GameFrame::updateAliveUnits() {
     knockedBlack->Update();
     knockedBlack->Refresh();
 
+}
+
+void GameFrame::checkForKnocks() {
+    int xDim = game->getBoard()->getXDimension();
+    int yDim = game->getBoard()->getYDimension();
+
+    for(int x = 0; x < xDim; x++)
+    {
+        for(int y = 0; y < yDim; y++)
+        {
+            FieldPtr field = game->getBoard()->get_field(x, y);
+            if(!field->isOccupied())
+            {
+                int id = getIdFromCoords(x, y);
+                wxButton* btn = getButtonOfId(id);
+                if(btn->GetLabelText() != "\n\n" || btn->GetLabelText() != "")
+                {
+                    btn->SetLabelText("\n\n");
+                    btn->Update();
+                    btn->Refresh();
+                }
+            }
+        }
+    }
+}
+
+void GameFrame::surrender(Color color) {
+    string victoryColor = "";
+    if(color == BLACK) {
+        victoryColor = "WHITE";
+        game->setVictoryColor(WHITE);
+    }
+    else {
+        victoryColor = "BLACK";
+        game->setVictoryColor(BLACK);
+    }
+
+    cout << endl << endl<< color << " GAVE UP" << endl << victoryColor << " WON!";
+    set_enabled_every_button(false);
+    showResultsScreen("Surrender");
+}
+
+void GameFrame::set_enabled_every_button(bool state) {
+    vector<Ids> ids = getVectorOfIds();
+
+    for(int i = 0; i < ids.size(); i++)
+    {
+        wxButton* btn = getButtonOfId(ids[i]);
+        btn->Enable(state);
+        btn->Update();
+        btn->Refresh();
+    }
+    wxButton* surr = getButtonOfId(SURRENDER_BTN);
+    surr->Enable(state);
+    surr->Update();
+    surr->Refresh();
+}
+
+void GameFrame::showResultsScreen(string outcome) {
+    ui->showResults();
+    string colorString;
+    Color color = game->getVictoryColor();
+    switch(color){
+        case BLACK:
+            colorString = "Black";
+            break;
+        case WHITE:
+            colorString = "White";
+            break;
+    }
+    ui->getResultsFrame()->setWonText(colorString + " WIN!");
+    ui->getResultsFrame()->setOutcomeText(outcome);
 }

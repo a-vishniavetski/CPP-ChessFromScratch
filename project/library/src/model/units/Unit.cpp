@@ -3,24 +3,18 @@
 #include <Board.h>
 #include <iostream>
 
-
-// ---------------- Konstruktro a destruktor ----------------
 Unit::Unit(const string &name, int uuid, const FieldPtr field, bool alive, Color color)
         : name(name), UUID(uuid), field(field),
           alive(alive), color(color) {
 
 }
 
-Unit::Unit(std::nullptr_t) {
-    FieldPtr null_field = make_shared<Field>(nullptr);
-    field = null_field;
-}
-
-Unit::~Unit() {}
-
-// ---------------- GETTERS AND SETTERS ----------------
 const string &Unit::getName() const {
     return name;
+}
+
+void Unit::setColor(Color color) {
+    Unit::color = color;
 }
 
 void Unit::setName(const string &name) {
@@ -51,6 +45,28 @@ void Unit::setAlive(bool alive) {
     Unit::alive = alive;
 }
 
+vector<FieldPtr> Unit::get_moves(BoardPtr board) {
+    return vector<FieldPtr>();
+}
+
+Unit::Unit(std::nullptr_t) {
+    FieldPtr null_field = make_shared<Field>(nullptr);
+    field = null_field;
+}
+
+string Unit::get_unit_info() const {
+    if (this == nullptr){
+        return "NULL";
+    }
+    string _prompt;
+    _prompt.append(this->getName());
+    _prompt.append(", ").append(to_string(this->getUuid()));
+    _prompt.append(", ").append(to_string(this->isAlive()));
+    _prompt.append(", ").append(this->getField()->get_field_info());
+    _prompt.append(", ").append(to_string(this->getColor()));
+    return _prompt;
+}
+
 string Unit::getIcon() {
     return std::string();
 }
@@ -66,28 +82,6 @@ bool Unit::isEnpassantable() const {
 void Unit::setEnpassantable(bool _enpassantable) {
     enpassantable = _enpassantable;
 }
-
-// ---------------- LOGIC ----------------
-string Unit::getUnitInfo() const {
-    if (this == nullptr){
-        return "NULL";
-    }
-    string _prompt;
-    _prompt.append(this->getName());
-    _prompt.append(", ").append(to_string(this->getUuid()));
-    _prompt.append(", ").append(to_string(this->isAlive()));
-    _prompt.append(", ").append(this->getField()->getFieldInfo());
-    _prompt.append(", ").append(to_string(this->getColor()));
-    return _prompt;
-}
-
-vector<FieldPtr> Unit::getMoves(BoardPtr board) {
-    return vector<FieldPtr>();
-}
-
-
-
-
 
 
 

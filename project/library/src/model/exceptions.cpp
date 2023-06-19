@@ -5,5 +5,3 @@ NoUnitFoundException::NoUnitFoundException(const std::string &arg) : logic_error
 SaveFailedException::SaveFailedException(const std::string &arg) : logic_error(arg) {}
 
 LoadFailedException::LoadFailedException(const std::string &arg) : logic_error(arg) {}
-
-//FieldNotFoundException::FieldNotFoundException(const std::string &arg) : logic_error(arg) {}

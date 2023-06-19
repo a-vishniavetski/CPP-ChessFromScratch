@@ -6,10 +6,11 @@
 #include "model/ui/GameFrame.h"
 #include "wx/wx.h"
 #include "typedefs.h"
+#include "model/ui/ResultsFrame.h"
 
-UI::UI(const wxString& title, wxFrame& parent, GamePtr game): wxFrame(&parent, 200, title), parent(parent), game(game) {
-    gameFrame = new GameFrame("Game", parent, game);
-    gameFrame->SetClientSize(1280, 720);
+UI::UI(const wxString& title, wxFrame& parent, GamePtr game, MainFrame& mainFrame): wxFrame(&parent, 200, title), parent(parent), game(game), mainFrame(mainFrame) {
+    gameFrame = new GameFrame("Game", parent, game, this);
+    gameFrame->SetClientSize(1120, 700);
     gameFrame->Center();
     gameFrame->Show();
 }
@@ -18,14 +19,30 @@ UI::~UI() noexcept {
 //    delete this;
 }
 
-//void UI::update_units_pos(vector<UnitPtr> units) {
-//    gameFrame->update_unit_pos(units);
-//}
-
-void UI::createBoard(int xDim, int yDim) {
-    gameFrame->createBoard(xDim, yDim);
+MainFrame& UI::getMainFrame() {
+    return mainFrame;
 }
 
-void UI::populateBoard(BoardPtr board) {
-    gameFrame->populateBoard(board);
+void UI::create_board(int xDim, int yDim) {
+    gameFrame->create_board(xDim, yDim);
+}
+
+void UI::populate_board(BoardPtr board) {
+    gameFrame->populate_board(board);
+}
+
+void UI::showResults() {
+    resultsFrame = new ResultsFrame(wxT("GAME OVER"), *this, game, gameFrame);
+    resultsFrame->SetClientSize(330, 200);
+    resultsFrame->Center();
+    resultsFrame->Show();
+
+}
+
+ResultsFrame* UI::getResultsFrame() {
+    return resultsFrame;
+}
+
+GameFrame* UI::getGameFrame() {
+    return gameFrame;
 }
