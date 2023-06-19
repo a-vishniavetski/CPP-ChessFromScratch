@@ -14,6 +14,7 @@ struct MyConfig {
             //  tolerance(0.0001);
     }
 
+
     ~MyConfig() {
     }
 };
