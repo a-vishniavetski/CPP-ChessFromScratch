@@ -38,7 +38,7 @@ public:
     bool isStalemate() const;
     void setIsStalemate(bool isStalemate);
     // --------------- logika gry, deska i ruchi ---------------
-    void new_game();
+    void new_game(bool is_against_ai, Color ai_color);
     void place_unit_at(int x_coord, int y_coord, UnitPtr unit, BoardPtr board);
     BoardPtr create_empty_board() const;
     virtual ~Game();

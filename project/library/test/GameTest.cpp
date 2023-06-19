@@ -27,7 +27,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteGame, GameFixture)
 
     BOOST_AUTO_TEST_CASE(CopyBoardTest) {
         GamePtr game = make_shared<Game>();
-        game->new_game();
+        game->new_game(false, WHITE);
         BoardPtr game_board = game->getBoard();
         game->place_unit_at(4, 4, make_shared<Pawn>("Pawn", -1, nullptr, true, WHITE), game_board);
         game->place_unit_at(5, 5, make_shared<Queen>("Queen", -1, nullptr, true, WHITE), game_board);

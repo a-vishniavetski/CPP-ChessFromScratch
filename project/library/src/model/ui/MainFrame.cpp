@@ -71,7 +71,7 @@ void MainFrame::OnButtonClicked(wxCommandEvent &event) {
         gameStarted = true;
 
         GamePtr game = make_shared<Game>(Game());
-        game->new_game();
+        game->new_game(false, WHITE);
         BoardPtr board = game->getBoard();
 
         int x = board->getXDimension();
@@ -85,7 +85,7 @@ void MainFrame::OnButtonClicked(wxCommandEvent &event) {
     if(id == LOADGAME_BTN)
     {
         GamePtr game = make_shared<Game>(Game());
-        game->new_game();
+        game->new_game(false, WHITE);
         BoardPtr board = game->getBoard();
         int x = board->getXDimension();
         int y = board->getYDimension();

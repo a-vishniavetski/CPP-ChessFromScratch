@@ -27,7 +27,7 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteUnit, UnitFixture)
 
     BOOST_AUTO_TEST_CASE(get_movesTest) {
         GamePtr game = make_shared<Game>();
-        game->new_game();
+        game->new_game(false, WHITE);
         int x = 1;
         int y = 1;
         vector<FieldPtr> need_moves;

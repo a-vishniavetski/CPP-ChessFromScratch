@@ -371,7 +371,7 @@ BoardPtr Game::copy_board(BoardPtr board) {
 
 // TWORZENIA GRY PODTAWOWEJ
 /*Tworzy nową grę z nowymi graczami i deską według standardowych reguł szachów*/
-void Game::new_game(){
+void Game::new_game(bool is_against_ai, Color ai_color) {
     // towrzymy deskę
     board = create_empty_board();
     // tworzymy graczy
