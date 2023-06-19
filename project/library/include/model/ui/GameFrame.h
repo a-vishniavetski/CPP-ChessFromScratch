@@ -26,6 +26,7 @@ public:
     void unsetSelectedField();
 
     void update_unit_pos(UnitPtr unit);
+    void update_unit_pos_arr(vector<UnitPtr> units);
 
     vector<int> getCoordsFromId(int id);
 
@@ -46,7 +47,6 @@ private:
     FieldPtr selected_field = nullptr;
     void highlight_field(FieldPtr field, wxColour color);
     void revert_fields_colors();
-
 
     void surrender(Color color);
     void showResultsScreen(string outcome);

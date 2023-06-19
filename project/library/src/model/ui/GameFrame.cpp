@@ -427,8 +427,18 @@ void GameFrame::OnButtonClicked(wxCommandEvent &event) {
             //game->place_unit_at(clicked_field->getXCoord(), clicked_field->getYCoord(), selected_field->getOccupiedByUnit());
             game->makeMove(selected_field->getOccupiedByUnit(), clicked_field, game->getBoard(), game);
             game->updateGameStatus(game, game->getBoard());
-            update_unit_pos(clicked_field->getOccupiedByUnit());
 
+            vector<UnitPtr> units;
+            for(int i = 0; i < 8; i++)
+            {
+                for(int j = 0; j < 8; j++)
+                {
+                    if(game->getBoard()->get_field(i,j)->isOccupied())
+                        units.push_back(game->getBoard()->get_field(i, j)->getOccupiedByUnit());
+                }
+            }
+//            update_unit_pos(clicked_field->getOccupiedByUnit());
+            update_unit_pos_arr(units);
 
             unsetSelectedField();
             setTurnText();
@@ -468,6 +478,38 @@ void GameFrame::checkForCheck() {
         }
     }
 }
+
+void GameFrame::update_unit_pos_arr(vector<UnitPtr> units) {
+    for(int i = 0; i < units.size(); i++)
+    {
+        UnitPtr unit = units[i];
+        FieldPtr field = unit->getField();
+
+        int x = field->getXCoord();
+        int y = field->getYCoord();
+        int id = getIdFromCoords(x, y);
+
+        int x1 = selected_field->getXCoord();
+        int y1 = selected_field->getYCoord();
+        int id1 = getIdFromCoords(x1, y1);
+
+        wxButton* btnTo = getButtonOfId(id);
+        wxButton* btnFrom = getButtonOfId(id1);
+        btnTo->SetLabelText("\n\n");
+        btnTo->Update();
+        btnTo->Refresh();
+
+        btnFrom->SetLabelText("\n\n");
+        btnFrom->Update();
+        btnFrom->Refresh();
+
+        btnTo->wxButton::SetForegroundColour(wxColour(getColour(unit->getColor())));
+        btnTo->SetLabelText(unit->getIcon());
+        btnTo->Update();
+        btnTo->Refresh();
+    }
+}
+
 
 void GameFrame::update_unit_pos(UnitPtr unit) {
     FieldPtr field = unit->getField();
