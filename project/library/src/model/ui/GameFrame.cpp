@@ -13,6 +13,7 @@
 #include <string>
 #include "ui/MainFrame.h"
 #include "SaveManager.h"
+#include <exceptions.h>
 
 const wxColour BLACK_TILE = wxColour(59, 59, 59);
 const wxColour WHITE_TILE = wxColour(196, 196, 196);
@@ -359,7 +360,18 @@ void GameFrame::OnButtonClicked(wxCommandEvent &event) {
 
     if(game->isWhiteTurn() && selected_field == nullptr)
     {
-        vector<FieldPtr> blacks = game->getBoard()->getFieldsOccupiedByColor(BLACK);
+        // OLD CODE
+        //vector<FieldPtr> blacks = game->getBoard()->getFieldsOccupiedByColor(BLACK);
+        // NEW CODE
+        vector<FieldPtr> blacks;
+        try {
+            blacks = game->getBoard()->getFieldsOccupiedByColor(BLACK);
+        }
+        catch (NoUnitFoundException &e){
+            cout << "NoUnitFoundException while trying to getFieldsOccupiedByColor in GameFrame";
+            exit(1);
+        }
+
         for(int i = 0; i < blacks.size(); i++)
         {
             if(f == blacks[i])
@@ -425,8 +437,18 @@ void GameFrame::OnButtonClicked(wxCommandEvent &event) {
             UnitPtr tempUnit = selected_field->getOccupiedByUnit();
             Color color = tempUnit->getColor();
             //game->placeUnitAt(clicked_field->getXCoord(), clicked_field->getYCoord(), selected_field->getOccupiedByUnit());
+            /* OLD CODE
             game->makeMove(selected_field->getOccupiedByUnit(), clicked_field, game->getBoard(), game);
-            game->updateGameStatus(game, game->getBoard());
+            game->updateGameStatus(game, game->getBoard());*/
+            // NEW CODE
+            try {
+                game->makeMove(selected_field->getOccupiedByUnit(), clicked_field, game->getBoard(), game);
+                game->updateGameStatus(game, game->getBoard());
+            }
+            catch (NoUnitFoundException& e){
+                cout << "NoUnitFoundException happened while trying to make a move";
+                exit(1);
+            }
 
             vector<UnitPtr> units;
             for(int i = 0; i < 8; i++)
