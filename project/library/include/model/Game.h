@@ -56,6 +56,8 @@ public:
     FieldPtr findKingByColor(Color color);
     vector<UnitPtr> getTakenUnitsByColor(Color color);
 
+    PlayerPtr getPlayerTurn();
+
 private:
     vector<PlayerPtr> players;
     BoardPtr board;
@@ -70,6 +72,8 @@ private:
     //PlayerPtr victory_player = nullptr;
     vector<UnitPtr> taken_white_units;
     vector<UnitPtr> taken_black_units;
+
+    PlayerPtr player_turn = nullptr;
 
     int givePlayerInitialUnits(PlayerPtr player, int initial_uuid);
     void createAndPlaceUnit(int x_coord, int y_coord, UnitPtr unit, PlayerPtr player, int *uuid_count);

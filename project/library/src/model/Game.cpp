@@ -185,8 +185,10 @@ void Game::updateGameStatus(GamePtr game, BoardPtr board) {
     // --------------- ZMIEN GRACZA ---------------
     if (isWhiteTurn()){
         setWhiteTurn(false);
+        player_turn = getPlayers()[0];
     }
     else{
+        player_turn = getPlayers()[1];
         setWhiteTurn(true);
     }
 
@@ -581,4 +583,11 @@ bool Game::isTie() const {
 
 void Game::setIsTie(bool isTie) {
     is_tie = isTie;
+}
+
+PlayerPtr Game::getPlayerTurn() {
+    if(isWhiteTurn())
+        return getPlayers()[0];
+    else
+        return getPlayers()[1];
 }

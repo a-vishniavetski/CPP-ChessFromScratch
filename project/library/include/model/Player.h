@@ -36,6 +36,10 @@ public:
     void addUnit(UnitPtr unit);
     virtual UnitPtr chooseUnit(BoardPtr board)=0;
     virtual FieldPtr chooseMove(const vector<FieldPtr> &fields)=0;
+    virtual void chooseUnitField(FieldPtr field)= 0;
+    virtual FieldPtr getSelectedField()=0;
+    virtual void unsetUnit()=0;
+
     Color getColor() const;
 
 private:

@@ -7,6 +7,18 @@
 PlayerAi::PlayerAi(const string &name, int upid, Color color) : Player(name, upid, color) {}
 PlayerAi::~PlayerAi() {}
 
+void PlayerAi::chooseUnitField(FieldPtr field) {
+    return;
+}
+
+FieldPtr PlayerAi::getSelectedField() {
+    return nullptr;
+}
+
+void PlayerAi::unsetUnit() {
+    return;
+}
+
 UnitPtr PlayerAi::chooseUnit(BoardPtr board) {
     try {
         srand(time(0));

@@ -14,6 +14,7 @@
 #include "ui/MainFrame.h"
 #include "SaveManager.h"
 #include <exceptions.h>
+#include "Player.h"
 
 const wxColour BLACK_TILE = wxColour(59, 59, 59);
 const wxColour WHITE_TILE = wxColour(196, 196, 196);
@@ -221,7 +222,8 @@ wxButton* GameFrame::getButtonOfId(int id) {
 }
 
 void GameFrame::setSelectedField(FieldPtr field) {
-    selected_field = field;
+    game->getPlayerTurn()->chooseUnitField(field);
+    selected_field = game->getPlayerTurn()->getSelectedField();
     string x = to_string(field->getXCoord());
     string y = to_string(field->getYCoord());
 
@@ -303,6 +305,7 @@ void GameFrame::revertFieldsColors() {
 }
 
 void GameFrame::unsetSelectedField() {
+//    FieldPtr selected_field = game->getPlayerTurn()->getSelectedField();
     string x = to_string(selected_field->getXCoord());
     string y = to_string(selected_field->getYCoord());
 //
@@ -326,7 +329,8 @@ void GameFrame::unsetSelectedField() {
 
     btn->Update();
     btn->Refresh();
-    selected_field = nullptr;
+    game->getPlayerTurn()->unsetUnit();
+    selected_field = game->getPlayerTurn()->getSelectedField();
 }
 
 void GameFrame::OnButtonClicked(wxCommandEvent &event) {
@@ -357,6 +361,7 @@ void GameFrame::OnButtonClicked(wxCommandEvent &event) {
         return;
     vector<int> coords = getCoordsFromId(id);
     FieldPtr f = game->getBoard()->getField(coords[0], coords[1]);
+//    FieldPtr selected_field = game->getPlayerTurn()->getSelectedField();
 
     if(game->isWhiteTurn() && selected_field == nullptr)
     {
@@ -504,6 +509,12 @@ void GameFrame::checkForCheck() {
 void GameFrame::updateUnitPosArr(vector<UnitPtr> units) {
     for(int i = 0; i < units.size(); i++)
     {
+        FieldPtr selected_field;
+        if(game->isWhiteTurn() == false)
+             selected_field = game->getPlayers()[0]->getSelectedField();
+        else
+             selected_field = game->getPlayers()[1]->getSelectedField();
+
         UnitPtr unit = units[i];
         FieldPtr field = unit->getField();
 
@@ -535,6 +546,7 @@ void GameFrame::updateUnitPosArr(vector<UnitPtr> units) {
 
 void GameFrame::updateUnitPos(UnitPtr unit) {
     FieldPtr field = unit->getField();
+//    FieldPtr selected_field = game->getPlayerTurn()->getSelectedField();
 
     int x = field->getXCoord();
     int y = field->getYCoord();
