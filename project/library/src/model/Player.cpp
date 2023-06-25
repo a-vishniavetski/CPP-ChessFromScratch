@@ -53,8 +53,19 @@ void Player::addUnit(UnitPtr unit) {
     units.push_back(unit);
 }
 
-UnitPtr Player::choose_unit() {
+Player::Player(const string &name, int upid, Color color) : name(name), UPID(upid), color(color) {}
+
+/*UnitPtr Player::chooseUnit(BoardPtr board) {
     return UnitPtr();
+}*/
+
+/*
+FieldPtr Player::chooseMove(const vector<FieldPtr> &fields) {
+    return FieldPtr();
+}*/
+
+PlayerType Player::getPlayerType() const {
+    return player_type;
 }
 
-Player::Player(const string &name, int upid, Color color) : name(name), UPID(upid), color(color) {}
+

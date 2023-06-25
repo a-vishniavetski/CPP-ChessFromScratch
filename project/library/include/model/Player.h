@@ -13,6 +13,11 @@ using namespace std;
 
 class Unit;
 
+enum PlayerType {
+    AI,
+    HUMAN
+};
+
 class Player {
 public:
     // Konstruktor i destruktor
@@ -20,6 +25,7 @@ public:
     Player(const string &name, int upid, Color color);
     virtual ~Player();
 
+    PlayerType getPlayerType() const;
     string getAllUnitsInfo() const;
     const string &getName() const;
     void setName(const string &name);
@@ -28,8 +34,8 @@ public:
     const vector<UnitPtr> &getUnits() const;
     void setUnits(const vector<UnitPtr> &units);
     void addUnit(UnitPtr unit);
-    virtual UnitPtr choose_unit();
-
+    virtual UnitPtr chooseUnit(BoardPtr board)=0;
+    virtual FieldPtr chooseMove(const vector<FieldPtr> &fields)=0;
     Color getColor() const;
 
 private:
@@ -37,7 +43,7 @@ private:
     int UPID;  // unique player ID
     vector<UnitPtr> units;
     Color color;
-
+    PlayerType player_type;
 };
 
 

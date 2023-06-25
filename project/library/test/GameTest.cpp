@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Pawn.h"
 #include "Queen.h"
+#include "PlayerHuman.h"
 
 struct GameFixture {
     GamePtr game;
@@ -14,8 +15,8 @@ struct GameFixture {
 
     GameFixture() {
         board = std::make_shared<Board>(8, 8, std::vector<FieldPtr>());
-        players.push_back(std::make_shared<Player>("Player 1", 0, WHITE));
-        players.push_back(std::make_shared<Player>("Player 2", 1, BLACK));
+        players.push_back(std::make_shared<PlayerHuman>("Player 1", 0, WHITE));
+        players.push_back(std::make_shared<PlayerHuman>("Player 2", 1, BLACK));
         game = std::make_shared<Game>(players, board, 0);
     }
 
@@ -84,8 +85,8 @@ BOOST_FIXTURE_TEST_SUITE(TestSuiteGame, GameFixture)
 
     BOOST_AUTO_TEST_CASE(test_SetPlayers) {
         std::vector<PlayerPtr> newPlayers;
-        newPlayers.push_back(std::make_shared<Player>("Player 3", 3, WHITE));
-        newPlayers.push_back(std::make_shared<Player>("Player 4", 4, BLACK));
+        newPlayers.push_back(std::make_shared<PlayerHuman>("Player 3", 3, WHITE));
+        newPlayers.push_back(std::make_shared<PlayerHuman>("Player 4", 4, BLACK));
         game->setPlayers(newPlayers);
 
         const std::vector<PlayerPtr>& gamePlayers = game->getPlayers();

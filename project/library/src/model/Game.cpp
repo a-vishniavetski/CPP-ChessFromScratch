@@ -11,6 +11,8 @@
 #include <Bishop.h>
 #include <Queen.h>
 #include <King.h>
+#include <PlayerAi.h>
+#include <PlayerHuman.h>
 
 using namespace std;
 
@@ -257,8 +259,8 @@ vector<FieldPtr> Game::getLegalMoves(UnitPtr unit) {
     for (auto destination_field: unchecked_moves){
         // Tworzymy nową grę, deskę itp.
         GamePtr fake_game = make_shared<Game>();
-        PlayerPtr player_white = make_shared<Player>("Player WHITE", 3, WHITE);
-        PlayerPtr player_black = make_shared<Player>("Player BLACK", 4, BLACK);
+        PlayerPtr player_white = make_shared<PlayerHuman>("Player WHITE", 3, WHITE);
+        PlayerPtr player_black = make_shared<PlayerHuman>("Player BLACK", 4, BLACK);
         fake_game->setPlayers(vector<PlayerPtr> {player_white, player_black});
         BoardPtr fake_board = copyBoard(this->board);
         fake_game->setBoard(fake_board);
@@ -414,14 +416,29 @@ BoardPtr Game::copyBoard(BoardPtr board) {
     return retval;
 }
 
-// TWORZENIA GRY PODTAWOWEJ
+// TWORZENIA GRY PODSTAWOWEJ
 /*Tworzy nową grę z nowymi graczami i deską według standardowych reguł szachów*/
 void Game::newGame(bool is_against_ai, Color ai_color) {
     // towrzymy deskę
     board = createEmptyBoard();
     // tworzymy graczy
-    PlayerPtr player_white = make_shared<Player>("Player WHITE", 0, WHITE);
-    PlayerPtr player_black = make_shared<Player>("Player BLACK", 2, BLACK);
+    PlayerPtr player_white;
+    PlayerPtr player_black;
+    if (!is_against_ai){
+        player_white = make_shared<PlayerHuman>("PlayerHuman WHITE", 0, WHITE);
+        player_black = make_shared<PlayerHuman>("PlayerHuman BLACK", 2, BLACK);
+    }
+    else {
+        if (ai_color == WHITE){
+            player_white = make_shared<PlayerAi>("PlayerAi WHITE", 0, WHITE);
+            player_black = make_shared<PlayerHuman>("PlayerHuman BLACK", 2, BLACK);
+        }
+        else{
+            player_white = make_shared<PlayerHuman>("PlayerHuman WHITE", 0, WHITE);
+            player_black = make_shared<PlayerAi>("PlayerAi BLACK", 2, BLACK);
+        }
+    }
+
     // tworzymy jednostki i ustawiamy ich na desce
     int next_uuid = givePlayerInitialUnits(player_white, 0);
     givePlayerInitialUnits(player_black, next_uuid);
