@@ -1,6 +1,10 @@
-cat .gitignore 
-.idea
-.DS_Store
-cmake-build-debug
-/vishniavetski/introduction/build/
-/vishniavetski/workshop/CarRental/build/
+/extlibs/
+/target/
+/boost_1_60_0.zip
+/nbproject/
+CMakeFiles/
+cmake-build-debug/
+Makefile
+*.dll
+*.a
+*.exe
